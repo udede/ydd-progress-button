@@ -7,7 +7,7 @@
     "build": "npm run build:lib && npm run build:showcase",
     "copy:readme": "copyfiles ./README.md ./dist/progress-button",
     "build:lib": "npm run copy:readme && ng build progress-button",
-    "build:showcase": "ng build progress-button-showcase",
+    "build:showcase": "ng build progress-button-showcase --base-href=''",
     "publish:showcase": "npx angular-cli-ghpages --dir=./dist/progress-button-showcase",
     "test": "ng test",
     "lint": "ng lint",
