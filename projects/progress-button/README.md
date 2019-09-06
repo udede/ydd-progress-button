@@ -33,7 +33,7 @@ import {ProgressButtonModule} from 'progress-button';
   imports: [ProgressButtonModule],
   bootstrap: [AppComponent]
 })
-export class ProgressButtonShowcaseModule {}
+export class AppModule {}
 ```
 ### Usage sample
 
