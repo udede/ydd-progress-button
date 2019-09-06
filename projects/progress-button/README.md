@@ -18,20 +18,20 @@ Table of contents
 - [x] Setup all the layout variables
 
 ## Getting started
-### Step 1: Install `ydd-progress-button`:
+### Step 1: Install `progress-button`:
 
 #### NPM
 ```shell
-npm i ydd-progress-button
+npm i progress-button
 ```
 ### Step 2: Import the ProgressButtonModule:
 ```js
-import {ProgressButtonModule} from 'ydd-progress-button';
+import {ProgressButtonModule} from 'progress-button';
 
 @NgModule({
-  declarations: [ProgressButtonShowcaseComponent],
+  declarations: [AppComponent],
   imports: [ProgressButtonModule],
-  bootstrap: [ProgressButtonShowcaseComponent]
+  bootstrap: [AppComponent]
 })
 export class ProgressButtonShowcaseModule {}
 ```
@@ -145,21 +145,6 @@ run = (instance)=>{
 | Name  | Description |
 | ------------- | ------------- |
 | progressValue | Useful to change the value of the progress. You can use it inside the `action` Output |
-
-## Styles
-If you are not happy with default styles you can easily override them:
-
-```html
-<div class="ng-autocomplete">
-<ng-autocomplete></ng-autocomplete>
-</div>
-```
-
-```css
-.ng-autocomplete {
-    width: 400px;
-}
-```
 
 ## Support Progress Button!
 If this project help you reduce time to develop, you can give me a cup of coffee :)

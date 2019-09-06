@@ -34,9 +34,9 @@
 </button>
 <ng-template #content>
   <span class="content" [ngStyle]="this.contentStyle">
-    <div class="success" [style.color]="design.successIconColor"></div>
+    <div class="success" [style.color]="design.successIconColor">&#xea10;</div>
     <ng-content></ng-content>
-    <div class="error" [style.color]="design.errorIconColor"></div>
+    <div class="error" [style.color]="design.errorIconColor">&#xea0f;</div>
   </span>
   <span class="progress" [style.background]="design.progressBackground">
     <span class="progress-inner"
