@@ -4,7 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run build:lib && npm run build:showcase",
+    "build:lib": "ng build progress-button",
+    "build:showcase": "ng build progress-button-showcase --base-href='https://udede.github.io/ydd-progress-button/'",
+    "publish:showcase": "npx angular-cli-ghpages --dir=./dist/progress-button-showcase",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -20,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~8.2.4",
     "@angular/router": "~8.2.4",
     "@ng-select/ng-select": "^3.0.7",
+    "angular-cli-ghpages": "^0.6.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
