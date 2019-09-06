@@ -1,6 +1,6 @@
 # Angular Progress Button
 This represents a button element where the button itself serves as a progress indicator. You can choose from 16 types of animations. 3D animation styles are used for showing the progress indication on one side of the button while rotating the button in perspective.
-* See [Demo](https://udede.github.io/progress-button/)
+* See [Demo](https://udede.github.io/ydd-progress-button/)
 
 Table of contents
 =================
