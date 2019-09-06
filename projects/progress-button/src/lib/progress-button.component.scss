@@ -56,12 +56,10 @@
     }
 
     .success {
-      content: "\e600"; /* Checkmark for success */
       color: $successIconColor;
     }
 
     .error {
-      content: "\e601"; /* Cross for error */
       color: $errorIconColor;
     }
   }
