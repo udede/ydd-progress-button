@@ -1,0 +1,392 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@font-face {
+  font-family: 'Gilroy-Regular';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy/Gilroy-Regular/Gilroy-Regular.eot');
+  src: url('./assets/fonts/Gilroy/Gilroy-Regular/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
+  url('./assets/fonts/Gilroy/Gilroy-Regular/Gilroy-Regular.woff2') format('woff2'),
+  url('./assets/fonts/Gilroy/Gilroy-Regular/Gilroy-Regular.woff') format('woff'),
+  url('./assets/fonts/Gilroy/Gilroy-Regular/Gilroy-Regular.ttf') format('ttf'),
+  url('./assets/fonts/Gilroy/Gilroy-Regular/Gilroy-Regular.svg#Gilroy-Regular') format('svg');
+}
+
+@font-face {
+  font-family: 'Gilroy-Light';
+  font-weight: 300;
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy/Gilroy-Light/Gilroy-Light.eot');
+  src: url('./assets/fonts/Gilroy/Gilroy-Light/Gilroy-Light.eot?#iefix') format('embedded-opentype'),
+  url('./assets/fonts/Gilroy/Gilroy-Light/Gilroy-Light.woff2') format('woff2'),
+  url('./assets/fonts/Gilroy/Gilroy-Light/Gilroy-Light.woff') format('woff'),
+  url('./assets/fonts/Gilroy/Gilroy-Light/Gilroy-Light.ttf') format('ttf'),
+  url('./assets/fonts/Gilroy/Gilroy-Light/Gilroy-Light.svg#Gilroy-Light') format('svg');
+}
+
+@font-face {
+  font-family: 'Gilroy-Bold';
+  font-weight: 700;
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy/Gilroy-Bold/Gilroy-Bold.eot');
+  src: url('./assets/fonts/Gilroy/Gilroy-Bold/Gilroy-Bold.eot?#iefix') format('embedded-opentype'),
+  url('./assets/fonts/Gilroy/Gilroy-Bold/Gilroy-Bold.woff2') format('woff2'),
+  url('./assets/fonts/Gilroy/Gilroy-Bold/Gilroy-Bold.woff') format('woff'),
+  url('./assets/fonts/Gilroy/Gilroy-Bold/Gilroy-Bold.ttf') format('ttf'),
+  url('./assets/fonts/Gilroy/Gilroy-Bold/Gilroy-Bold.svg#Gilroy-Bold') format('svg');
+}
+
+@font-face {
+  font-family: 'Gilroy-Medium';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy/Gilroy-Medium/Gilroy-Medium.eot');
+  src: url('./assets/fonts/Gilroy/Gilroy-Medium/Gilroy-Medium.eot?#iefix') format('embedded-opentype'),
+  url('./assets/fonts/Gilroy/Gilroy-Medium/Gilroy-Medium.woff2') format('woff2'),
+  url('./assets/fonts/Gilroy/Gilroy-Medium/Gilroy-Medium.woff') format('woff'),
+  url('./assets/fonts/Gilroy/Gilroy-Medium/Gilroy-Medium.ttf') format('ttf'),
+  url('./assets/fonts/Gilroy/Gilroy-Medium/Gilroy-Medium.svg#Gilroy-Medium') format('svg');
+}
+
+@font-face {
+  font-family: 'Gilroy-SemiBold';
+  font-weight: 700;
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy/Gilroy-SemiBold/Gilroy-SemiBold.eot');
+  src: url('./assets/fonts/Gilroy/Gilroy-SemiBold/Gilroy-SemiBold.eot?#iefix') format('embedded-opentype'),
+  url('./assets/fonts/Gilroy/Gilroy-SemiBold/Gilroy-SemiBold.woff2') format('woff2'),
+  url('./assets/fonts/Gilroy/Gilroy-SemiBold/Gilroy-SemiBold.woff') format('woff'),
+  url('./assets/fonts/Gilroy/Gilroy-SemiBold/Gilroy-SemiBold.ttf') format('ttf'),
+  url('./assets/fonts/Gilroy/Gilroy-SemiBold/Gilroy-SemiBold.svg#Gilroy-SemiBold') format('svg');
+}
+
+@font-face {
+  font-family: 'Gilroy-ExtraBold';
+  font-weight: 800;
+  font-style: normal;
+  src: url('./assets/fonts/Gilroy/Gilroy-ExtraBold/Gilroy-ExtraBold.eot');
+  src: url('./assets/fonts/Gilroy/Gilroy-ExtraBold/Gilroy-ExtraBold.eot?#iefix') format('embedded-opentype'),
+  url('./assets/fonts/Gilroy/Gilroy-ExtraBold/Gilroy-ExtraBold.woff2') format('woff2'),
+  url('./assets/fonts/Gilroy/Gilroy-ExtraBold/Gilroy-ExtraBold.woff') format('woff'),
+  url('./assets/fonts/Gilroy/Gilroy-ExtraBold/Gilroy-ExtraBold.ttf') format('ttf'),
+  url('./assets/fonts/Gilroy/Gilroy-ExtraBold/Gilroy-ExtraBold.svg#Gilroy-ExtraBold') format('svg');
+}
+
+*::selection {
+  background: #000000; /* WebKit/Blink Browsers */
+  color: #ffffff;
+}
+
+*::-moz-selection {
+  background: #000000; /* Gecko Browsers */
+  color: #ffffff;
+}
+
+
+body {
+  font-family: 'Gilroy-Medium', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1.4;
+  color: #333333;
+}
+
+h1 {
+  font-family: 'Gilroy-ExtraBold', sans-serif;
+  font-weight: 800;
+}
+
+h2{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+body h1:first-child{
+  margin-top: 0;
+}
+
+body a{
+  color: #516bf0;
+  text-decoration: none;
+  border-bottom: 1px solid #dce2ff;
+  padding-bottom: 3px;
+}
+
+h2, h3, h4, h5, b, strong, button {
+  font-family: 'Gilroy-Bold', sans-serif;
+}
+
+input[type='text'].ydd-input-text {
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 2px solid #f0f0f0;
+  color: #333;
+  font-size: 14px;
+  font-family: Gilroy-Medium, sans-serif;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input[type='text'].ydd-input-text:hover, input[type='text'].ydd-input-text:focus {
+  border-color: #333333;
+}
+
+.ydd-page-content {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.ydd-page-preview {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.ydd-page-preview .item {
+  width: 60%;
+  box-sizing: border-box;
+  overflow: auto;
+  height: 100%;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ydd-page-preview-item-description {
+  padding: 5em;
+  height: 70%;
+  overflow: auto;
+}
+
+.ydd-page-preview-item-description code{
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.ydd-page-preview-item-content {
+  padding: 3em;
+  height: 30%;
+  flex-grow: 2;
+  background: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  overflow: auto;
+  z-index: 1;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.02);
+}
+
+.ydd-page-preview-item-content:before {
+  content: 'COMPONENT PREVIEW';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: 10px;
+  color: #ddd;
+  padding: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+.ydd-page-preview .settings {
+  width: 40%;
+  box-sizing: border-box;
+  padding: 3em;
+  overflow: auto;
+  height: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.02);
+  border-left: 1px solid #f0f0f0;
+  z-index: 2;
+}
+
+.ydd-page-preview-settings-field {
+  margin: 1em 0;
+  display: flex;
+  align-items: center;
+}
+
+.ydd-page-preview-settings-field label {
+  max-width: 240px;
+  width: 240px;
+  font-size: 14px;
+}
+
+.ydd-page-preview-settings-field .field {
+  flex-grow: 2;
+}
+
+.ydd-page-preview-settings-field .field.ydd-color-preview{
+  display: flex;
+  align-items: center;
+}
+
+.ydd-page-preview-settings-field .field.ydd-color-preview input{
+  flex-grow: 2;
+  margin-right: 10px;
+  font-family: monospace;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+.ydd-page-preview-settings-field .field.ydd-color-preview span {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  min-width: 20px;
+  border: 2px solid #f0f0f0;
+  border-radius: 50%;
+  flex-grow: 2;
+}
+
+/* SELECT */
+
+.ng-select {
+  outline: none;
+  font-size: 14px;
+}
+
+.ng-select .ng-select-container {
+  border: 2px solid #f0f0f0;
+  background: #f9f9f9;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ng-select .ng-select-container:hover {
+  box-shadow: none;
+  border-color: #cccccc;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-input > input {
+  font-size: 14px;
+  font-family: Gilroy-Medium, sans-serif;
+}
+
+.ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+  border-color: #333;
+  box-shadow: none;
+}
+
+.ng-dropdown-panel {
+  background-color: #fff;
+  border: 2px solid #333;
+  border-top: 0;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: #f9f9f9;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-color: #f0f0f0;
+}
+
+
+.ng-select.ng-select-opened > .ng-select-container {
+  background: #fff;
+  border-color: #333333 #333333 transparent;
+}
+
+/** TABLE **/
+
+.ydd-table {
+  font-size: 12px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.02);
+}
+
+.ydd-table .ydd-row {
+  display: flex;
+  align-items: center;
+}
+
+.ydd-table .ydd-table-body {
+}
+
+.ydd-table .ydd-table-body .ydd-row {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ydd-table .ydd-table-body .ydd-row:last-child {
+  border-bottom: none;
+}
+
+.ydd-table .ydd-row.ydd-row-header {
+  font-family: 'Gilroy-Bold', sans-serif;
+  border-bottom: 1px solid #f0f0f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.01);
+}
+
+.ydd-table .ydd-row .ydd-cell {
+  flex-grow: 2;
+  margin-right: 1em;
+  box-sizing: border-box;
+  padding: 2em;
+}
+
+.ydd-table .ydd-row .ydd-cell-name {
+  max-width: 100px;
+  min-width: 100px;
+  width: 100px;
+}
+
+.ydd-table.big-name .ydd-row .ydd-cell-name{
+  max-width: 180px;
+  min-width: 180px;
+  width: 180px;
+}
+
+.ydd-table .ydd-row .ydd-cell-type {
+  max-width: 150px;
+  min-width: 150px;
+  width: 150px;
+}
+
+.ydd-table.big-name .ydd-row .ydd-cell-type{
+  max-width: 200px;
+  min-width: 200px;
+  width: 200px;
+}
+
+.ydd-table .ydd-row:not(.ydd-row-header) .ydd-cell-selector,
+.ydd-table .ydd-row:not(.ydd-row-header) .ydd-cell-name,
+.ydd-table .ydd-row:not(.ydd-row-header) .ydd-cell-type {
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.ydd-table .ydd-row:not(.ydd-row-header) .ydd-cell-title{
+  background: rgba(249, 249, 249, 0.4);
+  margin-right: 0;
+  font-family: Gilroy-Bold,sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+
+.ydd-table .ydd-row:not(.ydd-row-header) .ydd-cell-type {
+  color: #999999;
+}
+
+.ydd-table .ydd-row-header .ydd-cell {
+  font-size: 14px;
+}
+

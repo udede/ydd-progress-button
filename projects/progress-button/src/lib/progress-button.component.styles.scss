@@ -1,0 +1,430 @@
+@import "./progress-button.component.vars";
+
+.progress-button {
+
+  /***************************************************** Fill */
+  &[data-style="fill"] {
+    &[data-horizontal], &[data-vertical] {
+      overflow: hidden;
+
+      .content {
+        z-index: 10;
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+
+        .success, .error {
+          top: 100%;
+          right: auto;
+          left: 50%;
+          -webkit-transition: opacity 0.3s;
+          transition: opacity 0.3s;
+          -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+        }
+      }
+
+      &.state-success .content,
+      &.state-error .content {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+      }
+    }
+  }
+
+  /***************************************************** Shrink */
+  &[data-style="shrink"] {
+    overflow: hidden;
+    -webkit-transition: -webkit-transform 0.2s;
+    transition: transform 0.2s;
+
+    &[data-horizontal], &[data-vertical] {
+      .content {
+        -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+        transition: opacity 0.3s, transform 0.3s;
+
+        .success, .error {
+          top: 100%;
+          right: auto;
+          left: 50%;
+          -webkit-transition: opacity 0.3s;
+          transition: opacity 0.3s;
+          -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+        }
+      }
+
+      &.state-loading {
+        -webkit-transform: scaleY(0.3);
+        transform: scaleY(0.3);
+
+        .content {
+          opacity: 0;
+        }
+      }
+
+      &.state-success .content,
+      &.state-error .content {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+      }
+    }
+
+    &[data-vertical] {
+      &.state-loading {
+        -webkit-transform: scaleX(0.1);
+        transform: scaleX(0.1);
+      }
+    }
+  }
+
+  /***************************************************** Rotate Bottom 3D */
+  &[data-style="rotate-angle-bottom"] {
+    .progress {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      box-shadow: 0 -1px 0 $rotateBlurriness; /* fix the blurriness that causes a gap */
+      -webkit-transform: rotateX(-90deg);
+      transform: rotateX(-90deg);
+      -webkit-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+    }
+
+    &.state-loading {
+      .progress-wrap {
+        -webkit-transform: rotateX(45deg);
+        transform: rotateX(45deg);
+      }
+    }
+  }
+
+  /***************************************************** Rotate Top 3D */
+  &[data-style="rotate-angle-top"] {
+    .progress {
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      box-shadow: 0 -1px 0 $rotateBlurriness; /* fix the blurriness that causes a gap */
+      -webkit-transform: rotateX(90deg);
+      transform: rotateX(90deg);
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+    }
+
+    &.state-loading {
+      .progress-wrap {
+        -webkit-transform: rotateX(-45deg);
+        transform: rotateX(-45deg);
+      }
+    }
+  }
+
+  /***************************************************** Rotate Left 3D */
+  &[data-style="rotate-angle-left"] {
+    .progress {
+      position: absolute;
+      top: 0;
+      right: 100%;
+      width: 20px;
+      height: 100%;
+      box-shadow: 1px 0 0 $rotateBlurriness; /* fix the blurriness that causes a gap */
+      -webkit-transform: rotateY(-90deg);
+      transform: rotateY(-90deg);
+      -webkit-transform-origin: 100% 50%;
+      transform-origin: 100% 50%;
+    }
+
+    &.state-loading {
+      .progress-wrap {
+        -webkit-transform: rotateY(45deg);
+        transform: rotateY(45deg);
+      }
+    }
+  }
+
+  /***************************************************** Rotate Right 3D */
+  &[data-style="rotate-angle-right"] {
+    .progress {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 20px;
+      height: 100%;
+      box-shadow: -1px 0 0 $rotateBlurriness; /* fix the blurriness that causes a gap */
+      -webkit-transform: rotateY(90deg);
+      transform: rotateY(90deg);
+      -webkit-transform-origin: 0 50%;
+      transform-origin: 0 50%;
+    }
+
+    &.state-loading {
+      .progress-wrap {
+        -webkit-transform: rotateY(-45deg);
+        transform: rotateY(-45deg);
+      }
+    }
+  }
+
+  /***************************************************** Rotate Side Down 3D */
+  &[data-style="rotate-side-down"] {
+    .progress {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      -webkit-transform: rotateX(-90deg);
+      transform: rotateX(-90deg);
+      -webkit-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    &.state-loading {
+      .progress-wrap {
+        -webkit-transform: rotateX(90deg) translateZ(10px);
+        transform: rotateX(90deg) translateZ(10px);
+      }
+    }
+  }
+
+  /***************************************************** Rotate Side Up 3D */
+  &[data-style="rotate-side-up"] {
+    .progress {
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      -webkit-transform: rotateX(90deg);
+      transform: rotateX(90deg);
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    &.state-loading {
+      .progress-wrap {
+        -webkit-transform: rotateX(-90deg) translateZ(10px);
+        transform: rotateX(-90deg) translateZ(10px);
+      }
+    }
+  }
+
+  /***************************************************** Rotate Side Left 3D */
+  &[data-style="rotate-side-left"] {
+    .progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 100%;
+      -webkit-transform: rotateY(90deg);
+      transform: rotateY(90deg);
+      -webkit-transform-origin: 0 50%;
+      transform-origin: 0 50%;
+    }
+
+    .progress-wrap {
+      -webkit-transform-origin: 0 50%;
+      transform-origin: 0 50%;
+    }
+
+    &.state-loading {
+      .progress-wrap {
+        -webkit-transform: translateX(50%) rotateY(90deg) translateZ(10px);
+        transform: translateX(50%) rotateY(90deg) translateZ(10px);
+      }
+    }
+  }
+
+  /***************************************************** Rotate Side Right 3D */
+  &[data-style="rotate-side-right"] {
+    .progress {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 20px;
+      height: 100%;
+      -webkit-transform: rotateY(90deg);
+      transform: rotateY(90deg);
+      -webkit-transform-origin: 0 50%;
+      transform-origin: 0 50%;
+    }
+
+    .progress-wrap {
+      -webkit-transform-origin: 100% 50%;
+      transform-origin: 100% 50%;
+    }
+
+    &.state-loading {
+      .progress-wrap {
+        -webkit-transform: translateX(-50%) rotateY(-90deg) translateZ(10px);
+        transform: translateX(-50%) rotateY(-90deg) translateZ(10px);
+      }
+    }
+  }
+
+  /***************************************************** Rotate Back 3D */
+  &[data-style="rotate-back"] {
+    .progress {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-transform: rotateX(-180deg);
+      transform: rotateX(-180deg);
+      -webkit-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .progress-wrap {
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+    }
+
+    .content {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    &.state-loading {
+      .progress-wrap {
+        -webkit-transform: rotateX(180deg) scaleX(0.6) scaleY(0.3);
+        transform: rotateX(180deg) scaleX(0.6) scaleY(0.3);
+      }
+    }
+  }
+
+  /***************************************************** Flip Open 3D */
+  &[data-style="flip-open"] {
+    .progress {
+      position: absolute;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+    }
+
+    .content {
+      z-index: 10;
+      -webkit-transition: -webkit-transform 0.2s;
+      transition: transform 0.2s;
+      -webkit-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+    }
+
+    &.state-loading {
+      .content {
+        -webkit-transform: rotateX(45deg);
+        transform: rotateX(45deg);
+      }
+    }
+  }
+
+  /***************************************************** Slide Down */
+  &[data-style="slide-down"] {
+    padding: 0;
+    overflow: visible;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    .progress {
+      position: absolute;
+      top: auto;
+      bottom:0;
+      left: 0;
+      width: 100%;
+      height: $slideDownProgressHeight;
+      -webkit-transition: -webkit-transform 0.2s;
+      transition: transform 0.2s;
+    }
+
+    .content {
+      z-index: 10;
+      padding: 20px 60px;
+      background: $buttonBackground;
+    }
+
+    &.state-loading {
+      .progress {
+        -webkit-transform: translateY($slideDownProgressHeight);
+        transform: translateY($slideDownProgressHeight);
+      }
+    }
+  }
+
+  /***************************************************** Move Up */
+  &[data-style="move-up"] {
+    padding: 0;
+    overflow: visible;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    .progress {
+      position: absolute;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: $moveUpProgressHeight;
+    }
+
+    .content {
+      z-index: 10;
+      padding: 20px 60px;
+      background: $buttonBackground;
+      -webkit-transition: -webkit-transform 0.2s;
+      transition: transform 0.2s;
+    }
+
+    &.state-loading {
+      .content {
+        -webkit-transform: translateY(-$moveUpProgressHeight);
+        transform: translateY(-$moveUpProgressHeight);
+      }
+    }
+  }
+
+  /***************************************************** Top Line */
+  &[data-style="top-line"] {
+    .progress-inner {
+      height: $linesSize;
+    }
+
+    .content {
+      .success, .error {
+
+      }
+    }
+  }
+
+  /***************************************************** Lateral Lines */
+  &[data-style="lateral-lines"] {
+    .progress-inner {
+      width: 100%;
+      border-right-style: solid;
+      border-left-style: solid;
+      border-right-width: $linesSize;
+      border-left-width: $linesSize;
+      border-color: $progressInnerBackground;
+      background: transparent;
+    }
+
+    .content {
+      .success, .error {
+
+      }
+    }
+  }
+}

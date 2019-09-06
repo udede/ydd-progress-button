@@ -1,0 +1,47 @@
+<button class="progress-button"
+        [attr.autofocus]="autofocus"
+        [attr.disabled]="disabled"
+
+        [attr.form]="form?.id"
+        [attr.formaction]="form?.action"
+        [attr.formmethod]="form?.method"
+        [attr.formnovalidate]="form?.noValidate"
+        [attr.formtarget]="form?.target"
+        [attr.formenctype]="form?.enctype"
+
+        [attr.name]="name"
+        [attr.type]="type"
+        [attr.value]="value"
+
+        [attr.data-style]="progress.animation"
+        [attr.data-vertical]="(!isHorizontal())?'':null"
+        [attr.data-horizontal]="(isHorizontal())?'':null"
+        [attr.data-perspective]="perspective"
+        (click)="click()"
+        [ngClass]="[(loading)?'state-loading':'',statusClass]"
+        [ngStyle]="buttonStyle"
+>
+  <!-- perspective -->
+  <ng-container *ngIf="perspective === ''">
+      <span class="progress-wrap">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </span>
+  </ng-container>
+  <!-- not perspective -->
+  <ng-container *ngIf="perspective === null">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </ng-container>
+</button>
+<ng-template #content>
+  <span class="content" [ngStyle]="this.contentStyle">
+    <div class="success" [style.color]="design.successIconColor"></div>
+    <ng-content></ng-content>
+    <div class="error" [style.color]="design.errorIconColor"></div>
+  </span>
+  <span class="progress" [style.background]="design.progressBackground">
+    <span class="progress-inner"
+          [ngStyle]="progressInnerStyle"
+          [ngClass]="{'notransition':noTransition}"
+    ></span>
+  </span>
+</ng-template>

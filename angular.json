@@ -2,5 +2,163 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "progress-button": {
+      "projectType": "library",
+      "root": "projects/progress-button",
+      "sourceRoot": "projects/progress-button/src",
+      "prefix": "ydd",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/progress-button/tsconfig.lib.json",
+            "project": "projects/progress-button/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/progress-button/src/test.ts",
+            "tsConfig": "projects/progress-button/tsconfig.spec.json",
+            "karmaConfig": "projects/progress-button/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/progress-button/tsconfig.lib.json",
+              "projects/progress-button/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "progress-button-showcase": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/progress-button-showcase",
+      "sourceRoot": "projects/progress-button-showcase/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/progress-button-showcase",
+            "index": "projects/progress-button-showcase/src/index.html",
+            "main": "projects/progress-button-showcase/src/main.ts",
+            "polyfills": "projects/progress-button-showcase/src/polyfills.ts",
+            "tsConfig": "projects/progress-button-showcase/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/progress-button-showcase/src/favicon.ico",
+              "projects/progress-button-showcase/src/assets"
+            ],
+            "styles": [
+              "projects/progress-button-showcase/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/progress-button-showcase/src/environments/environment.ts",
+                  "with": "projects/progress-button-showcase/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "progress-button-showcase:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "progress-button-showcase:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "progress-button-showcase:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/progress-button-showcase/src/test.ts",
+            "polyfills": "projects/progress-button-showcase/src/polyfills.ts",
+            "tsConfig": "projects/progress-button-showcase/tsconfig.spec.json",
+            "karmaConfig": "projects/progress-button-showcase/karma.conf.js",
+            "assets": [
+              "projects/progress-button-showcase/src/favicon.ico",
+              "projects/progress-button-showcase/src/assets"
+            ],
+            "styles": [
+              "projects/progress-button-showcase/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/progress-button-showcase/tsconfig.app.json",
+              "projects/progress-button-showcase/tsconfig.spec.json",
+              "projects/progress-button-showcase/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/progress-button-showcase/e2e/protractor.conf.js",
+            "devServerTarget": "progress-button-showcase:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "progress-button-showcase:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "progress-button"
 }
