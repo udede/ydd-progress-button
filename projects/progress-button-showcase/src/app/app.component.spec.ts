@@ -1,5 +1,12 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {ProgressButtonModule} from '../../../progress-button/src/lib/progress-button.module';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
+import {markedOptionsFactory} from './app.component.models';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -7,6 +14,22 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [
+        BrowserModule,
+        ProgressButtonModule,
+        NgSelectModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MarkdownModule.forRoot({
+          loader: HttpClient,
+          markedOptions: {
+            provide: MarkedOptions,
+            useFactory: markedOptionsFactory,
+          }
+        })
+      ],
+      providers: [],
     }).compileComponents();
   }));
 
@@ -14,18 +37,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'progress-button-showcase'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('progress-button-showcase');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('progress-button-showcase app is running!');
   });
 });
