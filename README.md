@@ -9,7 +9,8 @@ Table of contents
   * [Getting started](#getting-started)
   * [Usage](#usage-sample)
   * [API](#api)
-  * [Styles](#styles)
+  * [Support](#support)
+  * [License](#license)
 
 ## Features
 - [x] Choose from 16 different types of progress animations
@@ -153,8 +154,7 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 * [Francesco Lisandro](https://www.linkedin.com/in/francescolisandro/)
 
 ### Credits
-This angular component is liberally inspired to [Progress Button Styles](https://tympanus.net/Development/ProgressButtonStyles/) of Mary Lou. Icons are by IcoMoon and the icon font was created with the [IcoMoon app](http://icomoon.io/app/).
+This angular component is liberally inspired to [Progress Button Styles](https://tympanus.net/Development/ProgressButtonStyles/) of Mary Lou.
 
 ## License
-
 This project is licensed under the terms of the MIT license.
