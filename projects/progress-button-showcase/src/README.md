@@ -19,8 +19,6 @@ Table of contents
 
 ## Getting started
 ### Step 1: Install `progress-button`:
-
-#### NPM
 ```shell
 npm i progress-button
 ```
