@@ -3,7 +3,7 @@ This represents a button element where the button itself serves as a progress in
 <p>
 <img src="https://raw.githubusercontent.com/udede/ydd-progress-button/master/preview.gif" alt="preview" style="max-width:100%;"/>
 </p>
-<div class="demo-url">
+<div id="demourl">
 <ul>
 <li><a href="https://udede.github.io/ydd-progress-button/" target="_blank" rel="nofollow">See Demo</a></li>
 </ul>
