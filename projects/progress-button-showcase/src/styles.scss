@@ -171,6 +171,10 @@ input[type='text'].ydd-input-text:hover, input[type='text'].ydd-input-text:focus
   border-color: #333333;
 }
 
+#demourl {
+  display: none;
+}
+
 .ydd-page-content {
   height: 100%;
   width: 100%;
@@ -636,10 +640,10 @@ input[type='text'].ydd-input-text:hover, input[type='text'].ydd-input-text:focus
     padding: 2em;
   }
 
-  .ydd-page-preview .settings{
+  .ydd-page-preview .settings {
     width: 100%;
   }
-  .ydd-page-preview-settings-field{
+  .ydd-page-preview-settings-field {
     align-items: flex-start;
     flex-direction: column;
   }
