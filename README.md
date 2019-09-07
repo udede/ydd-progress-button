@@ -24,7 +24,7 @@ Table of contents
 ```shell
 npm i progress-button
 ```
-### Step 2: Import the ProgressButtonModule:
+### Step 2: Import `ProgressButtonModule`:
 ```js
 import {ProgressButtonModule} from 'progress-button';
 
@@ -135,18 +135,18 @@ run = (instance)=>{
 | ------------- | ------------- | ------------- |
 | (action) | `ProgressButtonComponent` | Fires on a mouse click on the element. |
 
-### Methods (ProgressButtonComponent)
+### Methods `ProgressButtonComponent`
 | Method  | Params | Description |
 | ------------- | ------------- | ------------- |
 | progressInit  | | Initialize the progress component. You can use it inside the `action` Output |
 | progressStop | `success` or `error` | Stop the progress component. You can use it inside the `action` Output. |
 
-### Properties (ProgressButtonComponent)
+### Properties `ProgressButtonComponent`
 | Name  | Description |
 | ------------- | ------------- |
 | progressValue | Useful to change the value of the progress. You can use it inside the `action` Output |
 
-## Support Progress Button!
+## Support
 If this project help you reduce time to develop, you can give me a cup of coffee :)
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SFS56GER4N4WW&source=url)
@@ -160,4 +160,3 @@ This angular component is liberally inspired to [Progress Button Styles](https:/
 ## License
 
 This project is licensed under the terms of the MIT license.
-
