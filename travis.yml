@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "10.16.0"
+dist: trusty
+sudo: required
+branches:
+  only:
+    - master
+before_script:
+  - npm install -g @angular/cli
+script:
+  - npm install
+  - ng lint
+  - npm run test-headless
+  - npm run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/progress-button-showcase
+  keep_history: true
+  on:
+    branch: gh-pages
