@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<button class=\"progress-button\"\n        [attr.autofocus]=\"autofocus\"\n        [attr.disabled]=\"disabled\"\n\n        [attr.form]=\"form?.id\"\n        [attr.formaction]=\"form?.action\"\n        [attr.formmethod]=\"form?.method\"\n        [attr.formnovalidate]=\"form?.noValidate\"\n        [attr.formtarget]=\"form?.target\"\n        [attr.formenctype]=\"form?.enctype\"\n\n        [attr.name]=\"name\"\n        [attr.type]=\"type\"\n        [attr.value]=\"value\"\n\n        [attr.data-style]=\"progress.animation\"\n        [attr.data-vertical]=\"(!isHorizontal())?'':null\"\n        [attr.data-horizontal]=\"(isHorizontal())?'':null\"\n        [attr.data-perspective]=\"perspective\"\n        (click)=\"click()\"\n        [ngClass]=\"[(loading)?'state-loading':'',statusClass]\"\n        [ngStyle]=\"buttonStyle\"\n>\n  <!-- perspective -->\n  <ng-container *ngIf=\"perspective === ''\">\n      <span class=\"progress-wrap\">\n        <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n      </span>\n  </ng-container>\n  <!-- not perspective -->\n  <ng-container *ngIf=\"perspective === null\">\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </ng-container>\n</button>\n<ng-template #content>\n  <span class=\"content\" [ngStyle]=\"this.contentStyle\">\n    <div class=\"success\" [style.color]=\"design.successIconColor\" [innerHTML]=\"'&#xe600;'\"></div>\n    <ng-content></ng-content>\n    <div class=\"error\" [style.color]=\"design.errorIconColor\" [innerHTML]=\"'&#xe601;'\"></div>\n  </span>\n  <span class=\"progress\" [style.background]=\"design.progressBackground\">\n    <span class=\"progress-inner\"\n          [ngStyle]=\"progressInnerStyle\"\n          [ngClass]=\"{'notransition':noTransition}\"\n    ></span>\n  </span>\n</ng-template>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<button class=\"progress-button\"\n        [attr.autofocus]=\"autofocus\"\n        [attr.disabled]=\"disabled\"\n\n        [attr.form]=\"form?.id\"\n        [attr.formaction]=\"form?.action\"\n        [attr.formmethod]=\"form?.method\"\n        [attr.formnovalidate]=\"form?.noValidate\"\n        [attr.formtarget]=\"form?.target\"\n        [attr.formenctype]=\"form?.enctype\"\n\n        [attr.name]=\"name\"\n        [attr.type]=\"type\"\n        [attr.value]=\"value\"\n\n        [attr.data-style]=\"progress.animation\"\n        [attr.data-vertical]=\"(progress.direction === 'vertical')?'':null\"\n        [attr.data-horizontal]=\"(progress.direction === 'horizontal')?'':null\"\n        [attr.data-perspective]=\"perspective\"\n        (click)=\"click()\"\n        [ngClass]=\"[(loading)?'state-loading':'',statusClass]\"\n        [ngStyle]=\"buttonStyle\">\n  <!-- perspective -->\n  <ng-container *ngIf=\"perspective === ''\">\n      <span class=\"progress-wrap\">\n        <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n      </span>\n  </ng-container>\n  <!-- not perspective -->\n  <ng-container *ngIf=\"perspective === null\">\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </ng-container>\n</button>\n<ng-template #content>\n  <span class=\"content\" [ngStyle]=\"this.contentStyle\">\n    <div class=\"success\" [style.color]=\"design.successIconColor\" [innerHTML]=\"'&#xe600;'\"></div>\n    <ng-content></ng-content>\n    <div class=\"error\" [style.color]=\"design.errorIconColor\" [innerHTML]=\"'&#xe601;'\"></div>\n  </span>\n  <span class=\"progress\" [style.background]=\"design.progressBackground\">\n    <span class=\"progress-inner\"\n          [ngStyle]=\"progressInnerStyle\"\n          [ngClass]=\"{'notransition':noTransition}\"\n    ></span>\n  </span>\n</ng-template>\n");
 
 /***/ }),
 
@@ -432,34 +432,45 @@ let ProgressButtonComponent = class ProgressButtonComponent {
             height: null,
             width: null,
         };
-        // Lateral Lines & Top Line
-        if (this.isAnimation('lateral-lines') || this.isAnimation('top-line')) {
-            style.background = null;
-            style.borderColor = this.design.progressInnerBackground;
-            if (this.design.linesSize) {
-                style.borderLeftWidth = this.design.linesSize + 'px';
-                style.borderRightWidth = this.design.linesSize + 'px';
-            }
-            else {
-                this.design.linesSize = 10;
-                style.borderLeftWidth = '5px';
-                style.borderRightWidth = '5px';
-            }
+        // Reset LinesSize
+        if (this.design.linesSize === null) {
+            this.design.linesSize = 10;
         }
         // Lateral Lines
         if (this.isAnimation('lateral-lines')) {
             style.background = null;
             style.borderColor = this.design.progressInnerBackground;
+            style.borderLeftWidth = this.design.linesSize + 'px';
+            style.borderRightWidth = this.design.linesSize + 'px';
         }
-        if (this.isHorizontal()) {
-            style.width = this.progressValue + '%';
-            style.height = (this.isAnimation('top-line')) ? this.design.linesSize + 'px' : null;
-        }
-        else {
-            style.height = this.progressValue + '%';
-            style.width = (this.isAnimation('top-line')) ? this.design.linesSize + 'px' : null;
-        }
+        // Set Size
+        style.height = this.progressInnerHeight;
+        style.width = this.progressInnerWidth;
         return style;
+    }
+    /**
+     * Get Calculated Progress Inner Width
+     */
+    get progressInnerWidth() {
+        if (this.progress.direction === 'horizontal') {
+            return this.progressValue + '%';
+        }
+        if (this.isAnimation('top-line')) {
+            return this.design.linesSize + 'px';
+        }
+        return null;
+    }
+    /**
+     * Get Calculated Progress Inner Height
+     */
+    get progressInnerHeight() {
+        if (this.progress.direction === 'vertical') {
+            return this.progressValue + '%';
+        }
+        if (this.isAnimation('top-line')) {
+            return this.design.linesSize + 'px';
+        }
+        return null;
     }
     /**
      * Check if animation is active
@@ -469,24 +480,12 @@ let ProgressButtonComponent = class ProgressButtonComponent {
         return (this.progress.animation === name);
     }
     /**
-     * Check if progress direction is horizontal
-     */
-    isHorizontal() {
-        return (this.progress.direction === 'horizontal');
-    }
-    /**
-     * Check if vertical direction is forced
-     */
-    isForcedVerticalDirection() {
-        return (this.progress.animation === 'lateral-lines');
-    }
-    /**
      * Progress Button Data
      * @param progress ProgressButtonData The Progress Button Data
      */
     set progress(progress) {
         this.progressP = Object.assign({}, this.progressDefault, progress);
-        this.progressP.direction = (this.isForcedVerticalDirection()) ? 'vertical' : this.progressP.direction;
+        this.progressP.direction = (this.isAnimation('lateral-lines')) ? 'vertical' : this.progressP.direction;
     }
     /**
      * The Progress Button Data
