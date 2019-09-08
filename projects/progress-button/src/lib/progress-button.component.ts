@@ -180,22 +180,32 @@ export class ProgressButtonComponent implements OnInit {
       width: null,
     };
 
-    // Lateral Lines
-    if (this.isAnimation('lateral-lines')) {
+    // Lateral Lines & Top Line
+    if (this.isAnimation('lateral-lines') || this.isAnimation('top-line')) {
       style.background = null;
       style.borderColor = this.design.progressInnerBackground;
       if (this.design.linesSize) {
         style.borderLeftWidth = this.design.linesSize + 'px';
         style.borderRightWidth = this.design.linesSize + 'px';
+      } else {
+        this.design.linesSize = 10;
+        style.borderLeftWidth = '5px';
+        style.borderRightWidth = '5px';
       }
+    }
+
+    // Lateral Lines
+    if (this.isAnimation('lateral-lines')) {
+      style.background = null;
+      style.borderColor = this.design.progressInnerBackground;
     }
 
     if (this.isHorizontal()) {
       style.width = this.progressValue + '%';
-      style.height = (this.isAnimation('top-line') && this.design.linesSize) ? this.design.linesSize + 'px' : null;
+      style.height = (this.isAnimation('top-line')) ? this.design.linesSize + 'px' : null;
     } else {
       style.height = this.progressValue + '%';
-      style.width = (this.isAnimation('top-line') && this.design.linesSize) ? this.design.linesSize + 'px' : null;
+      style.width = (this.isAnimation('top-line')) ? this.design.linesSize + 'px' : null;
     }
 
     return style;
