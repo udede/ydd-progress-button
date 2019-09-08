@@ -180,35 +180,50 @@ export class ProgressButtonComponent implements OnInit {
       width: null,
     };
 
-    // Lateral Lines & Top Line
-    if (this.isAnimation('lateral-lines') || this.isAnimation('top-line')) {
-      style.background = null;
-      style.borderColor = this.design.progressInnerBackground;
-      if (this.design.linesSize) {
-        style.borderLeftWidth = this.design.linesSize + 'px';
-        style.borderRightWidth = this.design.linesSize + 'px';
-      } else {
-        this.design.linesSize = 10;
-        style.borderLeftWidth = '5px';
-        style.borderRightWidth = '5px';
-      }
+    // Reset LinesSize
+    if (this.design.linesSize === null) {
+      this.design.linesSize = 10;
     }
 
     // Lateral Lines
     if (this.isAnimation('lateral-lines')) {
       style.background = null;
       style.borderColor = this.design.progressInnerBackground;
+      style.borderLeftWidth = this.design.linesSize + 'px';
+      style.borderRightWidth = this.design.linesSize + 'px';
     }
 
-    if (this.isHorizontal()) {
-      style.width = this.progressValue + '%';
-      style.height = (this.isAnimation('top-line')) ? this.design.linesSize + 'px' : null;
-    } else {
-      style.height = this.progressValue + '%';
-      style.width = (this.isAnimation('top-line')) ? this.design.linesSize + 'px' : null;
-    }
+    // Set Size
+    style.height = this.progressInnerHeight;
+    style.width = this.progressInnerWidth;
 
     return style;
+  }
+
+  /**
+   * Get Calculated Progress Inner Width
+   */
+  get progressInnerWidth() {
+    if (this.progress.direction === 'horizontal') {
+      return this.progressValue + '%';
+    }
+    if (this.isAnimation('top-line')) {
+      return this.design.linesSize + 'px';
+    }
+    return null;
+  }
+
+  /**
+   * Get Calculated Progress Inner Height
+   */
+  get progressInnerHeight() {
+    if (this.progress.direction === 'vertical') {
+      return this.progressValue + '%';
+    }
+    if (this.isAnimation('top-line')) {
+      return this.design.linesSize + 'px';
+    }
+    return null;
   }
 
   /**
@@ -220,27 +235,13 @@ export class ProgressButtonComponent implements OnInit {
   }
 
   /**
-   * Check if progress direction is horizontal
-   */
-  isHorizontal() {
-    return (this.progress.direction === 'horizontal');
-  }
-
-  /**
-   * Check if vertical direction is forced
-   */
-  isForcedVerticalDirection() {
-    return (this.progress.animation === 'lateral-lines');
-  }
-
-  /**
    * Progress Button Data
    * @param progress ProgressButtonData The Progress Button Data
    */
   @Input()
   set progress(progress: ProgressButtonData) {
     this.progressP = Object.assign({}, this.progressDefault, progress);
-    this.progressP.direction = (this.isForcedVerticalDirection()) ? 'vertical' : this.progressP.direction;
+    this.progressP.direction = (this.isAnimation('lateral-lines')) ? 'vertical' : this.progressP.direction;
   }
 
   /**

@@ -14,13 +14,12 @@
         [attr.value]="value"
 
         [attr.data-style]="progress.animation"
-        [attr.data-vertical]="(!isHorizontal())?'':null"
-        [attr.data-horizontal]="(isHorizontal())?'':null"
+        [attr.data-vertical]="(progress.direction === 'vertical')?'':null"
+        [attr.data-horizontal]="(progress.direction === 'horizontal')?'':null"
         [attr.data-perspective]="perspective"
         (click)="click()"
         [ngClass]="[(loading)?'state-loading':'',statusClass]"
-        [ngStyle]="buttonStyle"
->
+        [ngStyle]="buttonStyle">
   <!-- perspective -->
   <ng-container *ngIf="perspective === ''">
       <span class="progress-wrap">
