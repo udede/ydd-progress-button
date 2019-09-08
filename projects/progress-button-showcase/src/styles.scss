@@ -94,7 +94,7 @@ body {
 
 ul {
   list-style: none;
-  padding-left: 0px;
+  padding-left: 0;
 }
 
 body h1:first-child {
@@ -141,7 +141,7 @@ h2 {
 h3 code {
   font-size: 18px;
   margin-right: 5px;
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 img[alt='preview'] {
@@ -171,8 +171,12 @@ input[type='text'].ydd-input-text:hover, input[type='text'].ydd-input-text:focus
   border-color: #333333;
 }
 
-#demourl {
+div#demourl, [alt="demo online"] {
   display: none;
+}
+
+h1#angular-progress-button + p a {
+  border-bottom: none;
 }
 
 .ydd-page-content {
@@ -190,8 +194,8 @@ input[type='text'].ydd-input-text:hover, input[type='text'].ydd-input-text:focus
   max-width: 1920px;
   margin: auto;
   border: 1px solid #f0f0f0;
-  border-top: 0px;
-  border-bottom: 0px;
+  border-top: 0;
+  border-bottom: 0;
 }
 
 .ydd-page-preview .item {
@@ -442,7 +446,7 @@ input[type='text'].ydd-input-text:hover, input[type='text'].ydd-input-text:focus
 .table .header {
   padding: 0 1em;
   background: #f9f9f957;
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0 0;
   border-bottom: 1px solid #f0f0f0;
 }
 
@@ -503,7 +507,7 @@ input[type='text'].ydd-input-text:hover, input[type='text'].ydd-input-text:focus
 
   .header .row {
     padding: 0;
-    height: 0px;
+    height: 0;
   }
 
   .header .row .cell {
@@ -553,7 +557,7 @@ input[type='text'].ydd-input-text:hover, input[type='text'].ydd-input-text:focus
 }
 
 .table-body .row:last-child .cell {
-  border-bottom: 0px;
+  border-bottom: 0;
 }
 
 .header .row .cell {
@@ -608,7 +612,7 @@ input[type='text'].ydd-input-text:hover, input[type='text'].ydd-input-text:focus
   }
   .cell code {
     padding: 3px 5px;
-    margin-right: 0px;
+    margin-right: 0;
     margin-bottom: 3px;
     font-size: 14px;
   }
