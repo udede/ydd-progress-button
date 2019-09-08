@@ -17,7 +17,7 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '../../coverage/progress-button-showcase'),
-      reports: ['html', 'text-summary'],
+      reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
     },
     reporters: ['progress', 'kjhtml'],
