@@ -18,7 +18,7 @@ import {Observable} from 'rxjs';
 })
 export class ProgressButtonComponent implements OnInit {
 
-  /** PRIVATE */
+  /** Private Props */
   private progressDefault: ProgressButtonData = {
     animation: 'fill',
     direction: 'horizontal',
@@ -37,12 +37,14 @@ export class ProgressButtonComponent implements OnInit {
     linesSize: 10
   };
 
-  private progressValueP = 0;
-  private statusClassP = '';
   private progressP: ProgressButtonData = this.progressDefault;
   private designP: ProgressButtonDesign = this.designDefault;
-  private loadingP = false;
-  private noTransitionP = false;
+
+  /** Public Props */
+  progressValue = 0;
+  loading = false;
+  noTransition = false;
+  statusClass = '';
 
   /**
    * Specifies a name for the button
@@ -77,6 +79,9 @@ export class ProgressButtonComponent implements OnInit {
   constructor() {
   }
 
+  /**
+   * Execute click action
+   */
   click() {
     this.action.emit(this);
   }
@@ -86,8 +91,8 @@ export class ProgressButtonComponent implements OnInit {
    */
   progressInit() {
     this.disabled = true;
-    this.loadingP = true;
-    this.noTransitionP = false;
+    this.loading = true;
+    this.noTransition = false;
     this.progressValue = 0;
   }
 
@@ -100,9 +105,9 @@ export class ProgressButtonComponent implements OnInit {
     return new Observable((observer) => {
       observer.next('before-init');
       const tim1 = setTimeout(() => {
-        this.noTransitionP = true;
+        this.noTransition = true;
         this.progressValue = 0;
-        this.loadingP = false;
+        this.loading = false;
         this.statusClass = ('state-' + status);
         observer.next('after-init');
         const tim2 = setTimeout(() => {
@@ -124,6 +129,9 @@ export class ProgressButtonComponent implements OnInit {
     return (this.progress.animation.includes('rotate-') || this.progress.animation.includes('flip-')) ? '' : null;
   }
 
+  /**
+   * Get css style of the button
+   */
   get buttonStyle() {
     return {
       background: (this.perspective === null) ? this.mainBackgroundColor : null,
@@ -131,7 +139,9 @@ export class ProgressButtonComponent implements OnInit {
     };
   }
 
-
+  /**
+   * Get the background color of the button according to the status
+   */
   get mainBackgroundColor() {
     let bg = this.design.background;
     switch (this.statusClass) {
@@ -145,6 +155,9 @@ export class ProgressButtonComponent implements OnInit {
     return bg;
   }
 
+  /**
+   * Get the content style according to the status
+   */
   get contentStyle() {
     return {
       background: (this.perspective === '' || this.isAnimation('slide-down') || this.isAnimation('move-up')) ?
@@ -154,19 +167,38 @@ export class ProgressButtonComponent implements OnInit {
   }
 
   /**
-   * The Progress Inner Style
+   * Get the Progress Inner Style
    */
   get progressInnerStyle() {
-    return {
-      background: (!this.isAnimation('lateral-lines')) ? this.design.progressInnerBackground : null,
-      borderColor: (this.isAnimation('lateral-lines')) ? this.design.progressInnerBackground : null,
-      borderLeftWidth: (this.isAnimation('lateral-lines') && this.design.linesSize) ? this.design.linesSize + 'px' : null,
-      borderRightWidth: (this.isAnimation('lateral-lines') && this.design.linesSize) ? this.design.linesSize + 'px' : null,
-      height: (!this.isHorizontal()) ? this.progressValueP + '%' :
-        (this.isAnimation('top-line') && this.design.linesSize) ? this.design.linesSize + 'px' : null,
-      width: (this.isHorizontal()) ? this.progressValueP + '%' :
-        (this.isAnimation('top-line') && this.design.linesSize) ? this.design.linesSize + 'px' : null,
+
+    const style = {
+      background: this.design.progressInnerBackground,
+      borderColor: null,
+      borderLeftWidth: null,
+      borderRightWidth: null,
+      height: null,
+      width: null,
     };
+
+    // Lateral Lines
+    if (this.isAnimation('lateral-lines')) {
+      style.background = null;
+      style.borderColor = this.design.progressInnerBackground;
+      if (this.design.linesSize) {
+        style.borderLeftWidth = this.design.linesSize + 'px';
+        style.borderRightWidth = this.design.linesSize + 'px';
+      }
+    }
+
+    if (this.isHorizontal()) {
+      style.width = this.progressValue + '%';
+      style.height = (this.isAnimation('top-line') && this.design.linesSize) ? this.design.linesSize + 'px' : null;
+    } else {
+      style.height = this.progressValue + '%';
+      style.width = (this.isAnimation('top-line') && this.design.linesSize) ? this.design.linesSize + 'px' : null;
+    }
+
+    return style;
   }
 
   /**
@@ -187,7 +219,6 @@ export class ProgressButtonComponent implements OnInit {
   /**
    * Check if vertical direction is forced
    */
-
   isForcedVerticalDirection() {
     return (this.progress.animation === 'lateral-lines');
   }
@@ -223,37 +254,6 @@ export class ProgressButtonComponent implements OnInit {
    */
   get design(): ProgressButtonDesign {
     return this.designP;
-  }
-
-  /**
-   * Get the status class
-   */
-  get statusClass(): string {
-    return this.statusClassP;
-  }
-
-  /**
-   * Set the status class
-   * @param value The status class
-   */
-  set statusClass(value: string) {
-    this.statusClassP = value;
-  }
-
-  get progressValue(): number {
-    return this.progressValueP;
-  }
-
-  set progressValue(value: number) {
-    this.progressValueP = value;
-  }
-
-  get noTransition(): boolean {
-    return this.noTransitionP;
-  }
-
-  get loading(): boolean {
-    return this.loadingP;
   }
 
   ngOnInit() {
