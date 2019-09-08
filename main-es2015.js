@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"ydd-main-container\">\n  <div class=\"ydd-main-content\">\n    <div class=\"ydd-page-content\">\n      <div class=\"ydd-page-preview\">\n        <div class=\"item\">\n          <div class=\"ydd-page-preview-item-description\">\n            <markdown [src]=\"'https://raw.githubusercontent.com/udede/ydd-progress-button/master/README.md'\"></markdown>\n          </div>\n          <div class=\"ydd-page-preview-item-content\" style=\"height: 100px\">\n            <div class=\"open-settings-icon\" [ngClass]=\"{'visible':(innerWidth <= 1200)}\" (click)=\"isSidebarSettingsOpen=true\"></div>\n            <ydd-progress-button (action)=\"run($event)\" [progress]=\"progressData\" [design]=\"designData\">\n              Submit\n            </ydd-progress-button>\n          </div>\n        </div>\n        <div class=\"settings\" [ngClass]=\"{'open':(isSidebarSettingsOpen && (innerWidth <= 1200))}\">\n          <div class=\"close-settings-icon\" (click)=\"isSidebarSettingsOpen=false\"></div>\n          <form [formGroup]=\"settingsForm\" novalidate>\n            <h2>Settings</h2>\n            <h3>Data</h3>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Animation</label>\n              <div class=\"field\">\n                <ng-select class=\"ydd-select\" formControlName=\"animation\" [clearable]=\"false\">\n                  <ng-option value=\"fill\">Fill</ng-option>\n                  <ng-option value=\"shrink\">Shrink</ng-option>\n                  <ng-option value=\"rotate-angle-bottom\">Rotate Angle Bottom</ng-option>\n                  <ng-option value=\"rotate-angle-top\">Rotate Angle Top</ng-option>\n                  <ng-option value=\"rotate-angle-left\">Rotate Angle Left</ng-option>\n                  <ng-option value=\"rotate-angle-right\">Rotate Angle Right</ng-option>\n                  <ng-option value=\"rotate-side-down\">Rotate Side Down</ng-option>\n                  <ng-option value=\"rotate-side-up\">Rotate Side Up</ng-option>\n                  <ng-option value=\"rotate-side-left\">Rotate Side Left</ng-option>\n                  <ng-option value=\"rotate-side-right\">Rotate Side Right</ng-option>\n                  <ng-option value=\"rotate-back\">Rotate Back</ng-option>\n                  <ng-option value=\"flip-open\">Flip Open</ng-option>\n                  <ng-option value=\"slide-down\">Slide Down</ng-option>\n                  <ng-option value=\"move-up\">Move Up</ng-option>\n                  <ng-option value=\"top-line\">Top Line</ng-option>\n                  <ng-option value=\"lateral-lines\">Lateral Lines</ng-option>\n                </ng-select>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Direction</label>\n              <div class=\"field\">\n                <ng-select class=\"ydd-select\" formControlName=\"direction\" [clearable]=\"false\">\n                  <ng-option value=\"horizontal\">Horizontal</ng-option>\n                  <ng-option value=\"vertical\">Vertical</ng-option>\n                </ng-select>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Status</label>\n              <div class=\"field\">\n                <ng-select class=\"ydd-select\" formControlName=\"status\" [clearable]=\"false\">\n                  <ng-option value=\"success\">Success</ng-option>\n                  <ng-option value=\"error\">Error</ng-option>\n                </ng-select>\n              </div>\n            </div>\n            <h3>Design</h3>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"background\" name=\"background\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.background\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Text Color</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"color\" name=\"color\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.color\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Success Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"successBackground\" name=\"successBackground\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.successBackground\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Error Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"errorBackground\" name=\"errorBackground\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.errorBackground\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Success Icon</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"successIconColor\" name=\"successIconColor\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.successIconColor\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Error Icon</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"errorIconColor\" name=\"errorIconColor\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.errorIconColor\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Progress Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"progressBackground\" name=\"progressBackground\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.progressBackground\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Progress Inner Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"progressInnerBackground\" name=\"progressInnerBackground\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.progressInnerBackground\"></span>\n              </div>\n            </div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"ydd-main-container\">\n  <div class=\"ydd-main-content\">\n    <div class=\"ydd-page-content\">\n      <div class=\"ydd-page-preview\">\n        <div class=\"item\">\n          <div class=\"ydd-page-preview-item-description\">\n            <markdown [src]=\"'https://raw.githubusercontent.com/udede/ydd-progress-button/master/README.md'\"></markdown>\n          </div>\n          <div class=\"ydd-page-preview-item-content\" style=\"height: 100px\">\n            <div class=\"open-settings-icon\" (click)=\"isSidebarSettingsOpen=true\"></div>\n            <ydd-progress-button (action)=\"run($event)\" [progress]=\"progressData\" [design]=\"designData\">\n              Submit\n            </ydd-progress-button>\n          </div>\n        </div>\n        <div class=\"settings\" [ngClass]=\"{'open':(isSidebarSettingsOpen)}\">\n          <div class=\"close-settings-icon\" (click)=\"isSidebarSettingsOpen=false\"></div>\n          <form [formGroup]=\"settingsForm\" novalidate>\n            <h2>Settings</h2>\n            <h3>Data</h3>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Animation</label>\n              <div class=\"field\">\n                <ng-select class=\"ydd-select\" formControlName=\"animation\" [clearable]=\"false\">\n                  <ng-option value=\"fill\">Fill</ng-option>\n                  <ng-option value=\"shrink\">Shrink</ng-option>\n                  <ng-option value=\"rotate-angle-bottom\">Rotate Angle Bottom</ng-option>\n                  <ng-option value=\"rotate-angle-top\">Rotate Angle Top</ng-option>\n                  <ng-option value=\"rotate-angle-left\">Rotate Angle Left</ng-option>\n                  <ng-option value=\"rotate-angle-right\">Rotate Angle Right</ng-option>\n                  <ng-option value=\"rotate-side-down\">Rotate Side Down</ng-option>\n                  <ng-option value=\"rotate-side-up\">Rotate Side Up</ng-option>\n                  <ng-option value=\"rotate-side-left\">Rotate Side Left</ng-option>\n                  <ng-option value=\"rotate-side-right\">Rotate Side Right</ng-option>\n                  <ng-option value=\"rotate-back\">Rotate Back</ng-option>\n                  <ng-option value=\"flip-open\">Flip Open</ng-option>\n                  <ng-option value=\"slide-down\">Slide Down</ng-option>\n                  <ng-option value=\"move-up\">Move Up</ng-option>\n                  <ng-option value=\"top-line\">Top Line</ng-option>\n                  <ng-option value=\"lateral-lines\">Lateral Lines</ng-option>\n                </ng-select>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Direction</label>\n              <div class=\"field\">\n                <ng-select class=\"ydd-select\" formControlName=\"direction\" [clearable]=\"false\">\n                  <ng-option value=\"horizontal\">Horizontal</ng-option>\n                  <ng-option value=\"vertical\">Vertical</ng-option>\n                </ng-select>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Status</label>\n              <div class=\"field\">\n                <ng-select class=\"ydd-select\" formControlName=\"status\" [clearable]=\"false\">\n                  <ng-option value=\"success\">Success</ng-option>\n                  <ng-option value=\"error\">Error</ng-option>\n                </ng-select>\n              </div>\n            </div>\n            <h3>Design</h3>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"background\" name=\"background\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.background\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Text Color</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"color\" name=\"color\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.color\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Success Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"successBackground\" name=\"successBackground\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.successBackground\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Error Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"errorBackground\" name=\"errorBackground\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.errorBackground\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Success Icon</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"successIconColor\" name=\"successIconColor\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.successIconColor\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Error Icon</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"errorIconColor\" name=\"errorIconColor\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.errorIconColor\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Progress Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"progressBackground\" name=\"progressBackground\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.progressBackground\"></span>\n              </div>\n            </div>\n            <div class=\"ydd-page-preview-settings-field\">\n              <label>Progress Inner Background</label>\n              <div class=\"field ydd-color-preview\">\n                <input class=\"ydd-input-text\" formControlName=\"progressInnerBackground\" name=\"progressInnerBackground\" type=\"text\"/>\n                <span [style.backgroundColor]=\"settingsForm.value.progressInnerBackground\"></span>\n              </div>\n            </div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -299,7 +299,7 @@ __webpack_require__.r(__webpack_exports__);
 
 let ProgressButtonComponent = class ProgressButtonComponent {
     constructor() {
-        /** PRIVATE */
+        /** Private Props */
         this.progressDefault = {
             animation: 'fill',
             direction: 'horizontal',
@@ -316,12 +316,13 @@ let ProgressButtonComponent = class ProgressButtonComponent {
             progressInnerBackground: '#555555',
             linesSize: 10
         };
-        this.progressValueP = 0;
-        this.statusClassP = '';
         this.progressP = this.progressDefault;
         this.designP = this.designDefault;
-        this.loadingP = false;
-        this.noTransitionP = false;
+        /** Public Props */
+        this.progressValue = 0;
+        this.loading = false;
+        this.noTransition = false;
+        this.statusClass = '';
         /**
          * Specifies the type of button
          */
@@ -339,6 +340,9 @@ let ProgressButtonComponent = class ProgressButtonComponent {
          */
         this.action = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
     }
+    /**
+     * Execute click action
+     */
     click() {
         this.action.emit(this);
     }
@@ -347,8 +351,8 @@ let ProgressButtonComponent = class ProgressButtonComponent {
      */
     progressInit() {
         this.disabled = true;
-        this.loadingP = true;
-        this.noTransitionP = false;
+        this.loading = true;
+        this.noTransition = false;
         this.progressValue = 0;
     }
     /**
@@ -360,9 +364,9 @@ let ProgressButtonComponent = class ProgressButtonComponent {
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
             observer.next('before-init');
             const tim1 = setTimeout(() => {
-                this.noTransitionP = true;
+                this.noTransition = true;
                 this.progressValue = 0;
-                this.loadingP = false;
+                this.loading = false;
                 this.statusClass = ('state-' + status);
                 observer.next('after-init');
                 const tim2 = setTimeout(() => {
@@ -382,12 +386,18 @@ let ProgressButtonComponent = class ProgressButtonComponent {
     get perspective() {
         return (this.progress.animation.includes('rotate-') || this.progress.animation.includes('flip-')) ? '' : null;
     }
+    /**
+     * Get css style of the button
+     */
     get buttonStyle() {
         return {
             background: (this.perspective === null) ? this.mainBackgroundColor : null,
             color: this.design.color
         };
     }
+    /**
+     * Get the background color of the button according to the status
+     */
     get mainBackgroundColor() {
         let bg = this.design.background;
         switch (this.statusClass) {
@@ -400,6 +410,9 @@ let ProgressButtonComponent = class ProgressButtonComponent {
         }
         return bg;
     }
+    /**
+     * Get the content style according to the status
+     */
     get contentStyle() {
         return {
             background: (this.perspective === '' || this.isAnimation('slide-down') || this.isAnimation('move-up')) ?
@@ -408,19 +421,45 @@ let ProgressButtonComponent = class ProgressButtonComponent {
         };
     }
     /**
-     * The Progress Inner Style
+     * Get the Progress Inner Style
      */
     get progressInnerStyle() {
-        return {
-            background: (!this.isAnimation('lateral-lines')) ? this.design.progressInnerBackground : null,
-            borderColor: (this.isAnimation('lateral-lines')) ? this.design.progressInnerBackground : null,
-            borderLeftWidth: (this.isAnimation('lateral-lines') && this.design.linesSize) ? this.design.linesSize + 'px' : null,
-            borderRightWidth: (this.isAnimation('lateral-lines') && this.design.linesSize) ? this.design.linesSize + 'px' : null,
-            height: (!this.isHorizontal()) ? this.progressValueP + '%' :
-                (this.isAnimation('top-line') && this.design.linesSize) ? this.design.linesSize + 'px' : null,
-            width: (this.isHorizontal()) ? this.progressValueP + '%' :
-                (this.isAnimation('top-line') && this.design.linesSize) ? this.design.linesSize + 'px' : null,
+        const style = {
+            background: this.design.progressInnerBackground,
+            borderColor: null,
+            borderLeftWidth: null,
+            borderRightWidth: null,
+            height: null,
+            width: null,
         };
+        // Lateral Lines & Top Line
+        if (this.isAnimation('lateral-lines') || this.isAnimation('top-line')) {
+            style.background = null;
+            style.borderColor = this.design.progressInnerBackground;
+            if (this.design.linesSize) {
+                style.borderLeftWidth = this.design.linesSize + 'px';
+                style.borderRightWidth = this.design.linesSize + 'px';
+            }
+            else {
+                this.design.linesSize = 10;
+                style.borderLeftWidth = '5px';
+                style.borderRightWidth = '5px';
+            }
+        }
+        // Lateral Lines
+        if (this.isAnimation('lateral-lines')) {
+            style.background = null;
+            style.borderColor = this.design.progressInnerBackground;
+        }
+        if (this.isHorizontal()) {
+            style.width = this.progressValue + '%';
+            style.height = (this.isAnimation('top-line')) ? this.design.linesSize + 'px' : null;
+        }
+        else {
+            style.height = this.progressValue + '%';
+            style.width = (this.isAnimation('top-line')) ? this.design.linesSize + 'px' : null;
+        }
+        return style;
     }
     /**
      * Check if animation is active
@@ -467,31 +506,6 @@ let ProgressButtonComponent = class ProgressButtonComponent {
      */
     get design() {
         return this.designP;
-    }
-    /**
-     * Get the status class
-     */
-    get statusClass() {
-        return this.statusClassP;
-    }
-    /**
-     * Set the status class
-     * @param value The status class
-     */
-    set statusClass(value) {
-        this.statusClassP = value;
-    }
-    get progressValue() {
-        return this.progressValueP;
-    }
-    set progressValue(value) {
-        this.progressValueP = value;
-    }
-    get noTransition() {
-        return this.noTransitionP;
-    }
-    get loading() {
-        return this.loadingP;
     }
     ngOnInit() {
     }
@@ -642,16 +656,7 @@ function markedOptionsFactory() {
         }
         return '<div class="cell" ' + ((title !== null) ? 'data-title="' + title + '"' : '') + '>' + content.replace(/,/g, '') + '</div>';
     };
-    return {
-        renderer,
-        gfm: true,
-        tables: true,
-        breaks: false,
-        pedantic: false,
-        sanitize: false,
-        smartLists: true,
-        smartypants: false,
-    };
+    return { renderer };
 }
 
 
@@ -692,7 +697,6 @@ let AppComponent = class AppComponent {
         this.isSidebarSettingsOpen = false;
     }
     ngOnInit() {
-        this.innerWidth = window.innerWidth;
         this.settingsForm = this.fb.group({
             animation: 'fill',
             direction: 'horizontal',
@@ -706,9 +710,6 @@ let AppComponent = class AppComponent {
             progressBackground: '#000000',
             progressInnerBackground: '#555555'
         });
-    }
-    onResize(event) {
-        this.innerWidth = window.innerWidth;
     }
     get progressData() {
         return {
@@ -748,9 +749,6 @@ let AppComponent = class AppComponent {
 AppComponent.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] }
 ];
-tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('window:resize', ['$event'])
-], AppComponent.prototype, "onResize", null);
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-root',
