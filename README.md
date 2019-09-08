@@ -2,6 +2,9 @@
 [![Build Status](https://travis-ci.com/udede/ydd-progress-button.svg?branch=master)](https://travis-ci.com/udede/ydd-progress-button)
 [![npm version](https://badge.fury.io/js/progress-button.svg)](https://badge.fury.io/js/progress-button)
 [![demo online](https://img.shields.io/badge/demo-online-brightgreen)](https://udede.github.io/ydd-progress-button/)
+[![npm downloads](https://img.shields.io/npm/dm/progress-button.svg)](https://www.npmjs.com/package/progress-button)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e82c59da5ecb867c9a60/maintainability)](https://codeclimate.com/github/udede/ydd-progress-button/maintainability)
+[![Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)]()
 
 This represents a button element where the button itself serves as a progress indicator. You can choose from 16 types of animations. 3D animation styles are used for showing the progress indication on one side of the button while rotating the button in perspective.
 <p>
