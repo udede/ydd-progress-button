@@ -86,8 +86,6 @@ describe('ProgressButtonComponent', () => {
     comp.progress = {animation: 'top-line', direction: 'vertical'};
     comp.design.linesSize = null;
     expect(comp.progressInnerStyle.width).toBe(comp.design.linesSize + 'px', '10px for top-line animation (vertical)');
-    expect(comp.progressInnerStyle.borderLeftWidth).toBe('10px', '10px for linesSize == null');
-    expect(comp.progressInnerStyle.borderRightWidth).toBe('10px', '10px for linesSize == null');
   });
 
   it('should change contentStyle according to progress animation', () => {
