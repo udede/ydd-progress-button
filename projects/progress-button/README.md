@@ -1,4 +1,8 @@
 # Angular Progress Button
+[![Build Status](https://travis-ci.com/udede/ydd-progress-button.svg?branch=master)](https://travis-ci.com/udede/ydd-progress-button)
+[![npm version](https://badge.fury.io/js/progress-button.svg)](https://badge.fury.io/js/progress-button)
+[![demo online](https://img.shields.io/badge/demo-online-brightgreen)](https://udede.github.io/ydd-progress-button/)
+
 This represents a button element where the button itself serves as a progress indicator. You can choose from 16 types of animations. 3D animation styles are used for showing the progress indication on one side of the button while rotating the button in perspective.
 <p>
 <img src="https://raw.githubusercontent.com/udede/ydd-progress-button/master/preview.gif" alt="preview" style="max-width:100%;"/>
