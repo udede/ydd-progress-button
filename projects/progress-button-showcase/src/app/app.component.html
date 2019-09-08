@@ -7,13 +7,13 @@
             <markdown [src]="'https://raw.githubusercontent.com/udede/ydd-progress-button/master/README.md'"></markdown>
           </div>
           <div class="ydd-page-preview-item-content" style="height: 100px">
-            <div class="open-settings-icon" [ngClass]="{'visible':(innerWidth <= 1200)}" (click)="isSidebarSettingsOpen=true"></div>
+            <div class="open-settings-icon" (click)="isSidebarSettingsOpen=true"></div>
             <ydd-progress-button (action)="run($event)" [progress]="progressData" [design]="designData">
               Submit
             </ydd-progress-button>
           </div>
         </div>
-        <div class="settings" [ngClass]="{'open':(isSidebarSettingsOpen && (innerWidth <= 1200))}">
+        <div class="settings" [ngClass]="{'open':(isSidebarSettingsOpen)}">
           <div class="close-settings-icon" (click)="isSidebarSettingsOpen=false"></div>
           <form [formGroup]="settingsForm" novalidate>
             <h2>Settings</h2>

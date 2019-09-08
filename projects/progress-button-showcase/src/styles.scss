@@ -426,6 +426,12 @@ h1#angular-progress-button + p a {
   display: block;
 }
 
+@media (max-width: 1200px) {
+  .open-settings-icon, .close-settings-icon {
+    display: block;
+  }
+}
+
 
 /** TABLE **/
 

@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProgressButtonComponent} from '../../../progress-button/src/lib/progress-button.component';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
@@ -10,13 +10,11 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class AppComponent implements OnInit {
   settingsForm: FormGroup;
   isSidebarSettingsOpen = false;
-  innerWidth: any;
 
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    this.innerWidth = window.innerWidth;
     this.settingsForm = this.fb.group({
       animation: 'fill',
       direction: 'horizontal',
@@ -30,11 +28,6 @@ export class AppComponent implements OnInit {
       progressBackground: '#000000',
       progressInnerBackground: '#555555'
     });
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.innerWidth = window.innerWidth;
   }
 
   get progressData() {
