@@ -10,7 +10,7 @@
     "build:showcase": "ng build progress-button-showcase --base-href='.' --rebase-root-relative-css-urls=true",
     "publish:showcase": "npx angular-cli-ghpages --dir=./dist/progress-button-showcase",
     "test": "ng test",
-    "test-headless": "ng test --watch=false --browsers=ChromeHeadless",
+    "test-headless": "ng test --code-coverage --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

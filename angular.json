@@ -129,6 +129,7 @@
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
+          "codeCoverage": true,
           "options": {
             "main": "projects/progress-button-showcase/src/test.ts",
             "polyfills": "projects/progress-button-showcase/src/polyfills.ts",
