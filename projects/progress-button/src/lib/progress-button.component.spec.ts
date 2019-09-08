@@ -41,7 +41,6 @@ describe('ProgressButtonComponent', () => {
   it('#progressStop() should change button status and design on complete', (done) => {
     comp.progress.statusTime = 1000;
     comp.progressInit();
-    const originalBg = comp.design.background;
     const sub = comp.progressStop('error').subscribe({
       complete(): void {
         expect(comp.disabled).toBe(null, 'null after stop');
