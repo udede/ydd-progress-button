@@ -7,6 +7,7 @@ import {
   ProgressButtonData, ProgressButtonAnimation
 } from './progress-button.types';
 import {Observable} from 'rxjs';
+import {ProgressButtonService} from './progress-button.service';
 
 @Component({
   selector: 'ydd-progress-button',
@@ -18,27 +19,9 @@ import {Observable} from 'rxjs';
 })
 export class ProgressButtonComponent implements OnInit {
 
-  /** Private Props */
-  private progressDefault: ProgressButtonData = {
-    animation: 'fill',
-    direction: 'horizontal',
-    statusTime: 1500,
-  };
 
-  private designDefault: ProgressButtonDesign = {
-    background: '#222222',
-    color: '#FFFFFF',
-    successBackground: '#00e175',
-    errorBackground: '#ff0c00',
-    successIconColor: '#ffffff',
-    errorIconColor: '#ffffff',
-    progressBackground: '#000000',
-    progressInnerBackground: '#555555',
-    linesSize: 10
-  };
-
-  private progressP: ProgressButtonData = this.progressDefault;
-  private designP: ProgressButtonDesign = this.designDefault;
+  private progressP: ProgressButtonData;
+  private designP: ProgressButtonDesign;
 
   /** Public Props */
   progressValue = 0;
@@ -76,7 +59,9 @@ export class ProgressButtonComponent implements OnInit {
    */
   @Output() action = new EventEmitter();
 
-  constructor() {
+  constructor(private service: ProgressButtonService) {
+    this.progress = this.service.progress;
+    this.design = this.service.design;
   }
 
   /**
@@ -240,8 +225,8 @@ export class ProgressButtonComponent implements OnInit {
    */
   @Input()
   set progress(progress: ProgressButtonData) {
-    this.progressP = Object.assign({}, this.progressDefault, progress);
-    this.progressP.direction = (this.isAnimation('lateral-lines')) ? 'vertical' : this.progressP.direction;
+    this.service.progress = progress;
+    this.progressP = this.service.progress;
   }
 
   /**
@@ -257,7 +242,8 @@ export class ProgressButtonComponent implements OnInit {
    */
   @Input()
   set design(design: ProgressButtonDesign) {
-    this.designP = Object.assign({}, this.designDefault, design);
+    this.service.design = design;
+    this.designP = this.service.design;
   }
 
   /**

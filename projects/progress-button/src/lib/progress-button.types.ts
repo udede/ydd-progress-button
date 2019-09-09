@@ -99,3 +99,8 @@ export interface ProgressButtonData {
    */
   statusTime?: number;
 }
+
+export interface ProgressButtonConfig {
+  progress?: ProgressButtonData;
+  design?: ProgressButtonDesign;
+}

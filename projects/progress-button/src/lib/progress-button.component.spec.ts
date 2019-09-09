@@ -1,6 +1,8 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, inject, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ProgressButtonComponent} from './progress-button.component';
+import {ProgressButtonService} from './progress-button.service';
+import {progressButtonServiceFactory} from './progress-button.module';
 
 describe('ProgressButtonComponent', () => {
   let comp: ProgressButtonComponent;
@@ -8,16 +10,20 @@ describe('ProgressButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProgressButtonComponent]
+      declarations: [ProgressButtonComponent],
+      providers: [{
+        provide: ProgressButtonService,
+        useFactory: progressButtonServiceFactory(null)
+      }]
     })
       .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async(inject([ProgressButtonService], (service: ProgressButtonService) => {
     fixture = TestBed.createComponent(ProgressButtonComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  })));
 
   it('should create', () => {
     expect(comp).toBeTruthy();
