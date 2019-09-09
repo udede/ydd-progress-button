@@ -294,30 +294,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var _progress_button_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./progress-button.service */ "../progress-button/src/lib/progress-button.service.ts");
+
 
 
 
 let ProgressButtonComponent = class ProgressButtonComponent {
-    constructor() {
-        /** Private Props */
-        this.progressDefault = {
-            animation: 'fill',
-            direction: 'horizontal',
-            statusTime: 1500,
-        };
-        this.designDefault = {
-            background: '#222222',
-            color: '#FFFFFF',
-            successBackground: '#00e175',
-            errorBackground: '#ff0c00',
-            successIconColor: '#ffffff',
-            errorIconColor: '#ffffff',
-            progressBackground: '#000000',
-            progressInnerBackground: '#555555',
-            linesSize: 10
-        };
-        this.progressP = this.progressDefault;
-        this.designP = this.designDefault;
+    constructor(service) {
+        this.service = service;
         /** Public Props */
         this.progressValue = 0;
         this.loading = false;
@@ -339,6 +323,8 @@ let ProgressButtonComponent = class ProgressButtonComponent {
          *  Fires on a mouse click on the element
          */
         this.action = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.progress = this.service.progress;
+        this.design = this.service.design;
     }
     /**
      * Execute click action
@@ -484,8 +470,8 @@ let ProgressButtonComponent = class ProgressButtonComponent {
      * @param progress ProgressButtonData The Progress Button Data
      */
     set progress(progress) {
-        this.progressP = Object.assign({}, this.progressDefault, progress);
-        this.progressP.direction = (this.isAnimation('lateral-lines')) ? 'vertical' : this.progressP.direction;
+        this.service.progress = progress;
+        this.progressP = this.service.progress;
     }
     /**
      * The Progress Button Data
@@ -498,7 +484,8 @@ let ProgressButtonComponent = class ProgressButtonComponent {
      * @param design ProgressButtonDesign The Progress Button Design
      */
     set design(design) {
-        this.designP = Object.assign({}, this.designDefault, design);
+        this.service.design = design;
+        this.designP = this.service.design;
     }
     /**
      * The Progress Button Design
@@ -509,6 +496,9 @@ let ProgressButtonComponent = class ProgressButtonComponent {
     ngOnInit() {
     }
 };
+ProgressButtonComponent.ctorParameters = () => [
+    { type: _progress_button_service__WEBPACK_IMPORTED_MODULE_3__["ProgressButtonService"] }
+];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], ProgressButtonComponent.prototype, "name", void 0);
@@ -575,22 +565,150 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _progress_button_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./progress-button.component */ "../progress-button/src/lib/progress-button.component.ts");
+/* harmony import */ var _progress_button_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./progress-button.types */ "../progress-button/src/lib/progress-button.types.ts");
+/* harmony import */ var _progress_button_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./progress-button.service */ "../progress-button/src/lib/progress-button.service.ts");
+var ProgressButtonModule_1;
 
 
 
 
-let ProgressButtonModule = class ProgressButtonModule {
+
+
+let ProgressButtonModule = ProgressButtonModule_1 = class ProgressButtonModule {
+    static forRoot(config) {
+        return {
+            ngModule: ProgressButtonModule_1,
+            providers: [{
+                    provide: _progress_button_service__WEBPACK_IMPORTED_MODULE_5__["ProgressButtonService"],
+                    useFactory: Object(_progress_button_types__WEBPACK_IMPORTED_MODULE_4__["progressButtonServiceFactory"])(config),
+                }]
+        };
+    }
 };
-ProgressButtonModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+ProgressButtonModule = ProgressButtonModule_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [_progress_button_component__WEBPACK_IMPORTED_MODULE_3__["ProgressButtonComponent"]],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]
         ],
-        exports: [_progress_button_component__WEBPACK_IMPORTED_MODULE_3__["ProgressButtonComponent"]]
+        exports: [_progress_button_component__WEBPACK_IMPORTED_MODULE_3__["ProgressButtonComponent"]],
+        providers: [{
+                provide: _progress_button_service__WEBPACK_IMPORTED_MODULE_5__["ProgressButtonService"],
+                useFactory: Object(_progress_button_types__WEBPACK_IMPORTED_MODULE_4__["progressButtonServiceFactory"])(null)
+            }]
     })
 ], ProgressButtonModule);
 
+
+
+/***/ }),
+
+/***/ "../progress-button/src/lib/progress-button.service.ts":
+/*!*************************************************************!*\
+  !*** ../progress-button/src/lib/progress-button.service.ts ***!
+  \*************************************************************/
+/*! exports provided: ProgressButtonService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProgressButtonService", function() { return ProgressButtonService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
+
+
+let ProgressButtonService = class ProgressButtonService {
+    constructor(config) {
+        this.default = {
+            progress: {
+                animation: 'fill',
+                direction: 'horizontal',
+                statusTime: 1500,
+            },
+            design: {
+                background: '#222222',
+                color: '#FFFFFF',
+                successBackground: '#00e175',
+                errorBackground: '#ff0c00',
+                successIconColor: '#ffffff',
+                errorIconColor: '#ffffff',
+                progressBackground: '#000000',
+                progressInnerBackground: '#555555',
+                linesSize: 10
+            }
+        };
+        this.init(config);
+    }
+    init(config) {
+        this.progressP = this.default.progress;
+        this.designP = this.default.design;
+        if (config) {
+            if (config.progress) {
+                this.progressP = this.safeMerge(this.progressP, config.progress);
+            }
+            if (config.design) {
+                this.designP = this.safeMerge(this.designP, config.design);
+            }
+        }
+    }
+    safeMerge(original, substitute) {
+        const ret = {};
+        if (substitute) {
+            Object.keys(original).forEach((k) => {
+                ret[k] = (substitute[k]) ? substitute[k] : original[k];
+            });
+        }
+        else {
+            return original;
+        }
+        return ret;
+    }
+    get design() {
+        return this.designP;
+    }
+    set design(value) {
+        this.designP = this.safeMerge(this.designP, value);
+    }
+    get progress() {
+        return this.progressP;
+    }
+    set progress(value) {
+        this.progressP = this.safeMerge(this.progressP, value);
+        this.progressP.direction = (this.progressP.animation === 'lateral-lines') ? 'vertical' : this.progressP.direction;
+    }
+};
+ProgressButtonService.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: ['config',] }] }
+];
+ProgressButtonService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"])()), tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])('config'))
+], ProgressButtonService);
+
+
+
+/***/ }),
+
+/***/ "../progress-button/src/lib/progress-button.types.ts":
+/*!***********************************************************!*\
+  !*** ../progress-button/src/lib/progress-button.types.ts ***!
+  \***********************************************************/
+/*! exports provided: progressButtonServiceFactory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "progressButtonServiceFactory", function() { return progressButtonServiceFactory; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _progress_button_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./progress-button.service */ "../progress-button/src/lib/progress-button.service.ts");
+
+
+function progressButtonServiceFactory(config) {
+    const service = () => new _progress_button_service__WEBPACK_IMPORTED_MODULE_1__["ProgressButtonService"](config);
+    return service;
+}
 
 
 /***/ }),
