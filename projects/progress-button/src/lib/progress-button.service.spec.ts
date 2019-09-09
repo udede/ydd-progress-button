@@ -1,8 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
 import {ProgressButtonService} from './progress-button.service';
-import {progressButtonServiceFactory} from './progress-button.module';
-import {ProgressButtonConfig, ProgressButtonData, ProgressButtonDesign} from './progress-button.types';
+import {ProgressButtonConfig, ProgressButtonData, ProgressButtonDesign, progressButtonServiceFactory} from './progress-button.types';
 
 describe('ProgressButtonService', () => {
   beforeEach(() => TestBed.configureTestingModule({

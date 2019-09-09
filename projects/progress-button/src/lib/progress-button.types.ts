@@ -1,3 +1,5 @@
+import {ProgressButtonService} from './progress-button.service';
+
 export type ProgressButtonType = 'button' | 'reset' | 'submit';
 export type ProgressButtonDirection = 'horizontal' | 'vertical';
 export type ProgressButtonStatus = 'success' | 'error';
@@ -103,4 +105,9 @@ export interface ProgressButtonData {
 export interface ProgressButtonConfig {
   progress?: ProgressButtonData;
   design?: ProgressButtonDesign;
+}
+
+export function progressButtonServiceFactory(config) {
+  const service = () => new ProgressButtonService(config);
+  return service;
 }

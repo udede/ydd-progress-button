@@ -1,4 +1,4 @@
-import {Injectable, Optional} from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
 import {ProgressButtonConfig, ProgressButtonData, ProgressButtonDesign} from './progress-button.types';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class ProgressButtonService {
   private progressP: ProgressButtonData;
   private designP: ProgressButtonDesign;
 
-  constructor(@Optional() config: ProgressButtonConfig) {
+  constructor(@Optional() @Inject('config') config: ProgressButtonConfig) {
     this.init(config);
   }
 

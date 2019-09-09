@@ -1,12 +1,8 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ProgressButtonComponent} from './progress-button.component';
-import {ProgressButtonConfig, ProgressButtonData, ProgressButtonDesign} from './progress-button.types';
+import {ProgressButtonConfig, progressButtonServiceFactory} from './progress-button.types';
 import {ProgressButtonService} from './progress-button.service';
-
-export function progressButtonServiceFactory(config) {
-  return () => new ProgressButtonService(config);
-}
 
 @NgModule({
   declarations: [ProgressButtonComponent],

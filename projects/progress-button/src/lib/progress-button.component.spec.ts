@@ -1,8 +1,7 @@
 import {async, inject, ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ProgressButtonComponent} from './progress-button.component';
 import {ProgressButtonService} from './progress-button.service';
-import {progressButtonServiceFactory} from './progress-button.module';
+import {progressButtonServiceFactory} from './progress-button.types';
 
 describe('ProgressButtonComponent', () => {
   let comp: ProgressButtonComponent;
