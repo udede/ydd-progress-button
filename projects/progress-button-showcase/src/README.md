@@ -3,7 +3,11 @@
 [![npm version](https://badge.fury.io/js/progress-button.svg)](https://badge.fury.io/js/progress-button)
 [![demo online](https://img.shields.io/badge/demo-online-brightgreen)](https://udede.github.io/ydd-progress-button/)
 [![npm downloads](https://img.shields.io/npm/dm/progress-button.svg)](https://www.npmjs.com/package/progress-button)
-[![Maintainability](https://api.codeclimate.com/v1/badges/e82c59da5ecb867c9a60/maintainability)](https://codeclimate.com/github/udede/ydd-progress-button/maintainability)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/udede/ydd-progress-button)](https://codeclimate.com/github/udede/ydd-progress-button/maintainability)
+[![Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)]()
+[![Dependencies](https://img.shields.io/librariesio/release/npm/progress-button)]()
+[![GitHub issues](https://img.shields.io/github/issues-raw/udede/ydd-progress-button)]()
+[![npm bundle size](https://img.shields.io/bundlephobia/min/progress-button)]()
 
 This represents a button element where the button itself serves as a progress indicator. You can choose from 16 types of animations. 3D animation styles are used for showing the progress indication on one side of the button while rotating the button in perspective.
 <p>
@@ -45,7 +49,7 @@ import {ProgressButtonModule} from 'progress-button';
   imports: [ProgressButtonModule],
   bootstrap: [AppComponent]
 })
-export class ProgressButtonShowcaseModule {}
+export class AppModule {}
 ```
 ### Usage sample
 
@@ -98,6 +102,23 @@ run = (instance)=>{
   }
 
 ```
+### Global Configuration
+You can easily define progress options and design during the import phase using the method `forRoot`. This is useful if you need to setup a common behaviour and/or a common style for your buttons.
+```javascript
+import {ProgressButtonModule} from 'progress-button';  
+  
+@NgModule({  
+  declarations: [AppComponent],  
+  imports: [
+	  ProgressButtonModule.forRoot({  
+		  design: {...}, // ProgressButtonDesign interface  
+		  progress: {...} // ProgressButtonData interface 
+	  })
+  ],  
+  bootstrap: [AppComponent]  
+})  
+export class AppModule {}
+``` 
 
 ## API
 ### Inputs
