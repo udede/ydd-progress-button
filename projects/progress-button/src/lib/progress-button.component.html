@@ -16,30 +16,33 @@
         [attr.data-style]="progress.animation"
         [attr.data-vertical]="(progress.direction === 'vertical')?'':null"
         [attr.data-horizontal]="(progress.direction === 'horizontal')?'':null"
-        [attr.data-perspective]="perspective"
+        [attr.data-perspective]="status.perspective"
         (click)="click()"
-        [ngClass]="[(loading)?'state-loading':'',statusClass]"
-        [ngStyle]="buttonStyle">
+        [ngClass]="[(loading)?'state-loading':'',statusClass,(status.isBorderRadius)?'radius':'']"
+        [ngStyle]="styles.button">
   <!-- perspective -->
-  <ng-container *ngIf="perspective === ''">
+  <ng-container *ngIf="status.perspective === ''">
       <span class="progress-wrap">
         <ng-container *ngTemplateOutlet="content"></ng-container>
       </span>
   </ng-container>
   <!-- not perspective -->
-  <ng-container *ngIf="perspective === null">
+  <ng-container *ngIf="status.perspective === null">
     <ng-container *ngTemplateOutlet="content"></ng-container>
   </ng-container>
 </button>
+<!-- template -->
 <ng-template #content>
-  <span class="content" [ngStyle]="this.contentStyle">
+  <span class="content" [ngStyle]="styles.content">
     <div class="success" [style.color]="design.successIconColor" [innerHTML]="'&#xe600;'"></div>
     <ng-content></ng-content>
     <div class="error" [style.color]="design.errorIconColor" [innerHTML]="'&#xe601;'"></div>
   </span>
-  <span class="progress" [style.background]="design.progressBackground">
+  <span class="progress"
+        [style.background]="design.progressBackground"
+        [style.borderRadius]="(status.isBorderRadius)?design.radius+'px':null">
     <span class="progress-inner"
-          [ngStyle]="progressInnerStyle"
+          [ngStyle]="styles.progressInner"
           [ngClass]="{'notransition':noTransition}"
     ></span>
   </span>

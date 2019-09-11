@@ -1,8 +1,20 @@
 import {ProgressButtonService} from './progress-button.service';
 
+/**
+ * Type of buttons
+ */
 export type ProgressButtonType = 'button' | 'reset' | 'submit';
+/**
+ * Types of animation directions
+ */
 export type ProgressButtonDirection = 'horizontal' | 'vertical';
+/**
+ * Types of status
+ */
 export type ProgressButtonStatus = 'success' | 'error';
+/**
+ * Types of animations
+ */
 export type ProgressButtonAnimation =
   'fill'
   | 'shrink'
@@ -21,6 +33,9 @@ export type ProgressButtonAnimation =
   | 'top-line'
   | 'lateral-lines';
 
+/**
+ * Generic form data for Button
+ */
 export interface ProgressButtonForm {
   /**
    * Specifies one or more forms the button belongs to
@@ -48,6 +63,9 @@ export interface ProgressButtonForm {
   target?: '_blank' | '_self' | '_parent' | '_top' | null;
 }
 
+/**
+ * Progress Button Design Options (Input)
+ */
 export interface ProgressButtonDesign {
   /**
    * The background of the button
@@ -85,8 +103,15 @@ export interface ProgressButtonDesign {
    * The size in px of the progress lines. This value is used in the animation styles top-line and lateral-lines
    */
   linesSize?: number;
+  /**
+   * Sets rounded shape to button with given radius size
+   */
+  radius?: number;
 }
 
+/**
+ * Progress Button Data (Input)
+ */
 export interface ProgressButtonData {
   /**
    * Defines the progress animation style
@@ -102,12 +127,43 @@ export interface ProgressButtonData {
   statusTime?: number;
 }
 
+/**
+ * Button Config used to initialize button options
+ */
 export interface ProgressButtonConfig {
   progress?: ProgressButtonData;
   design?: ProgressButtonDesign;
 }
 
-export function progressButtonServiceFactory(config) {
-  const service = () => new ProgressButtonService(config);
-  return service;
+/**
+ * Progress Status Data
+ */
+export interface ProgressButtonDataStatus {
+  perspective?: '' | null;
+  isPerspective: boolean;
+  isBorderRadius: boolean;
+  isRotateAnimation: boolean;
+  isFlipAnimation: boolean;
+  isSlideDownAnimation: boolean;
+  isMoveUpAnimation: boolean;
+  isContentBackground: boolean;
+  isHorizontal: boolean;
+}
+
+/**
+ * Styles of Button elements
+ */
+export interface ProgressButtonStyles {
+  progressInner: any;
+  button: any;
+  content: any;
+}
+
+/**
+ * Return an instance of ProgressButtonService
+ * @param config The button config
+ * @return ProgressButtonService;
+ */
+export function progressButtonServiceFactory(config: ProgressButtonConfig | null) {
+  return () => new ProgressButtonService(config);
 }

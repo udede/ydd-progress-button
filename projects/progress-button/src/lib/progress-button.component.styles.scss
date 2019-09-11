@@ -1,7 +1,8 @@
 @import "./progress-button.component.vars";
 
 .progress-button {
-
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
   /***************************************************** Fill */
   &[data-style="fill"] {
     &[data-horizontal], &[data-vertical] {
@@ -34,20 +35,20 @@
   /***************************************************** Shrink */
   &[data-style="shrink"] {
     overflow: hidden;
-    -webkit-transition: -webkit-transform 0.2s;
-    transition: transform 0.2s;
+    -webkit-transition: -webkit-transform 0.2s, border-radius 0.2s linear;
+    transition: transform 0.2s, border-radius 0.2s linear;
 
     &[data-horizontal], &[data-vertical] {
       .content {
-        -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
-        transition: opacity 0.3s, transform 0.3s;
+        -webkit-transition: opacity 0.3s, -webkit-transform 0.3s, border-radius 0.3s linear, padding 0.3s linear;
+        transition: opacity 0.3s, transform 0.3s, border-radius 0.3s linear, padding 0.3s linear;
 
         .success, .error {
           top: 100%;
           right: auto;
           left: 50%;
-          -webkit-transition: opacity 0.3s;
-          transition: opacity 0.3s;
+          -webkit-transition: opacity 0.3s, border-radius 0.3s linear;
+          transition: opacity 0.3s, border-radius 0.3s linear;
           -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
         }
@@ -75,6 +76,29 @@
         transform: scaleX(0.1);
       }
     }
+
+    &.radius {
+      &.state-loading {
+        -webkit-transform: scale3d(0.3, 0.3, 1);
+        transform: scale3d(0.3, 0.3, 1);
+
+        .content {
+          padding: 20px 120px;
+        }
+      }
+
+      &[data-vertical] {
+        &.state-loading {
+          -webkit-transform: scale3d(0.3, 0.3, 1) rotate(-90deg);
+          transform: scale3d(0.3, 0.3, 1) rotate(-90deg);
+
+          .content {
+            padding: 20px 60px;
+          }
+        }
+      }
+    }
+
   }
 
   /***************************************************** Rotate Bottom 3D */
@@ -318,8 +342,8 @@
 
     .content {
       z-index: 10;
-      -webkit-transition: -webkit-transform 0.2s;
-      transition: transform 0.2s;
+      -webkit-transition: -webkit-transform 0.2s, background-color 0.2s;
+      transition: transform 0.2s, background-color 0.2s;
       -webkit-transform-origin: 50% 0;
       transform-origin: 50% 0;
     }
@@ -328,6 +352,21 @@
       .content {
         -webkit-transform: rotateX(45deg);
         transform: rotateX(45deg);
+      }
+    }
+
+    &.radius {
+      .progress {
+        height: 100%;
+        opacity: 0;
+        -webkit-transition: opacity 0.2s ease;
+        transition: opacity 0.2s ease;
+      }
+
+      &.state-loading {
+        .progress {
+          opacity: 1;
+        }
       }
     }
   }
@@ -342,12 +381,12 @@
     .progress {
       position: absolute;
       top: auto;
-      bottom:0;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: $slideDownProgressHeight;
-      -webkit-transition: -webkit-transform 0.2s;
-      transition: transform 0.2s;
+      -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+      transition: transform 0.2s, opacity 0.2s;
     }
 
     .content {
@@ -360,6 +399,25 @@
       .progress {
         -webkit-transform: translateY($slideDownProgressHeight);
         transform: translateY($slideDownProgressHeight);
+      }
+    }
+
+    &.radius {
+      .progress, .progress-inner {
+        height: 100%;
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      &.state-loading {
+        .progress {
+          -webkit-transform: translateY($slideDownProgressHeightRadius);
+          transform: translateY($slideDownProgressHeightRadius);
+        }
+
+        .progress, .progress-inner {
+          opacity: 1;
+        }
       }
     }
   }
@@ -378,20 +436,41 @@
       left: 0;
       width: 100%;
       height: $moveUpProgressHeight;
+      -webkit-transition: opacity 0.2s;
+      transition: opacity 0.2s;
     }
 
     .content {
       z-index: 10;
       padding: 20px 60px;
       background: $buttonBackground;
-      -webkit-transition: -webkit-transform 0.2s;
-      transition: transform 0.2s;
+      -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+      transition: transform 0.2s, opacity 0.2s;
     }
 
     &.state-loading {
       .content {
         -webkit-transform: translateY(-$moveUpProgressHeight);
         transform: translateY(-$moveUpProgressHeight);
+      }
+    }
+
+    &.radius {
+      .progress, .progress-inner {
+        height: 100%;
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      &.state-loading {
+        .content {
+          -webkit-transform: translateY(-$moveUpProgressHeightRadius);
+          transform: translateY(-$moveUpProgressHeightRadius);
+        }
+
+        .progress, .progress-inner {
+          opacity: 1;
+        }
       }
     }
   }
