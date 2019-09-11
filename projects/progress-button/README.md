@@ -33,7 +33,7 @@ Table of contents
 - [x] Choose from 16 different types of progress animations
 - [x] Choose the direction of the progress animation
 - [x] Manage success and error statuses
-- [x] Setup all the layout variables
+- [x] Setup all style variables
 
 ## Getting started
 ### Step 1: Install `progress-button`:
@@ -77,7 +77,8 @@ let designData = {
     successIconColor: '#ffffff',
     errorIconColor: '#ffffff',
     progressBackground: '#000000',
-    progressInnerBackground: '#555555'
+    progressInnerBackground: '#555555',
+    radius:50
 }
 
 run = (instance)=>{
@@ -162,6 +163,7 @@ export class AppModule {}
 | progressBackground  | `string (css color)` | `#000000` | no | The background of the progress element.  |
 | progressInnerBackground | `string (css color)` | `#555555` | no |  The background of the progress inner element.  |
 | linesSize | `number` | `10` | no |  The size in px of the progress lines. This value is used in the animation styles `top-line` and `lateral-lines`.  |
+| radius | `number` | `0` | no |  Sets rounded shape to button with given radius size. This value is used in all the animation styles except `rotate-*` animations.  |
 
 ### Outputs
 | Output  | Params | Description |
@@ -185,7 +187,7 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SFS56GER4N4WW&source=url)
 
 ### Author
-* [Francesco Lisandro](https://www.linkedin.com/in/francescolisandro/)
+* [Francesco Lisandro](https://www.linkedin.com/in/francescolisandro/) - [Youdede](https://www.linkedin.com/in/francescolisandro/)
 
 ### Credits
 This angular component is liberally inspired to [Progress Button Styles](https://tympanus.net/Development/ProgressButtonStyles/) of Mary Lou.
