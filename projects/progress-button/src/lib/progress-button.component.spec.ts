@@ -56,67 +56,6 @@ describe('ProgressButtonComponent', () => {
     });
   });
 
-  it('should change perspective according to progress animation', () => {
-    comp.progress.animation = 'rotate-angle-top';
-    expect(comp.perspective).toBe('', 'empty for animations that start with "rotate-"');
-    comp.progress.animation = 'flip-open';
-    expect(comp.perspective).toBe('', 'empty for animations that start with "flip-"');
-    comp.progress.animation = 'move-up';
-    expect(comp.perspective).toBe(null, 'null for others');
-  });
-
-  it('should change progress inner style according to progress animation', () => {
-    expect(comp.progressInnerStyle.background).toBe('#555555', '#555555 for fill animation');
-    expect(comp.progressInnerStyle.borderColor).toBe(null, 'null for fill animation');
-    expect(comp.progressInnerStyle.borderLeftWidth).toBe(null, 'null for fill animation');
-    expect(comp.progressInnerStyle.borderRightWidth).toBe(null, 'null for fill animation');
-    expect(comp.progressInnerStyle.height).toBe(null, 'null for fill animation (horizontal)');
-    expect(comp.progressInnerStyle.width).toBe('0%', '0% for fill animation (horizontal)');
-    comp.progress.direction = 'vertical';
-    expect(comp.progressInnerStyle.height).toBe('0%', '0% for fill animation (vertical)');
-    expect(comp.progressInnerStyle.width).toBe(null, 'null for fill animation (vertical)');
-    comp.progress = {animation: 'lateral-lines', direction: 'horizontal'};
-    comp.design = {linesSize: 22};
-    expect(comp.progressInnerStyle.background).toBe(null, 'null for lateral-lines animation');
-    expect(comp.progressInnerStyle.borderColor).toBe('#555555', '#555555 for lateral-lines animation');
-    expect(comp.progressInnerStyle.borderLeftWidth).toBe(comp.design.linesSize + 'px', '22px for lateral-lines animation');
-    expect(comp.progressInnerStyle.borderRightWidth).toBe(comp.design.linesSize + 'px', '22px for lateral-lines animation');
-    expect(comp.progressInnerStyle.height).toBe('0%', '0% for lateral-lines animation');
-    expect(comp.progressInnerStyle.width).toBe(null, 'null for lateral-lines animation');
-    comp.progress = {animation: 'top-line', direction: 'horizontal'};
-    comp.design.linesSize = 20;
-    expect(comp.progressInnerStyle.height).toBe(comp.design.linesSize + 'px', '20px for top-line animation (horizontal)');
-    expect(comp.progressInnerStyle.width).toBe('0%', '0% for top-line animation (horizontal)');
-    comp.progress = {animation: 'top-line', direction: 'vertical'};
-    comp.design.linesSize = null;
-    expect(comp.progressInnerStyle.width).toBe(comp.design.linesSize + 'px', '10px for top-line animation (vertical)');
-  });
-
-  it('should change contentStyle according to progress animation', () => {
-    comp.progress = {animation: 'slide-down'};
-    expect(comp.contentStyle.background).toEqual('#222222', '#222222 for slide-down');
-    comp.progress = {animation: 'move-up'};
-    expect(comp.contentStyle.background).toEqual('#222222', '#222222 for move-up');
-    comp.progress = {animation: 'fill'};
-    expect(comp.contentStyle.background).toEqual(null, 'null for others');
-  });
-
-  it('should change mainBackgroundColor according to the status', () => {
-    comp.statusClass = 'state-success';
-    comp.design.successBackground = '#010101';
-    expect(comp.mainBackgroundColor).toBe(comp.design.successBackground, comp.design.successBackground + ' for state-success');
-    comp.statusClass = 'state-error';
-    comp.design.errorBackground = '#F20';
-    expect(comp.mainBackgroundColor).toBe(comp.design.errorBackground, comp.design.errorBackground + ' for state-error');
-  });
-
-  it('should change buttonStyle background according to the perspective', () => {
-    comp.progress = {animation: 'rotate-angle-top'};
-    expect(comp.buttonStyle.background).toBe(null, ' null for perspective animation');
-    comp.progress = {animation: 'fill'};
-    expect(comp.buttonStyle.background).toBe(comp.mainBackgroundColor, comp.mainBackgroundColor + ' for no perspective animation');
-  });
-
   it('should emit action when click', () => {
     spyOn(comp.action, 'emit');
     const nativeElement = fixture.nativeElement;
