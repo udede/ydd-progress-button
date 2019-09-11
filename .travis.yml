@@ -13,4 +13,5 @@ script:
   - ng lint
   - npm run test-headless
   - npm run build
+  - npm run version
   - npm run publish:showcase
