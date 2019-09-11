@@ -1,8 +1,8 @@
 @import "./progress-button.component.vars";
 
 .progress-button {
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
+  -webkit-transition: background 0.2s;
+  transition: background 0.2s;
   /***************************************************** Fill */
   &[data-style="fill"] {
     &[data-horizontal], &[data-vertical] {
@@ -342,8 +342,8 @@
 
     .content {
       z-index: 10;
-      -webkit-transition: -webkit-transform 0.2s, background-color 0.2s;
-      transition: transform 0.2s, background-color 0.2s;
+      -webkit-transition: -webkit-transform 0.2s, background 0.2s;
+      transition: transform 0.2s, background 0.2s;
       -webkit-transform-origin: 50% 0;
       transform-origin: 50% 0;
     }
@@ -361,6 +361,7 @@
         opacity: 0;
         -webkit-transition: opacity 0.2s ease;
         transition: opacity 0.2s ease;
+        overflow: hidden;
       }
 
       &.state-loading {
@@ -477,6 +478,9 @@
 
   /***************************************************** Top Line */
   &[data-style="top-line"] {
+    -webkit-transition: background 0.2s;
+    transition: background 0.2s;
+    overflow: hidden;
     .progress-inner {
       height: $linesSize;
     }
@@ -490,6 +494,7 @@
 
   /***************************************************** Lateral Lines */
   &[data-style="lateral-lines"] {
+    overflow: hidden;
     .progress-inner {
       width: 100%;
       border-right-style: solid;
