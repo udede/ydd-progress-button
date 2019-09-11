@@ -77,10 +77,8 @@ export class AppComponent implements OnInit {
       document.execCommand('copy');
       document.body.removeChild(selBox);
       this.clipboardCopied = true;
-      console.log(this.clipboardCopied);
       const t = setTimeout(() => {
         this.clipboardCopied = false;
-        console.log(this.clipboardCopied);
         clearTimeout(t);
       }, 1000);
     }

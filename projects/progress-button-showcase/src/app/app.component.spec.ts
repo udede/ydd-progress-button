@@ -8,6 +8,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
 import {markedOptionsFactory} from './app.component.models';
 import {ProgressButtonComponent} from '../../../progress-button/src/lib/progress-button.component';
+import {NgScrollbarModule} from 'ngx-scrollbar';
 
 
 describe('AppComponent', () => {
@@ -24,6 +25,7 @@ describe('AppComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        NgScrollbarModule,
         MarkdownModule.forRoot({
           loader: HttpClient,
           markedOptions: {
@@ -40,6 +42,21 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  it('should copy on clipboard', (done) => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    app.clipboardCopied = false;
+    app.copyClipboard('test123');
+    expect(app.clipboardCopied).toBe(true, ' copyClipboard was copied and message displayed');
+    setTimeout(() => {
+      expect(app.clipboardCopied).toEqual(false, ' clipboard copied message is dismissed correctly');
+      done();
+    }, 1100);
+    app.clipboardCopied = true;
+    app.copyClipboard('test123');
+    expect(app.clipboardCopied).toBe(true, ' copyClipboard was not copied because is currently copying');
   });
 
 
