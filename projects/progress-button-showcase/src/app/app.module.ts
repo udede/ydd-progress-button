@@ -8,6 +8,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {markedOptionsFactory} from './app.component.models';
+import {NgScrollbarModule} from 'ngx-scrollbar';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {markedOptionsFactory} from './app.component.models';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgScrollbarModule,
     MarkdownModule.forRoot({
       loader: HttpClient,
       markedOptions: {

@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class AppComponent implements OnInit {
   settingsForm: FormGroup;
   isSidebarSettingsOpen = false;
+  clipboardCopied = false;
 
   constructor(private fb: FormBuilder) {
   }
@@ -19,16 +20,26 @@ export class AppComponent implements OnInit {
       animation: 'fill',
       direction: 'horizontal',
       status: 'success',
-      background: '#222222',
+      background: '#516bf0',
       color: '#FFFFFF',
-      successBackground: '#00e175',
-      errorBackground: '#ff0c00',
+      successBackground: 'linear-gradient(to right, rgba(210,255,82,1) 0%, rgba(115,189,45,1) 100%)',
+      errorBackground: 'linear-gradient(to right, rgba(255,93,177,1) 0%, rgba(239,1,124,1) 100%)',
       successIconColor: '#ffffff',
       errorIconColor: '#ffffff',
-      progressBackground: '#000000',
-      progressInnerBackground: '#555555'
+      progressBackground: '#4053AA',
+      progressInnerBackground: 'rgba(0, 0, 0,0.5)',
+      radius: '50',
+      linesSize: '5'
     });
   }
+
+  isLinesSize = () => {
+    return ((this.progressData.animation === 'top-line') || (this.progressData.animation === 'lateral-lines'));
+  };
+
+  isRotateAnimation = () => {
+    return (this.progressData.animation.includes('rotate-'));
+  };
 
   get progressData() {
     return {
@@ -46,9 +57,34 @@ export class AppComponent implements OnInit {
       successIconColor: this.settingsForm.value.successIconColor,
       errorIconColor: this.settingsForm.value.errorIconColor,
       progressBackground: this.settingsForm.value.progressBackground,
-      progressInnerBackground: this.settingsForm.value.progressInnerBackground
+      progressInnerBackground: this.settingsForm.value.progressInnerBackground,
+      radius: parseInt(this.settingsForm.value.radius, 10),
+      linesSize: parseInt(this.settingsForm.value.linesSize, 10)
     };
   }
+
+  copyClipboard = (val: string) => {
+    if (!this.clipboardCopied) {
+      const selBox = document.createElement('textarea');
+      selBox.style.position = 'fixed';
+      selBox.style.left = '0';
+      selBox.style.top = '0';
+      selBox.style.opacity = '0';
+      selBox.value = val;
+      document.body.appendChild(selBox);
+      selBox.focus();
+      selBox.select();
+      document.execCommand('copy');
+      document.body.removeChild(selBox);
+      this.clipboardCopied = true;
+      console.log(this.clipboardCopied);
+      const t = setTimeout(() => {
+        this.clipboardCopied = false;
+        console.log(this.clipboardCopied);
+        clearTimeout(t);
+      }, 1000);
+    }
+  };
 
 
   run(instance: ProgressButtonComponent) {

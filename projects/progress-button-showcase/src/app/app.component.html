@@ -3,10 +3,12 @@
     <div class="ydd-page-content">
       <div class="ydd-page-preview">
         <div class="item">
-          <div class="ydd-page-preview-item-description">
-            <markdown [src]="'https://raw.githubusercontent.com/udede/ydd-progress-button/master/README.md'"></markdown>
-          </div>
-          <div class="ydd-page-preview-item-content" style="height: 100px">
+          <ng-scrollbar visibility="hover">
+            <div class="ydd-page-preview-item-description">
+              <markdown [src]="'https://raw.githubusercontent.com/udede/ydd-progress-button/master/README.md'"></markdown>
+            </div>
+          </ng-scrollbar>
+          <div class="ydd-page-preview-item-content">
             <div class="open-settings-icon" (click)="isSidebarSettingsOpen=true"></div>
             <ydd-progress-button (action)="run($event)" [progress]="progressData" [design]="designData">
               Submit
@@ -15,108 +17,149 @@
         </div>
         <div class="settings" [ngClass]="{'open':(isSidebarSettingsOpen)}">
           <div class="close-settings-icon" (click)="isSidebarSettingsOpen=false"></div>
-          <form [formGroup]="settingsForm" novalidate>
-            <h2>Settings</h2>
-            <h3>Data</h3>
-            <div class="ydd-page-preview-settings-field">
-              <label>Animation</label>
-              <div class="field">
-                <ng-select class="ydd-select" formControlName="animation" [clearable]="false">
-                  <ng-option value="fill">Fill</ng-option>
-                  <ng-option value="shrink">Shrink</ng-option>
-                  <ng-option value="rotate-angle-bottom">Rotate Angle Bottom</ng-option>
-                  <ng-option value="rotate-angle-top">Rotate Angle Top</ng-option>
-                  <ng-option value="rotate-angle-left">Rotate Angle Left</ng-option>
-                  <ng-option value="rotate-angle-right">Rotate Angle Right</ng-option>
-                  <ng-option value="rotate-side-down">Rotate Side Down</ng-option>
-                  <ng-option value="rotate-side-up">Rotate Side Up</ng-option>
-                  <ng-option value="rotate-side-left">Rotate Side Left</ng-option>
-                  <ng-option value="rotate-side-right">Rotate Side Right</ng-option>
-                  <ng-option value="rotate-back">Rotate Back</ng-option>
-                  <ng-option value="flip-open">Flip Open</ng-option>
-                  <ng-option value="slide-down">Slide Down</ng-option>
-                  <ng-option value="move-up">Move Up</ng-option>
-                  <ng-option value="top-line">Top Line</ng-option>
-                  <ng-option value="lateral-lines">Lateral Lines</ng-option>
-                </ng-select>
-              </div>
+          <div class="settings-header">
+            <a href="https://www.npmjs.com/package/progress-button" target="_blank" class="repo-link">
+              <img src="../assets/images/npm.png"/>
+            </a>
+            <a href="https://github.com/udede/ydd-progress-button" target="_blank" class="repo-link">
+              <img src="../assets/images/github.png"/>
+            </a>
+            <code (click)="copyClipboard('npm i progress-button')" [ngClass]="{'copied':clipboardCopied}">npm i progress-button</code>
+          </div>
+          <ng-scrollbar visibility="hover">
+            <div class="settings-content">
+              <form [formGroup]="settingsForm" novalidate>
+                <h2>Settings</h2>
+                <h3>Data</h3>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Animation</label>
+                  <div class="field">
+                    <ng-select class="ydd-select" formControlName="animation" [clearable]="false">
+                      <ng-option value="fill">Fill</ng-option>
+                      <ng-option value="shrink">Shrink</ng-option>
+                      <ng-option value="rotate-angle-bottom">Rotate Angle Bottom</ng-option>
+                      <ng-option value="rotate-angle-top">Rotate Angle Top</ng-option>
+                      <ng-option value="rotate-angle-left">Rotate Angle Left</ng-option>
+                      <ng-option value="rotate-angle-right">Rotate Angle Right</ng-option>
+                      <ng-option value="rotate-side-down">Rotate Side Down</ng-option>
+                      <ng-option value="rotate-side-up">Rotate Side Up</ng-option>
+                      <ng-option value="rotate-side-left">Rotate Side Left</ng-option>
+                      <ng-option value="rotate-side-right">Rotate Side Right</ng-option>
+                      <ng-option value="rotate-back">Rotate Back</ng-option>
+                      <ng-option value="flip-open">Flip Open</ng-option>
+                      <ng-option value="slide-down">Slide Down</ng-option>
+                      <ng-option value="move-up">Move Up</ng-option>
+                      <ng-option value="top-line">Top Line</ng-option>
+                      <ng-option value="lateral-lines">Lateral Lines</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Direction</label>
+                  <div class="field" [ngClass]="[(progressData.animation === 'lateral-lines')?'disabled':'']">
+                    <ng-select class="ydd-select" formControlName="direction" [clearable]="false">
+                      <ng-option value="horizontal">Horizontal</ng-option>
+                      <ng-option value="vertical">Vertical</ng-option>
+                    </ng-select>
+                    <small *ngIf="(progressData.animation === 'lateral-lines')">
+                      This property is always vertical when Lateral Lines animation is selected
+                    </small>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Status</label>
+                  <div class="field">
+                    <ng-select class="ydd-select" formControlName="status" [clearable]="false">
+                      <ng-option value="success">Success</ng-option>
+                      <ng-option value="error">Error</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+                <h3>Design</h3>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Background</label>
+                  <div class="field ydd-color-preview">
+                    <input class="ydd-input-text" formControlName="background" name="background" type="text"/>
+                    <span [ngStyle]="{background:settingsForm.value.background}"></span>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Text Color</label>
+                  <div class="field ydd-color-preview">
+                    <input class="ydd-input-text" formControlName="color" name="color" type="text"/>
+                    <span [ngStyle]="{background:settingsForm.value.color}"></span>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Success Background</label>
+                  <div class="field ydd-color-preview">
+                    <input class="ydd-input-text" formControlName="successBackground" name="successBackground" type="text"/>
+                    <span [ngStyle]="{background:settingsForm.value.successBackground}"></span>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Error Background</label>
+                  <div class="field ydd-color-preview">
+                    <input class="ydd-input-text" formControlName="errorBackground" name="errorBackground" type="text"/>
+                    <span [ngStyle]="{background:settingsForm.value.errorBackground}"></span>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Success Icon</label>
+                  <div class="field ydd-color-preview">
+                    <input class="ydd-input-text" formControlName="successIconColor" name="successIconColor" type="text"/>
+                    <span [ngStyle]="{background:settingsForm.value.successIconColor}"></span>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Error Icon</label>
+                  <div class="field ydd-color-preview">
+                    <input class="ydd-input-text" formControlName="errorIconColor" name="errorIconColor" type="text"/>
+                    <span [ngStyle]="{background:settingsForm.value.errorIconColor}"></span>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Progress Background</label>
+                  <div class="field ydd-color-preview">
+                    <input class="ydd-input-text" formControlName="progressBackground" name="progressBackground" type="text"/>
+                    <span [ngStyle]="{background:settingsForm.value.progressBackground}"></span>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Progress Inner Background</label>
+                  <div class="field ydd-color-preview">
+                    <input class="ydd-input-text" formControlName="progressInnerBackground" name="progressInnerBackground" type="text"/>
+                    <span [ngStyle]="{background:settingsForm.value.progressInnerBackground}"></span>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Line Sizes</label>
+                  <div class="field" [ngClass]="[(!isLinesSize())?'disabled':'']">
+                    <ng-select class="ydd-select" formControlName="linesSize" [clearable]="false">
+                      <ng-option value="5">5px</ng-option>
+                      <ng-option value="10">10px</ng-option>
+                      <ng-option value="20">20px</ng-option>
+                    </ng-select>
+                    <small *ngIf="!isLinesSize()">
+                      This property is disabled with the current animation
+                    </small>
+                  </div>
+                </div>
+                <div class="ydd-page-preview-settings-field">
+                  <label>Border Radius</label>
+                  <div class="field" [ngClass]="[(isRotateAnimation())?'disabled':'']">
+                    <ng-select class="ydd-select" formControlName="radius" [clearable]="false">
+                      <ng-option value="0">None</ng-option>
+                      <ng-option value="10">10px</ng-option>
+                      <ng-option value="20">20px</ng-option>
+                      <ng-option value="50">50px</ng-option>
+                    </ng-select>
+                    <small *ngIf="isRotateAnimation()">This property is disabled with the current animation</small>
+                  </div>
+                </div>
+              </form>
             </div>
-            <div class="ydd-page-preview-settings-field">
-              <label>Direction</label>
-              <div class="field">
-                <ng-select class="ydd-select" formControlName="direction" [clearable]="false">
-                  <ng-option value="horizontal">Horizontal</ng-option>
-                  <ng-option value="vertical">Vertical</ng-option>
-                </ng-select>
-              </div>
-            </div>
-            <div class="ydd-page-preview-settings-field">
-              <label>Status</label>
-              <div class="field">
-                <ng-select class="ydd-select" formControlName="status" [clearable]="false">
-                  <ng-option value="success">Success</ng-option>
-                  <ng-option value="error">Error</ng-option>
-                </ng-select>
-              </div>
-            </div>
-            <h3>Design</h3>
-            <div class="ydd-page-preview-settings-field">
-              <label>Background</label>
-              <div class="field ydd-color-preview">
-                <input class="ydd-input-text" formControlName="background" name="background" type="text"/>
-                <span [style.backgroundColor]="settingsForm.value.background"></span>
-              </div>
-            </div>
-            <div class="ydd-page-preview-settings-field">
-              <label>Text Color</label>
-              <div class="field ydd-color-preview">
-                <input class="ydd-input-text" formControlName="color" name="color" type="text"/>
-                <span [style.backgroundColor]="settingsForm.value.color"></span>
-              </div>
-            </div>
-            <div class="ydd-page-preview-settings-field">
-              <label>Success Background</label>
-              <div class="field ydd-color-preview">
-                <input class="ydd-input-text" formControlName="successBackground" name="successBackground" type="text"/>
-                <span [style.backgroundColor]="settingsForm.value.successBackground"></span>
-              </div>
-            </div>
-            <div class="ydd-page-preview-settings-field">
-              <label>Error Background</label>
-              <div class="field ydd-color-preview">
-                <input class="ydd-input-text" formControlName="errorBackground" name="errorBackground" type="text"/>
-                <span [style.backgroundColor]="settingsForm.value.errorBackground"></span>
-              </div>
-            </div>
-            <div class="ydd-page-preview-settings-field">
-              <label>Success Icon</label>
-              <div class="field ydd-color-preview">
-                <input class="ydd-input-text" formControlName="successIconColor" name="successIconColor" type="text"/>
-                <span [style.backgroundColor]="settingsForm.value.successIconColor"></span>
-              </div>
-            </div>
-            <div class="ydd-page-preview-settings-field">
-              <label>Error Icon</label>
-              <div class="field ydd-color-preview">
-                <input class="ydd-input-text" formControlName="errorIconColor" name="errorIconColor" type="text"/>
-                <span [style.backgroundColor]="settingsForm.value.errorIconColor"></span>
-              </div>
-            </div>
-            <div class="ydd-page-preview-settings-field">
-              <label>Progress Background</label>
-              <div class="field ydd-color-preview">
-                <input class="ydd-input-text" formControlName="progressBackground" name="progressBackground" type="text"/>
-                <span [style.backgroundColor]="settingsForm.value.progressBackground"></span>
-              </div>
-            </div>
-            <div class="ydd-page-preview-settings-field">
-              <label>Progress Inner Background</label>
-              <div class="field ydd-color-preview">
-                <input class="ydd-input-text" formControlName="progressInnerBackground" name="progressInnerBackground" type="text"/>
-                <span [style.backgroundColor]="settingsForm.value.progressInnerBackground"></span>
-              </div>
-            </div>
-          </form>
+          </ng-scrollbar>
         </div>
       </div>
     </div>
