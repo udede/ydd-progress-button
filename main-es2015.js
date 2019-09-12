@@ -572,7 +572,7 @@ let ProgressButtonService = class ProgressButtonService {
             const ret = {};
             if (source) {
                 Object.keys(object).forEach((k) => {
-                    ret[k] = (source[k]) ? source[k] : object[k];
+                    ret[k] = (source[k] !== null && typeof source[k] !== 'undefined') ? source[k] : object[k];
                 });
             }
             else {

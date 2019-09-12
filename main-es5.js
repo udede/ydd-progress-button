@@ -66,7 +66,7 @@ and limitations under the License.
          * Merge properties of object to source
          * @param object The destination object
          * @param source The source objects
-         */this.merge=function(object,source){var ret={};if(source){Object.keys(object).forEach(function(k){ret[k]=source[k]?source[k]:object[k]})}else{return object}return ret};/**
+         */this.merge=function(object,source){var ret={};if(source){Object.keys(object).forEach(function(k){ret[k]=source[k]!==null&&typeof source[k]!=="undefined"?source[k]:object[k]})}else{return object}return ret};/**
          * Check if animation is active
          * @param name ProgressButtonAnimation Animation name
          */this.isAnimation=function(name){return _this2.progress.animation===name};/**
