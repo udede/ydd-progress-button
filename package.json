@@ -1,6 +1,6 @@
 {
   "name": "ydd-progress-button",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,7 +11,7 @@
     "publish:showcase": "npx angular-cli-ghpages --dir=./dist/progress-button-showcase",
     "test": "ng test",
     "test-headless": "ng test --code-coverage --watch=false --browsers=ChromeHeadless",
-    "version": "auto-changelog -p && git add CHANGELOG.md",
+    "version": "standard-version",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -55,6 +55,7 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "ng-packagr": "^5.5.0",
     "protractor": "~5.4.2",
+    "standard-version": "^7.0.0",
     "ts-node": "~8.3.0",
     "tsickle": "^0.37.0",
     "tslint": "^5.20.0",
