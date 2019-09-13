@@ -1,37 +1,31 @@
 import {TestBed} from '@angular/core/testing';
 
 import {ProgressButtonService} from './progress-button.service';
-import {ProgressButtonConfig, ProgressButtonData, ProgressButtonDesign, progressButtonServiceFactory} from './progress-button.types';
+import {
+  ProgressButtonConfig,
+  ProgressButtonData,
+  ProgressButtonDesign,
+  progressButtonConfigFactory,
+  FOR_ROOT_CONFIG_TOKEN, mergeOptions
+} from './progress-button.types';
 
 describe('ProgressButtonService', () => {
   let defaultConfig: ProgressButtonConfig;
 
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [{
-      provide: ProgressButtonService,
-      useFactory: progressButtonServiceFactory(null)
-    }]
+    providers: [
+      {
+        provide: FOR_ROOT_CONFIG_TOKEN,
+        useValue: null
+      },
+      {
+        provide: ProgressButtonConfig,
+        useFactory: progressButtonConfigFactory,
+        deps: [FOR_ROOT_CONFIG_TOKEN]
+      }]
   }));
   beforeEach(() => {
-    defaultConfig = {
-      progress: {
-        animation: 'fill',
-        direction: 'horizontal',
-        statusTime: 1500,
-      },
-      design: {
-        background: '#222222',
-        color: '#FFFFFF',
-        successBackground: '#00e175',
-        errorBackground: '#ff2948',
-        successIconColor: '#ffffff',
-        errorIconColor: '#ffffff',
-        progressBackground: '#000000',
-        progressInnerBackground: 'rgba(255, 255, 255,0.5)',
-        linesSize: 10,
-        radius: 0
-      }
-    };
+    defaultConfig = new ProgressButtonConfig();
   });
 
 
@@ -40,31 +34,28 @@ describe('ProgressButtonService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should check data in mergeOptions', () => {
+    const merged = mergeOptions(null, {test: 'test'});
+    expect(merged).toEqual({test: 'test'}, 'equal to source on null data');
+    const merged2 = mergeOptions({test: 'test2', val: '2'}, {test: 'test', val2: ''});
+    expect(merged2).toEqual({test: 'test2', val2: ''}, 'equal to source on null data');
+  });
+
+  it('should return config progressButtonConfigFactory', () => {
+    const config: ProgressButtonConfig = progressButtonConfigFactory(
+      {design: {background: '#f20'}, progress: {animation: 'shrink'}});
+    expect(config.progress.animation).toEqual('shrink', 'shrink as defined from params');
+    expect(config.design.background).toEqual('#f20', '#f20 as defined from params');
+    expect(config.design.color).toEqual('#FFFFFF', '#FFFFFF as default values');
+  });
+
   it('should update properties according to config', () => {
-    const config: ProgressButtonConfig = {
-      design: {background: '#F20', successBackground: '#000', linesSize: null},
-      progress: {animation: 'shrink'}
-    };
-    const sDesign: ProgressButtonDesign = {
-      background: '#F20',
-      color: '#FFFFFF',
-      successBackground: '#000',
-      errorBackground: '#ff2948',
-      successIconColor: '#ffffff',
-      errorIconColor: '#ffffff',
-      progressBackground: '#000000',
-      progressInnerBackground: 'rgba(255, 255, 255,0.5)',
-      linesSize: 10,
-      radius: 0
-    };
-    const sProgress: ProgressButtonData = {
-      animation: 'shrink',
-      direction: 'horizontal',
-      statusTime: 1500,
-    };
+    const config: ProgressButtonConfig = new ProgressButtonConfig();
+    config.design = {background: '#F20', successBackground: '#000', linesSize: null};
+    config.progress = {animation: 'shrink'};
     const service: ProgressButtonService = new ProgressButtonService(config);
-    expect(service.design).toEqual(sDesign, 'changes only single vars for config.design={...}');
-    expect(service.progress).toEqual(sProgress, 'changes only single vars for config.progress={...}');
+    expect(service.design.background).toEqual('#F20', ' #f20 for design background');
+    expect(service.progress.animation).toEqual('shrink', 'shrink for progress animation');
     // Test Null
     const config2: ProgressButtonConfig = {
       design: null,
@@ -73,15 +64,10 @@ describe('ProgressButtonService', () => {
     const service2: ProgressButtonService = new ProgressButtonService(config2);
     expect(service2.design).toEqual(defaultConfig.design, 'as default values for config.design = null');
     expect(service2.progress).toEqual(defaultConfig.progress, 'as default values for config.progress = null');
-    // Check direct change
-    service.design = null;
-    expect(service.design).toEqual(sDesign, 'as original config.design = null');
-    service.progress = null;
-    expect(service.progress).toEqual(sProgress, 'as original config.progress = null');
   });
 
   it('should change perspective according to progress animation', () => {
-    const service: ProgressButtonService = new ProgressButtonService(null);
+    const service: ProgressButtonService = new ProgressButtonService();
     service.progress.animation = 'rotate-angle-top';
     expect(service.status.perspective).toBe('', 'empty for animations that start with "rotate-"');
     service.progress.animation = 'flip-open';
@@ -91,7 +77,7 @@ describe('ProgressButtonService', () => {
   });
 
   it('should change progress inner style according to progress animation', () => {
-    const service: ProgressButtonService = new ProgressButtonService(null);
+    const service: ProgressButtonService = new ProgressButtonService();
     let progressInner = service.styles(0, null).progressInner;
     expect(progressInner.background).toBe(defaultConfig.design.progressInnerBackground, 'rgba(255, 255, 255,0.5) for fill animation');
     expect(progressInner.borderColor).toBe(null, 'null for fill animation');
@@ -125,11 +111,11 @@ describe('ProgressButtonService', () => {
     service.progress = {animation: 'shrink'};
     service.design.radius = 10;
     progressInner = service.styles(10, null).progressInner;
-    expect(progressInner.width).toBe( '10%', '10% for shrink animation (width radius)');
+    expect(progressInner.width).toBe('10%', '10% for shrink animation (width radius)');
   });
 
   it('should change contentStyle according to progress animation', () => {
-    const service: ProgressButtonService = new ProgressButtonService(null);
+    const service: ProgressButtonService = new ProgressButtonService();
     service.progress = {animation: 'slide-down'};
     let content = service.styles(0, null).content;
     expect(content.background).toEqual('#222222', '#222222 for slide-down');
@@ -142,7 +128,7 @@ describe('ProgressButtonService', () => {
   });
 
   it('should change button background color according to the status', () => {
-    const service: ProgressButtonService = new ProgressButtonService(null);
+    const service: ProgressButtonService = new ProgressButtonService();
     service.design.successBackground = '#010101';
     let button = service.styles(0, 'state-success').button;
     expect(button.background).toBe(service.design.successBackground, service.design.successBackground + ' for state-success');
@@ -152,7 +138,7 @@ describe('ProgressButtonService', () => {
   });
 
   it('should change button style background according to the perspective', () => {
-    const service: ProgressButtonService = new ProgressButtonService(null);
+    const service: ProgressButtonService = new ProgressButtonService();
     service.progress = {animation: 'rotate-angle-top'};
     let button = service.styles(0, null).button;
     expect(button.background).toBe(null, ' null for perspective animation');

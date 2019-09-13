@@ -1,7 +1,7 @@
 import {async, inject, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ProgressButtonComponent} from './progress-button.component';
 import {ProgressButtonService} from './progress-button.service';
-import {progressButtonServiceFactory} from './progress-button.types';
+import {FOR_ROOT_CONFIG_TOKEN, ProgressButtonConfig, progressButtonConfigFactory} from './progress-button.types';
 
 describe('ProgressButtonComponent', () => {
   let comp: ProgressButtonComponent;
@@ -10,10 +10,7 @@ describe('ProgressButtonComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ProgressButtonComponent],
-      providers: [{
-        provide: ProgressButtonService,
-        useFactory: progressButtonServiceFactory(null)
-      }]
+      providers: [ProgressButtonService]
     })
       .compileComponents();
   }));
