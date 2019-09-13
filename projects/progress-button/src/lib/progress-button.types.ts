@@ -1,4 +1,5 @@
 import {ProgressButtonService} from './progress-button.service';
+import {Injectable, InjectionToken} from '@angular/core';
 
 /**
  * Type of buttons
@@ -127,12 +128,30 @@ export interface ProgressButtonData {
   statusTime?: number;
 }
 
+@Injectable({
+  providedIn: 'root'
+})
 /**
  * Button Config used to initialize button options
  */
-export interface ProgressButtonConfig {
-  progress?: ProgressButtonData;
-  design?: ProgressButtonDesign;
+export class ProgressButtonConfig {
+  progress: ProgressButtonData = {
+    animation: 'fill',
+    direction: 'horizontal',
+    statusTime: 1500,
+  };
+  design: ProgressButtonDesign = {
+    background: '#222222',
+    color: '#FFFFFF',
+    successBackground: '#00e175',
+    errorBackground: '#ff2948',
+    successIconColor: '#ffffff',
+    errorIconColor: '#ffffff',
+    progressBackground: '#000000',
+    progressInnerBackground: 'rgba(255, 255, 255,0.5)',
+    linesSize: 10,
+    radius: 0
+  };
 }
 
 /**
@@ -160,10 +179,45 @@ export interface ProgressButtonStyles {
 }
 
 /**
- * Return an instance of ProgressButtonService
- * @param config The button config
- * @return ProgressButtonService;
+ * Optional Configuration Data passed to the forRoot() method
  */
-export function progressButtonServiceFactory(config: ProgressButtonConfig | null) {
-  return () => new ProgressButtonService(config);
+export interface ProgressButtonModuleConfig {
+  progress?: ProgressButtonData;
+  design?: ProgressButtonDesign;
+}
+/**
+ * Merge an object with another
+ * @param data Object to merge
+ * @param source Original object
+ */
+export function mergeOptions(data: any, source: any) {
+  if (data) {
+    Object.keys(source).forEach((k) => {
+      if ((data[k] !== null && typeof data[k] !== 'undefined' && data[k] !== '')) {
+        source[k] = data[k];
+      }
+    });
+    // Update lateral-lines animation direction to vertical
+    if (typeof source !== 'undefined' && source.animation && source.animation === 'lateral-lines') {
+      source.direction = 'vertical';
+    }
+  }
+  return source;
+}
+
+// Token that makes the raw options available to the following factory function.
+export let FOR_ROOT_CONFIG_TOKEN = new InjectionToken<ProgressButtonModuleConfig>('forRoot() ProgressButtonService configuration.');
+
+/**
+ * Return an instance of ProgressButtonConfig
+ * @param config The button config for the module
+ * @return ProgressButtonConfig;
+ */
+export function progressButtonConfigFactory(config?: ProgressButtonModuleConfig): ProgressButtonConfig {
+  const options = new ProgressButtonConfig();
+  if (config) {
+    options.progress = mergeOptions(config.progress, options.progress);
+    options.design = mergeOptions(config.design, options.design);
+  }
+  return (options);
 }

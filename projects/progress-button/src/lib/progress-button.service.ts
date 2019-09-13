@@ -1,5 +1,6 @@
-import {Inject, Injectable, Optional} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
+  mergeOptions,
   ProgressButtonAnimation,
   ProgressButtonConfig,
   ProgressButtonData,
@@ -12,97 +13,14 @@ import {
 })
 export class ProgressButtonService {
 
-  private default: { progress: ProgressButtonData, design: ProgressButtonDesign } = {
-    progress: {
-      animation: 'fill',
-      direction: 'horizontal',
-      statusTime: 1500,
-    },
-    design: {
-      background: '#222222',
-      color: '#FFFFFF',
-      successBackground: '#00e175',
-      errorBackground: '#ff2948',
-      successIconColor: '#ffffff',
-      errorIconColor: '#ffffff',
-      progressBackground: '#000000',
-      progressInnerBackground: 'rgba(255, 255, 255,0.5)',
-      linesSize: 10,
-      radius: 0
-    }
-  };
+
   private progressP: ProgressButtonData;
   private designP: ProgressButtonDesign;
 
-  constructor(@Optional() @Inject('config') config: ProgressButtonConfig) {
-    this.init(config);
-  }
-
-  /**
-   * Initializes ProgressButtonService
-   * @param config ProgressButtonConfig
-   */
-  private init = (config: ProgressButtonConfig) => {
-    this.progressP = this.default.progress;
-    this.designP = this.default.design;
-    if (config) {
-      if (config.progress) {
-        this.progressP = this.merge(this.progressP, config.progress);
-      }
-      if (config.design) {
-        this.designP = this.merge(this.designP, config.design);
-      }
-    }
-  };
-
-  /**
-   * Merge properties of object to source
-   * @param object The destination object
-   * @param source The source objects
-   */
-  private merge = (object: ProgressButtonData | ProgressButtonDesign,
-                   source: ProgressButtonData | ProgressButtonDesign) => {
-    const ret = {};
-    if (source) {
-      Object.keys(object).forEach((k) => {
-        ret[k] = (source[k] !== null && typeof source[k] !== 'undefined') ? source[k] : object[k];
-      });
-    } else {
-      return object;
-    }
-    return ret;
-  };
-
-  /**
-   * Get design data
-   */
-  get design(): ProgressButtonDesign {
-    return this.designP;
-  }
-
-  /**
-   * Set the design data
-   * @param value ProgressButtonDesign object
-   */
-  set design(value: ProgressButtonDesign) {
-    this.designP = this.merge(this.designP, value);
-  }
-
-  /**
-   * Get progress data
-   */
-  get progress(): ProgressButtonData {
-    return this.progressP;
-  }
-
-  /**
-   * Set the progress data
-   * @param value ProgressButtonData object
-   */
-  set progress(value: ProgressButtonData) {
-    this.progressP = this.merge(this.progressP, value);
-    // If animation is lateral-lines forces vertical direction
-    this.progressP.direction = (this.progressP.animation === 'lateral-lines') ? 'vertical' : this.progressP.direction;
+  constructor(config: ProgressButtonConfig = new ProgressButtonConfig()) {
+    const defConfig = new ProgressButtonConfig();
+    this.progressP = (config.progress) ? {...config.progress} : {...defConfig.progress};
+    this.designP = (config.design) ? {...config.design} : {...defConfig.design};
   }
 
   /**
@@ -130,6 +48,22 @@ export class ProgressButtonService {
     status.isBorderRadius = (!status.isRotateAnimation && this.design.radius !== null);
     status.isContentBackground = (status.isPerspective || status.isSlideDownAnimation || status.isMoveUpAnimation);
     return status;
+  }
+
+  get design(): ProgressButtonDesign {
+    return this.designP;
+  }
+
+  set design(value: ProgressButtonDesign) {
+    this.designP = mergeOptions(value, this.designP);
+  }
+
+  get progress(): ProgressButtonData {
+    return this.progressP;
+  }
+
+  set progress(value: ProgressButtonData) {
+    this.progressP = mergeOptions(value, this.progressP);
   }
 
   /**

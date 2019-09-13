@@ -15,12 +15,10 @@ import {ProgressButtonService} from './progress-button.service';
   styleUrls: [
     './progress-button.component.vars.scss',
     './progress-button.component.scss',
-    './progress-button.component.styles.scss']
+    './progress-button.component.styles.scss'],
+  providers: [ProgressButtonService]
 })
 export class ProgressButtonComponent {
-
-  private progressP: ProgressButtonData;
-  private designP: ProgressButtonDesign;
 
   progressValue = 0;
   loading = false;
@@ -125,14 +123,13 @@ export class ProgressButtonComponent {
   @Input()
   set progress(progress: ProgressButtonData) {
     this.service.progress = progress;
-    this.progressP = this.service.progress;
   }
 
   /**
    * The Progress Button Data
    */
   get progress(): ProgressButtonData {
-    return this.progressP;
+    return this.service.progress;
   }
 
   /**
@@ -142,14 +139,13 @@ export class ProgressButtonComponent {
   @Input()
   set design(design: ProgressButtonDesign) {
     this.service.design = design;
-    this.designP = this.service.design;
   }
 
   /**
    * The Progress Button Design
    */
   get design(): ProgressButtonDesign {
-    return this.designP;
+    return this.service.design;
   }
 
 }
