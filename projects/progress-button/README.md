@@ -7,6 +7,7 @@
 [![Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)]()
 [![Dependencies](https://img.shields.io/librariesio/release/npm/progress-button)]()
 [![GitHub issues](https://img.shields.io/github/issues-raw/udede/ydd-progress-button)]()
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-brightgreen.svg)](https://conventionalcommits.org)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/progress-button)]()
 
 This represents a button element where the button itself serves as a progress indicator. You can choose from 16 types of animations. 3D animation styles are used for showing the progress indication on one side of the button while rotating the button in perspective.
