@@ -78,7 +78,7 @@ let designData = {
     successIconColor: '#ffffff',
     errorIconColor: '#ffffff',
     progressBackground: '#000000',
-    progressInnerBackground: '#555555',
+    progressInnerBackground: 'rgba(255, 255, 255,0.5)',
     radius:50
 }
 
@@ -162,7 +162,7 @@ export class AppModule {}
 | successIconColor  | `string (css color)` | `#FFFFFF` | no | The color of the icon when status is success.  |
 | errorIconColor | `string (css color)` | `#FFFFFF` | no |  The color of the icon when status is error.  |
 | progressBackground  | `string (css color)` | `#000000` | no | The background of the progress element.  |
-| progressInnerBackground | `string (css color)` | `#555555` | no |  The background of the progress inner element.  |
+| progressInnerBackground | `string (css color)` | `rgba(255, 255, 255,0.5)` | no |  The background of the progress inner element.  |
 | linesSize | `number` | `10` | no |  The size in px of the progress lines. This value is used in the animation styles `top-line` and `lateral-lines`.  |
 | radius | `number` | `0` | no |  Sets rounded shape to button with given radius size. This value is used in all the animation styles except `rotate-*` animations.  |
 
