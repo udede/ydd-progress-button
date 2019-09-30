@@ -29,7 +29,7 @@
     "@angular/router": "~8.2.8",
     "@ng-select/ng-select": "^3.0.7",
     "angular-cli-ghpages": "^0.6.0",
-    "ngx-markdown": "^8.1.0",
+    "ngx-markdown": "^8.1.1",
     "ngx-scrollbar": "^6.0.0",
     "prismjs": "^1.17.1",
     "rxjs": "~6.5.3",
