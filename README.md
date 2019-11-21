@@ -188,7 +188,7 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SFS56GER4N4WW&source=url)
 
 ### Author
-* [Francesco Lisandro](https://www.linkedin.com/in/francescolisandro/) - [Youdede](https://www.linkedin.com/in/francescolisandro/)
+* [Francesco Lisandro](https://www.linkedin.com/in/francescolisandro/) - [Youdede](https://youdede.eu/)
 
 ### Credits
 This angular component is liberally inspired to [Progress Button Styles](https://tympanus.net/Development/ProgressButtonStyles/) of Mary Lou.
