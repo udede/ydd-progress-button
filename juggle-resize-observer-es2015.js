@@ -91,8 +91,6 @@ var ResizeObservation = (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResizeObserver", function() { return ResizeObserver; });
 /* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResizeObserverController */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
-/* harmony import */ var _utils_prettify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/prettify */ "../../node_modules/@juggle/resize-observer/lib/utils/prettify.js");
-
 
 var ResizeObserver = (function () {
     function ResizeObserver(callback) {
@@ -126,7 +124,7 @@ var ResizeObserver = (function () {
         _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["ResizeObserverController"].disconnect(this);
     };
     ResizeObserver.toString = function () {
-        return _utils_prettify__WEBPACK_IMPORTED_MODULE_1__["POLYFILL_CONSOLE_OUTPUT"];
+        return 'function ResizeObserver () { [polyfill code] }';
     };
     return ResizeObserver;
 }());
@@ -160,7 +158,7 @@ var ResizeObserverBoxOptions;
 /*!*******************************************************************************************************************************!*\
   !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserverController.js ***!
   \*******************************************************************************************************************************/
-/*! exports provided: ResizeObserverController, resizeObservers, process */
+/*! exports provided: ResizeObserverController, resizeObservers, process, isWatching */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -168,6 +166,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResizeObserverController", function() { return ResizeObserverController; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeObservers", function() { return resizeObservers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "process", function() { return process; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isWatching", function() { return isWatching; });
 /* harmony import */ var _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/scheduler */ "../../node_modules/@juggle/resize-observer/lib/utils/scheduler.js");
 /* harmony import */ var _ResizeObservation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResizeObservation */ "../../node_modules/@juggle/resize-observer/lib/ResizeObservation.js");
 /* harmony import */ var _ResizeObserverDetail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResizeObserverDetail */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js");
@@ -250,6 +249,7 @@ var ResizeObserverController = (function () {
     };
     return ResizeObserverController;
 }());
+var isWatching = function () { return !!watching; };
 
 
 
@@ -644,23 +644,50 @@ var global = typeof window === 'undefined' ? undefined || {} : window;
 
 /***/ }),
 
-/***/ "../../node_modules/@juggle/resize-observer/lib/utils/prettify.js":
-/*!*********************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/prettify.js ***!
-  \*********************************************************************************************************************/
-/*! exports provided: POLYFILL_CONSOLE_OUTPUT, prettifyConsoleOutput */
+/***/ "../../node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js":
+/*!***************************************************************************************************************************!*\
+  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js ***!
+  \***************************************************************************************************************************/
+/*! exports provided: queueMicroTask */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POLYFILL_CONSOLE_OUTPUT", function() { return POLYFILL_CONSOLE_OUTPUT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prettifyConsoleOutput", function() { return prettifyConsoleOutput; });
-var POLYFILL_CONSOLE_OUTPUT = 'function ResizeObserver () { [polyfill code] }';
-var prettifyConsoleOutput = function (fn) {
-    Object.defineProperty(fn, 'toString', {
-        value: function () { return POLYFILL_CONSOLE_OUTPUT; }
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "queueMicroTask", function() { return queueMicroTask; });
+var trigger;
+var callbacks = [];
+var notify = function () { return callbacks.splice(0).forEach(function (cb) { return cb(); }); };
+var queueMicroTask = function (callback) {
+    if (!trigger) {
+        var el_1 = document.createTextNode('');
+        var config = { characterData: true };
+        new MutationObserver(function () { return notify(); }).observe(el_1, config);
+        trigger = function () { el_1.textContent = ''; };
+    }
+    callbacks.push(callback);
+    trigger();
+};
+
+
+
+/***/ }),
+
+/***/ "../../node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js":
+/*!********************************************************************************************************************************!*\
+  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js ***!
+  \********************************************************************************************************************************/
+/*! exports provided: queueResizeObserver */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "queueResizeObserver", function() { return queueResizeObserver; });
+/* harmony import */ var _queueMicroTask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./queueMicroTask */ "../../node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js");
+
+var queueResizeObserver = function (cb) {
+    Object(_queueMicroTask__WEBPACK_IMPORTED_MODULE_0__["queueMicroTask"])(function ResizeObserver() {
+        requestAnimationFrame(cb);
     });
-    return fn;
 };
 
 
@@ -678,13 +705,12 @@ var prettifyConsoleOutput = function (fn) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scheduler", function() { return scheduler; });
 /* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserverController */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
-/* harmony import */ var _prettify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./prettify */ "../../node_modules/@juggle/resize-observer/lib/utils/prettify.js");
-/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./global */ "../../node_modules/@juggle/resize-observer/lib/utils/global.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./global */ "../../node_modules/@juggle/resize-observer/lib/utils/global.js");
+/* harmony import */ var _queueResizeObserver__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./queueResizeObserver */ "../../node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js");
 
 
 
 var CATCH_FRAMES = 60 / 5;
-var requestAnimationFrame = _global__WEBPACK_IMPORTED_MODULE_2__["global"].requestAnimationFrame;
 var observerConfig = { attributes: true, characterData: true, childList: true, subtree: true };
 var events = [
     'resize',
@@ -702,38 +728,7 @@ var events = [
     'blur',
     'focus'
 ];
-var rafSlot = new Map();
-var resizeObserverSlot = new Map();
-var scheduled;
-var dispatchCallbacksOnNextFrame = function () {
-    if (scheduled) {
-        return;
-    }
-    scheduled = true;
-    function runSchedule(t) {
-        scheduled = false;
-        var frameCallbacks = [];
-        var resizeObserverCallbacks = [];
-        rafSlot.forEach(function (callback) { return frameCallbacks.push(callback); });
-        resizeObserverSlot.forEach(function (callback) { return resizeObserverCallbacks.push(callback); });
-        rafSlot.clear();
-        resizeObserverSlot.clear();
-        try {
-            for (var _i = 0, frameCallbacks_1 = frameCallbacks; _i < frameCallbacks_1.length; _i++) {
-                var callback = frameCallbacks_1[_i];
-                callback(t);
-            }
-        }
-        finally {
-            for (var _a = 0, resizeObserverCallbacks_1 = resizeObserverCallbacks; _a < resizeObserverCallbacks_1.length; _a++) {
-                var callback = resizeObserverCallbacks_1[_a];
-                callback(t);
-            }
-        }
-    }
-    ;
-    requestAnimationFrame(runSchedule);
-};
+var scheduled = false;
 var Scheduler = (function () {
     function Scheduler() {
         var _this = this;
@@ -741,25 +736,32 @@ var Scheduler = (function () {
         this.listener = function () { return _this.schedule(); };
     }
     Scheduler.prototype.run = function (frames) {
-        var scheduler = this;
-        resizeObserverSlot.set(this, function ResizeObserver() {
+        var _this = this;
+        if (scheduled) {
+            return;
+        }
+        scheduled = true;
+        Object(_queueResizeObserver__WEBPACK_IMPORTED_MODULE_2__["queueResizeObserver"])(function () {
             var elementsHaveResized = false;
             try {
                 elementsHaveResized = Object(_ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["process"])();
             }
             finally {
+                scheduled = false;
+                if (!Object(_ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["isWatching"])()) {
+                    return;
+                }
                 if (elementsHaveResized) {
-                    scheduler.run(60);
+                    _this.run(60);
                 }
                 else if (frames) {
-                    scheduler.run(frames - 1);
+                    _this.run(frames - 1);
                 }
                 else {
-                    scheduler.start();
+                    _this.start();
                 }
             }
         });
-        dispatchCallbacksOnNextFrame();
     };
     Scheduler.prototype.schedule = function () {
         this.stop();
@@ -768,45 +770,28 @@ var Scheduler = (function () {
     Scheduler.prototype.observe = function () {
         var _this = this;
         var cb = function () { return _this.observer && _this.observer.observe(document.body, observerConfig); };
-        document.body ? cb() : _global__WEBPACK_IMPORTED_MODULE_2__["global"].addEventListener('DOMContentLoaded', cb);
+        document.body ? cb() : _global__WEBPACK_IMPORTED_MODULE_1__["global"].addEventListener('DOMContentLoaded', cb);
     };
     Scheduler.prototype.start = function () {
         var _this = this;
         if (this.stopped) {
             this.stopped = false;
-            if ('MutationObserver' in _global__WEBPACK_IMPORTED_MODULE_2__["global"]) {
-                this.observer = new MutationObserver(this.listener);
-                this.observe();
-            }
-            events.forEach(function (name) { return _global__WEBPACK_IMPORTED_MODULE_2__["global"].addEventListener(name, _this.listener, true); });
+            this.observer = new MutationObserver(this.listener);
+            this.observe();
+            events.forEach(function (name) { return _global__WEBPACK_IMPORTED_MODULE_1__["global"].addEventListener(name, _this.listener, true); });
         }
     };
     Scheduler.prototype.stop = function () {
         var _this = this;
         if (!this.stopped) {
             this.observer && this.observer.disconnect();
-            events.forEach(function (name) { return _global__WEBPACK_IMPORTED_MODULE_2__["global"].removeEventListener(name, _this.listener, true); });
+            events.forEach(function (name) { return _global__WEBPACK_IMPORTED_MODULE_1__["global"].removeEventListener(name, _this.listener, true); });
             this.stopped = true;
         }
     };
     return Scheduler;
 }());
 var scheduler = new Scheduler();
-var rafIdBase = 0;
-_global__WEBPACK_IMPORTED_MODULE_2__["global"].requestAnimationFrame = function (callback) {
-    if (typeof callback !== 'function') {
-        throw new Error('requestAnimationFrame expects 1 callback argument of type function.');
-    }
-    var handle = rafIdBase += 1;
-    rafSlot.set(handle, function AnimationFrame(t) { return callback(t); });
-    dispatchCallbacksOnNextFrame();
-    return handle;
-};
-_global__WEBPACK_IMPORTED_MODULE_2__["global"].cancelAnimationFrame = function (handle) {
-    rafSlot.delete(handle);
-};
-Object(_prettify__WEBPACK_IMPORTED_MODULE_1__["prettifyConsoleOutput"])(_global__WEBPACK_IMPORTED_MODULE_2__["global"].requestAnimationFrame);
-Object(_prettify__WEBPACK_IMPORTED_MODULE_1__["prettifyConsoleOutput"])(_global__WEBPACK_IMPORTED_MODULE_2__["global"].cancelAnimationFrame);
 
 
 
