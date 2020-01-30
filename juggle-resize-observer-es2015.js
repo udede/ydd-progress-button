@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["juggle-resize-observer"],{
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js":
-/*!**********************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js ***!
-  \**********************************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js ***!
+  \****************************************************************************************************************/
 /*! exports provided: DOMRectReadOnly */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -33,9 +33,9 @@ var DOMRectReadOnly = (function () {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/ResizeObservation.js":
-/*!************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObservation.js ***!
-  \************************************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObservation.js ***!
+  \******************************************************************************************************************/
 /*! exports provided: ResizeObservation */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -81,10 +81,10 @@ var ResizeObservation = (function () {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/ResizeObserver.js":
-/*!*********************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserver.js ***!
-  \*********************************************************************************************************************/
-/*! exports provided: default, ResizeObserver */
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserver.js ***!
+  \***************************************************************************************************************/
+/*! exports provided: ResizeObserver */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -128,16 +128,15 @@ var ResizeObserver = (function () {
     };
     return ResizeObserver;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (ResizeObserver);
 
 
 
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js":
-/*!*******************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js ***!
-  \*******************************************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js ***!
+  \*************************************************************************************************************************/
 /*! exports provided: ResizeObserverBoxOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -148,6 +147,7 @@ var ResizeObserverBoxOptions;
 (function (ResizeObserverBoxOptions) {
     ResizeObserverBoxOptions["BORDER_BOX"] = "border-box";
     ResizeObserverBoxOptions["CONTENT_BOX"] = "content-box";
+    ResizeObserverBoxOptions["DEVICE_PIXEL_CONTENT_BOX"] = "device-pixel-content-box";
 })(ResizeObserverBoxOptions || (ResizeObserverBoxOptions = {}));
 
 
@@ -155,42 +155,24 @@ var ResizeObserverBoxOptions;
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js":
-/*!*******************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserverController.js ***!
-  \*******************************************************************************************************************************/
-/*! exports provided: ResizeObserverController, resizeObservers, process, isWatching */
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserverController.js ***!
+  \*************************************************************************************************************************/
+/*! exports provided: ResizeObserverController */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResizeObserverController", function() { return ResizeObserverController; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeObservers", function() { return resizeObservers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "process", function() { return process; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isWatching", function() { return isWatching; });
 /* harmony import */ var _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/scheduler */ "../../node_modules/@juggle/resize-observer/lib/utils/scheduler.js");
 /* harmony import */ var _ResizeObservation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResizeObservation */ "../../node_modules/@juggle/resize-observer/lib/ResizeObservation.js");
 /* harmony import */ var _ResizeObserverDetail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResizeObserverDetail */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js");
-/* harmony import */ var _algorithms_hasActiveObservations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./algorithms/hasActiveObservations */ "../../node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js");
-/* harmony import */ var _algorithms_hasSkippedObservations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./algorithms/hasSkippedObservations */ "../../node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js");
-/* harmony import */ var _algorithms_deliverResizeLoopError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./algorithms/deliverResizeLoopError */ "../../node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js");
-/* harmony import */ var _algorithms_broadcastActiveObservations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./algorithms/broadcastActiveObservations */ "../../node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js");
-/* harmony import */ var _algorithms_gatherActiveObservationsAtDepth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./algorithms/gatherActiveObservationsAtDepth */ "../../node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/resizeObservers */ "../../node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 
 
 
 
-
-
-
-
-var resizeObservers = [];
 var observerMap = new Map();
-var watching = 0;
-var updateCount = function (n) {
-    !watching && n > 0 && _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["scheduler"].start();
-    watching += n;
-    !watching && _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["scheduler"].stop();
-};
 var getObservationIndex = function (observationTargets, target) {
     for (var i = 0; i < observationTargets.length; i += 1) {
         if (observationTargets[i].target === target) {
@@ -199,24 +181,12 @@ var getObservationIndex = function (observationTargets, target) {
     }
     return -1;
 };
-var process = function () {
-    var depth = 0;
-    Object(_algorithms_gatherActiveObservationsAtDepth__WEBPACK_IMPORTED_MODULE_7__["gatherActiveObservationsAtDepth"])(depth);
-    while (Object(_algorithms_hasActiveObservations__WEBPACK_IMPORTED_MODULE_3__["hasActiveObservations"])()) {
-        depth = Object(_algorithms_broadcastActiveObservations__WEBPACK_IMPORTED_MODULE_6__["broadcastActiveObservations"])();
-        Object(_algorithms_gatherActiveObservationsAtDepth__WEBPACK_IMPORTED_MODULE_7__["gatherActiveObservationsAtDepth"])(depth);
-    }
-    if (Object(_algorithms_hasSkippedObservations__WEBPACK_IMPORTED_MODULE_4__["hasSkippedObservations"])()) {
-        Object(_algorithms_deliverResizeLoopError__WEBPACK_IMPORTED_MODULE_5__["deliverResizeLoopError"])();
-    }
-    return depth > 0;
-};
 var ResizeObserverController = (function () {
     function ResizeObserverController() {
     }
     ResizeObserverController.connect = function (resizeObserver, callback) {
         var detail = new _ResizeObserverDetail__WEBPACK_IMPORTED_MODULE_2__["ResizeObserverDetail"](resizeObserver, callback);
-        resizeObservers.push(detail);
+        _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].push(detail);
         observerMap.set(resizeObserver, detail);
     };
     ResizeObserverController.observe = function (resizeObserver, target, options) {
@@ -224,7 +194,7 @@ var ResizeObserverController = (function () {
             var detail = observerMap.get(resizeObserver);
             if (getObservationIndex(detail.observationTargets, target) < 0) {
                 detail.observationTargets.push(new _ResizeObservation__WEBPACK_IMPORTED_MODULE_1__["ResizeObservation"](target, options && options.box));
-                updateCount(1);
+                Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(1);
                 _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["scheduler"].schedule();
             }
         }
@@ -235,30 +205,29 @@ var ResizeObserverController = (function () {
             var index = getObservationIndex(detail.observationTargets, target);
             if (index >= 0) {
                 detail.observationTargets.splice(index, 1);
-                updateCount(-1);
+                Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(-1);
             }
         }
     };
     ResizeObserverController.disconnect = function (resizeObserver) {
         if (observerMap.has(resizeObserver)) {
             var detail = observerMap.get(resizeObserver);
-            resizeObservers.splice(resizeObservers.indexOf(detail), 1);
+            _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].splice(_utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].indexOf(detail), 1);
             observerMap.delete(resizeObserver);
-            updateCount(-detail.observationTargets.length);
+            Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(-detail.observationTargets.length);
         }
     };
     return ResizeObserverController;
 }());
-var isWatching = function () { return !!watching; };
 
 
 
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js":
-/*!***************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js ***!
-  \***************************************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js ***!
+  \*********************************************************************************************************************/
 /*! exports provided: ResizeObserverDetail */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -281,9 +250,9 @@ var ResizeObserverDetail = (function () {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js":
-/*!**************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js ***!
-  \**************************************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js ***!
+  \********************************************************************************************************************/
 /*! exports provided: ResizeObserverEntry */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -297,8 +266,9 @@ var ResizeObserverEntry = (function () {
         var boxes = Object(_algorithms_calculateBoxSize__WEBPACK_IMPORTED_MODULE_0__["calculateBoxSizes"])(target);
         this.target = target;
         this.contentRect = boxes.contentRect;
-        this.borderBoxSize = boxes.borderBoxSize;
-        this.contentBoxSize = boxes.contentBoxSize;
+        this.borderBoxSize = [boxes.borderBoxSize];
+        this.contentBoxSize = [boxes.contentBoxSize];
+        this.devicePixelContentBoxSize = [boxes.devicePixelContentBoxSize];
     }
     return ResizeObserverEntry;
 }());
@@ -308,16 +278,16 @@ var ResizeObserverEntry = (function () {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js":
-/*!*********************************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js ***!
-  \*********************************************************************************************************************************************/
+/*!***************************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js ***!
+  \***************************************************************************************************************************************/
 /*! exports provided: broadcastActiveObservations */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "broadcastActiveObservations", function() { return broadcastActiveObservations; });
-/* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserverController */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "../../node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 /* harmony import */ var _ResizeObserverEntry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ResizeObserverEntry */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js");
 /* harmony import */ var _calculateDepthForNode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./calculateDepthForNode */ "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js");
 /* harmony import */ var _calculateBoxSize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./calculateBoxSize */ "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
@@ -328,7 +298,7 @@ __webpack_require__.r(__webpack_exports__);
 var broadcastActiveObservations = function () {
     var shallowestDepth = Infinity;
     var callbacks = [];
-    _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].forEach(function processObserver(ro) {
+    _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].forEach(function processObserver(ro) {
         if (ro.activeTargets.length === 0) {
             return;
         }
@@ -359,9 +329,9 @@ var broadcastActiveObservations = function () {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js":
-/*!**********************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js ***!
-  \**********************************************************************************************************************************/
+/*!****************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js ***!
+  \****************************************************************************************************************************/
 /*! exports provided: calculateBoxSize, calculateBoxSizes, cache */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -393,6 +363,7 @@ var size = function (inlineSize, blockSize, switchSizes) {
     });
 };
 var zeroBoxes = Object.freeze({
+    devicePixelContentBoxSize: size(),
     borderBoxSize: size(),
     contentBoxSize: size(),
     contentRect: new _DOMRectReadOnly__WEBPACK_IMPORTED_MODULE_1__["DOMRectReadOnly"](0, 0, 0, 0)
@@ -406,7 +377,7 @@ var calculateBoxSizes = function (target) {
         return zeroBoxes;
     }
     var cs = getComputedStyle(target);
-    var svg = Object(_utils_element__WEBPACK_IMPORTED_MODULE_2__["isSVG"])(target) && target.getBBox();
+    var svg = Object(_utils_element__WEBPACK_IMPORTED_MODULE_2__["isSVG"])(target) && target.ownerSVGElement && target.getBBox();
     var removePadding = !IE && cs.boxSizing === 'border-box';
     var switchSizes = verticalRegexp.test(cs.writingMode || '');
     var canScrollVertically = !svg && scrollRegexp.test(cs.overflowY || '');
@@ -432,6 +403,7 @@ var calculateBoxSizes = function (target) {
     var borderBoxWidth = contentWidth + horizontalPadding + verticalScrollbarThickness + horizontalBorderArea;
     var borderBoxHeight = contentHeight + verticalPadding + horizontalScrollbarThickness + verticalBorderArea;
     var boxes = Object.freeze({
+        devicePixelContentBoxSize: size(Math.round(contentWidth * devicePixelRatio), Math.round(contentHeight * devicePixelRatio), switchSizes),
         borderBoxSize: size(borderBoxWidth, borderBoxHeight, switchSizes),
         contentBoxSize: size(contentWidth, contentHeight, switchSizes),
         contentRect: new _DOMRectReadOnly__WEBPACK_IMPORTED_MODULE_1__["DOMRectReadOnly"](paddingLeft, paddingTop, contentWidth, contentHeight)
@@ -440,8 +412,15 @@ var calculateBoxSizes = function (target) {
     return boxes;
 };
 var calculateBoxSize = function (target, observedBox) {
-    var _a = calculateBoxSizes(target), borderBoxSize = _a.borderBoxSize, contentBoxSize = _a.contentBoxSize;
-    return observedBox === _ResizeObserverBoxOptions__WEBPACK_IMPORTED_MODULE_0__["ResizeObserverBoxOptions"].BORDER_BOX ? borderBoxSize : contentBoxSize;
+    var _a = calculateBoxSizes(target), borderBoxSize = _a.borderBoxSize, contentBoxSize = _a.contentBoxSize, devicePixelContentBoxSize = _a.devicePixelContentBoxSize;
+    switch (observedBox) {
+        case _ResizeObserverBoxOptions__WEBPACK_IMPORTED_MODULE_0__["ResizeObserverBoxOptions"].DEVICE_PIXEL_CONTENT_BOX:
+            return devicePixelContentBoxSize;
+        case _ResizeObserverBoxOptions__WEBPACK_IMPORTED_MODULE_0__["ResizeObserverBoxOptions"].BORDER_BOX:
+            return borderBoxSize;
+        default:
+            return contentBoxSize;
+    }
 };
 
 
@@ -449,9 +428,9 @@ var calculateBoxSize = function (target, observedBox) {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js":
-/*!***************************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js ***!
-  \***************************************************************************************************************************************/
+/*!*********************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js ***!
+  \*********************************************************************************************************************************/
 /*! exports provided: calculateDepthForNode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -478,9 +457,9 @@ var calculateDepthForNode = function (node) {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js":
-/*!****************************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js ***!
-  \****************************************************************************************************************************************/
+/*!**********************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js ***!
+  \**********************************************************************************************************************************/
 /*! exports provided: deliverResizeLoopError */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -508,16 +487,16 @@ var deliverResizeLoopError = function () {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js":
-/*!*************************************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js ***!
-  \*************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js ***!
+  \*******************************************************************************************************************************************/
 /*! exports provided: gatherActiveObservationsAtDepth */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gatherActiveObservationsAtDepth", function() { return gatherActiveObservationsAtDepth; });
-/* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserverController */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "../../node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 /* harmony import */ var _calculateDepthForNode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calculateDepthForNode */ "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js");
 /* harmony import */ var _calculateBoxSize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./calculateBoxSize */ "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
 
@@ -525,7 +504,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var gatherActiveObservationsAtDepth = function (depth) {
     _calculateBoxSize__WEBPACK_IMPORTED_MODULE_2__["cache"].clear();
-    _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].forEach(function processObserver(ro) {
+    _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].forEach(function processObserver(ro) {
         ro.activeTargets.splice(0, ro.activeTargets.length);
         ro.skippedTargets.splice(0, ro.skippedTargets.length);
         ro.observationTargets.forEach(function processTarget(ot) {
@@ -546,19 +525,19 @@ var gatherActiveObservationsAtDepth = function (depth) {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js":
-/*!***************************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js ***!
-  \***************************************************************************************************************************************/
+/*!*********************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js ***!
+  \*********************************************************************************************************************************/
 /*! exports provided: hasActiveObservations */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasActiveObservations", function() { return hasActiveObservations; });
-/* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserverController */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "../../node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 
 var hasActiveObservations = function () {
-    return _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].some(function (ro) { return ro.activeTargets.length > 0; });
+    return _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].some(function (ro) { return ro.activeTargets.length > 0; });
 };
 
 
@@ -566,29 +545,50 @@ var hasActiveObservations = function () {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js":
-/*!****************************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js ***!
-  \****************************************************************************************************************************************/
+/*!**********************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js ***!
+  \**********************************************************************************************************************************/
 /*! exports provided: hasSkippedObservations */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasSkippedObservations", function() { return hasSkippedObservations; });
-/* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserverController */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "../../node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 
 var hasSkippedObservations = function () {
-    return _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].some(function (ro) { return ro.skippedTargets.length > 0; });
+    return _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].some(function (ro) { return ro.skippedTargets.length > 0; });
 };
 
 
 
 /***/ }),
 
+/***/ "../../node_modules/@juggle/resize-observer/lib/exports/resize-observer.js":
+/*!************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/exports/resize-observer.js ***!
+  \************************************************************************************************************************/
+/*! exports provided: ResizeObserver, ResizeObserverEntry */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ResizeObserver__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserver */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserver.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ResizeObserver", function() { return _ResizeObserver__WEBPACK_IMPORTED_MODULE_0__["ResizeObserver"]; });
+
+/* harmony import */ var _ResizeObserverEntry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ResizeObserverEntry */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ResizeObserverEntry", function() { return _ResizeObserverEntry__WEBPACK_IMPORTED_MODULE_1__["ResizeObserverEntry"]; });
+
+
+
+
+
+/***/ }),
+
 /***/ "../../node_modules/@juggle/resize-observer/lib/utils/element.js":
-/*!********************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/element.js ***!
-  \********************************************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/element.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: isSVG, isHidden, isReplacedElement */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -629,25 +629,61 @@ var isReplacedElement = function (target) {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/utils/global.js":
-/*!*******************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/global.js ***!
-  \*******************************************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/global.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: global */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "global", function() { return global; });
-var global = typeof window === 'undefined' ? undefined || {} : window;
+var global = typeof window !== 'undefined' ? window : {};
+
+
+/***/ }),
+
+/***/ "../../node_modules/@juggle/resize-observer/lib/utils/process.js":
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/process.js ***!
+  \**************************************************************************************************************/
+/*! exports provided: process */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "process", function() { return process; });
+/* harmony import */ var _algorithms_hasActiveObservations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../algorithms/hasActiveObservations */ "../../node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js");
+/* harmony import */ var _algorithms_hasSkippedObservations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../algorithms/hasSkippedObservations */ "../../node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js");
+/* harmony import */ var _algorithms_deliverResizeLoopError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../algorithms/deliverResizeLoopError */ "../../node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js");
+/* harmony import */ var _algorithms_broadcastActiveObservations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../algorithms/broadcastActiveObservations */ "../../node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js");
+/* harmony import */ var _algorithms_gatherActiveObservationsAtDepth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../algorithms/gatherActiveObservationsAtDepth */ "../../node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js");
+
+
+
+
+
+var process = function () {
+    var depth = 0;
+    Object(_algorithms_gatherActiveObservationsAtDepth__WEBPACK_IMPORTED_MODULE_4__["gatherActiveObservationsAtDepth"])(depth);
+    while (Object(_algorithms_hasActiveObservations__WEBPACK_IMPORTED_MODULE_0__["hasActiveObservations"])()) {
+        depth = Object(_algorithms_broadcastActiveObservations__WEBPACK_IMPORTED_MODULE_3__["broadcastActiveObservations"])();
+        Object(_algorithms_gatherActiveObservationsAtDepth__WEBPACK_IMPORTED_MODULE_4__["gatherActiveObservationsAtDepth"])(depth);
+    }
+    if (Object(_algorithms_hasSkippedObservations__WEBPACK_IMPORTED_MODULE_1__["hasSkippedObservations"])()) {
+        Object(_algorithms_deliverResizeLoopError__WEBPACK_IMPORTED_MODULE_2__["deliverResizeLoopError"])();
+    }
+    return depth > 0;
+};
 
 
 
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js":
-/*!***************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js ***!
-  \***************************************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js ***!
+  \*********************************************************************************************************************/
 /*! exports provided: queueMicroTask */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -673,9 +709,9 @@ var queueMicroTask = function (callback) {
 /***/ }),
 
 /***/ "../../node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js":
-/*!********************************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js ***!
-  \********************************************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js ***!
+  \**************************************************************************************************************************/
 /*! exports provided: queueResizeObserver */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -694,22 +730,41 @@ var queueResizeObserver = function (cb) {
 
 /***/ }),
 
-/***/ "../../node_modules/@juggle/resize-observer/lib/utils/scheduler.js":
+/***/ "../../node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js":
 /*!**********************************************************************************************************************!*\
-  !*** C:/Users/Crio/WebstormProjects/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/scheduler.js ***!
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js ***!
   \**********************************************************************************************************************/
-/*! exports provided: scheduler */
+/*! exports provided: resizeObservers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeObservers", function() { return resizeObservers; });
+var resizeObservers = [];
+
+
+
+/***/ }),
+
+/***/ "../../node_modules/@juggle/resize-observer/lib/utils/scheduler.js":
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/scheduler.js ***!
+  \****************************************************************************************************************/
+/*! exports provided: scheduler, updateCount */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scheduler", function() { return scheduler; });
-/* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserverController */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCount", function() { return updateCount; });
+/* harmony import */ var _process__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./process */ "../../node_modules/@juggle/resize-observer/lib/utils/process.js");
 /* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./global */ "../../node_modules/@juggle/resize-observer/lib/utils/global.js");
 /* harmony import */ var _queueResizeObserver__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./queueResizeObserver */ "../../node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js");
 
 
 
+var watching = 0;
+var isWatching = function () { return !!watching; };
 var CATCH_FRAMES = 60 / 5;
 var observerConfig = { attributes: true, characterData: true, childList: true, subtree: true };
 var events = [
@@ -744,11 +799,11 @@ var Scheduler = (function () {
         Object(_queueResizeObserver__WEBPACK_IMPORTED_MODULE_2__["queueResizeObserver"])(function () {
             var elementsHaveResized = false;
             try {
-                elementsHaveResized = Object(_ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["process"])();
+                elementsHaveResized = Object(_process__WEBPACK_IMPORTED_MODULE_0__["process"])();
             }
             finally {
                 scheduled = false;
-                if (!Object(_ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["isWatching"])()) {
+                if (!isWatching()) {
                     return;
                 }
                 if (elementsHaveResized) {
@@ -792,6 +847,11 @@ var Scheduler = (function () {
     return Scheduler;
 }());
 var scheduler = new Scheduler();
+var updateCount = function (n) {
+    !watching && n > 0 && scheduler.start();
+    watching += n;
+    !watching && scheduler.stop();
+};
 
 
 
