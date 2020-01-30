@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.15](https://github.com/udede/ydd-progress-button/compare/v1.1.14...v1.1.15) (2020-01-30)
+
+
+### Bug Fixes
+
+* Scrollbar error on nested elements solved ([3d8266e](https://github.com/udede/ydd-progress-button/commit/3d8266ea38a1f4942aef58bb62a1aab37e5d0ab7))
+
+### [1.1.14](https://github.com/udede/ydd-progress-button/compare/v1.1.13...v1.1.14) (2019-11-21)
+
+### [1.1.13](https://github.com/udede/ydd-progress-button/compare/v1.1.12...v1.1.13) (2019-11-21)
+
+### [1.1.12](https://github.com/udede/ydd-progress-button/compare/v1.1.11...v1.1.12) (2019-11-21)
+
 ### [1.1.11](https://github.com/udede/ydd-progress-button/compare/v1.1.10...v1.1.11) (2019-11-21)
 
 ### [1.1.10](https://github.com/udede/ydd-progress-button/compare/v1.1.9...v1.1.10) (2019-11-21)
