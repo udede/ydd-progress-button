@@ -282,7 +282,7 @@ h1#angular-progress-button + p a {
 }
 
 .ydd-page-preview .ng-scrollbar {
-  height: calc(100% - 65px);
+  height: calc(100% - 65px) !important;
 }
 
 .ydd-page-preview .settings-content {
