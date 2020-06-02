@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.17](https://github.com/udede/ydd-progress-button/compare/v1.1.15...v1.1.17) (2020-06-02)
+
+
+### Bug Fixes
+
+* Solve Typescript dependency ([cdd9c73](https://github.com/udede/ydd-progress-button/commit/cdd9c73f696bd2746e5c4eb0118bcd84c8f7a891))
+* Travic Configuration. ng lint is not available ([db2844e](https://github.com/udede/ydd-progress-button/commit/db2844ef9bc8652acbc67010ab27198247c851b6))
+* Update Travis Config ([89989b2](https://github.com/udede/ydd-progress-button/commit/89989b26fe0bc9931bd75eb33871c6a98074eca2))
+
 ### [1.1.15](https://github.com/udede/ydd-progress-button/compare/v1.1.14...v1.1.15) (2020-01-30)
 
 
