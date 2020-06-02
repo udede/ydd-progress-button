@@ -32,6 +32,29 @@
         return Object.freeze(this);
       }
 
+      DOMRectReadOnly.prototype.toJSON = function () {
+        var _a = this,
+            x = _a.x,
+            y = _a.y,
+            top = _a.top,
+            right = _a.right,
+            bottom = _a.bottom,
+            left = _a.left,
+            width = _a.width,
+            height = _a.height;
+
+        return {
+          x: x,
+          y: y,
+          top: top,
+          right: right,
+          bottom: bottom,
+          left: left,
+          width: width,
+          height: height
+        };
+      };
+
       DOMRectReadOnly.fromRect = function (rectangle) {
         return new DOMRectReadOnly(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
       };
@@ -95,7 +118,7 @@
       }
 
       ResizeObservation.prototype.isActive = function () {
-        var size = Object(_algorithms_calculateBoxSize__WEBPACK_IMPORTED_MODULE_1__["calculateBoxSize"])(this.target, this.observedBox);
+        var size = Object(_algorithms_calculateBoxSize__WEBPACK_IMPORTED_MODULE_1__["calculateBoxSize"])(this.target, this.observedBox, true);
 
         if (skipNotifyOnElement(this.target)) {
           this.lastReportedSize = size;
@@ -139,6 +162,12 @@
     var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! ./ResizeObserverController */
     "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
+    /* harmony import */
+
+
+    var _utils_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./utils/element */
+    "../../node_modules/@juggle/resize-observer/lib/utils/element.js");
 
     var ResizeObserver = function () {
       function ResizeObserver(callback) {
@@ -158,7 +187,7 @@
           throw new TypeError("Failed to execute 'observe' on 'ResizeObserver': 1 argument required, but only 0 present.");
         }
 
-        if (target instanceof Element === false) {
+        if (!Object(_utils_element__WEBPACK_IMPORTED_MODULE_1__["isElement"])(target)) {
           throw new TypeError("Failed to execute 'observe' on 'ResizeObserver': parameter 1 is not of type 'Element");
         }
 
@@ -170,7 +199,7 @@
           throw new TypeError("Failed to execute 'unobserve' on 'ResizeObserver': 1 argument required, but only 0 present.");
         }
 
-        if (target instanceof Element === false) {
+        if (!Object(_utils_element__WEBPACK_IMPORTED_MODULE_1__["isElement"])(target)) {
           throw new TypeError("Failed to execute 'unobserve' on 'ResizeObserver': parameter 1 is not of type 'Element");
         }
 
@@ -266,7 +295,7 @@
     /*! ./utils/resizeObservers */
     "../../node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 
-    var observerMap = new Map();
+    var observerMap = new WeakMap();
 
     var getObservationIndex = function getObservationIndex(observationTargets, target) {
       for (var i = 0; i < observationTargets.length; i += 1) {
@@ -283,46 +312,42 @@
 
       ResizeObserverController.connect = function (resizeObserver, callback) {
         var detail = new _ResizeObserverDetail__WEBPACK_IMPORTED_MODULE_2__["ResizeObserverDetail"](resizeObserver, callback);
-
-        _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].push(detail);
-
         observerMap.set(resizeObserver, detail);
       };
 
       ResizeObserverController.observe = function (resizeObserver, target, options) {
-        if (observerMap.has(resizeObserver)) {
-          var detail = observerMap.get(resizeObserver);
+        var detail = observerMap.get(resizeObserver);
+        var firstObservation = detail.observationTargets.length === 0;
 
-          if (getObservationIndex(detail.observationTargets, target) < 0) {
-            detail.observationTargets.push(new _ResizeObservation__WEBPACK_IMPORTED_MODULE_1__["ResizeObservation"](target, options && options.box));
-            Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(1);
+        if (getObservationIndex(detail.observationTargets, target) < 0) {
+          firstObservation && _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].push(detail);
+          detail.observationTargets.push(new _ResizeObservation__WEBPACK_IMPORTED_MODULE_1__["ResizeObservation"](target, options && options.box));
+          Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(1);
 
-            _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["scheduler"].schedule();
-          }
+          _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["scheduler"].schedule();
         }
       };
 
       ResizeObserverController.unobserve = function (resizeObserver, target) {
-        if (observerMap.has(resizeObserver)) {
-          var detail = observerMap.get(resizeObserver);
-          var index = getObservationIndex(detail.observationTargets, target);
+        var detail = observerMap.get(resizeObserver);
+        var index = getObservationIndex(detail.observationTargets, target);
+        var lastObservation = detail.observationTargets.length === 1;
 
-          if (index >= 0) {
-            detail.observationTargets.splice(index, 1);
-            Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(-1);
-          }
+        if (index >= 0) {
+          lastObservation && _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].splice(_utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].indexOf(detail), 1);
+          detail.observationTargets.splice(index, 1);
+          Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(-1);
         }
       };
 
       ResizeObserverController.disconnect = function (resizeObserver) {
-        if (observerMap.has(resizeObserver)) {
-          var detail = observerMap.get(resizeObserver);
+        var _this = this;
 
-          _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].splice(_utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].indexOf(detail), 1);
-
-          observerMap["delete"](resizeObserver);
-          Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(-detail.observationTargets.length);
-        }
+        var detail = observerMap.get(resizeObserver);
+        detail.observationTargets.slice().forEach(function (ot) {
+          return _this.unobserve(resizeObserver, ot.target);
+        });
+        detail.activeTargets.splice(0, detail.activeTargets.length);
       };
 
       return ResizeObserverController;
@@ -495,7 +520,7 @@
     !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js ***!
     \****************************************************************************************************************************/
 
-  /*! exports provided: calculateBoxSize, calculateBoxSizes, cache */
+  /*! exports provided: calculateBoxSize, calculateBoxSizes */
 
   /***/
   function node_modulesJuggleResizeObserverLibAlgorithmsCalculateBoxSizeJs(module, __webpack_exports__, __webpack_require__) {
@@ -513,12 +538,6 @@
 
     __webpack_require__.d(__webpack_exports__, "calculateBoxSizes", function () {
       return calculateBoxSizes;
-    });
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "cache", function () {
-      return cache;
     });
     /* harmony import */
 
@@ -545,7 +564,7 @@
     /*! ../utils/global */
     "../../node_modules/@juggle/resize-observer/lib/utils/global.js");
 
-    var cache = new Map();
+    var cache = new WeakMap();
     var scrollRegexp = /auto|scroll/;
     var verticalRegexp = /^tb|vertical/;
     var IE = /msie|trident/i.test(_utils_global__WEBPACK_IMPORTED_MODULE_3__["global"].navigator && _utils_global__WEBPACK_IMPORTED_MODULE_3__["global"].navigator.userAgent);
@@ -580,8 +599,12 @@
       contentRect: new _DOMRectReadOnly__WEBPACK_IMPORTED_MODULE_1__["DOMRectReadOnly"](0, 0, 0, 0)
     });
 
-    var calculateBoxSizes = function calculateBoxSizes(target) {
-      if (cache.has(target)) {
+    var calculateBoxSizes = function calculateBoxSizes(target, forceRecalculation) {
+      if (forceRecalculation === void 0) {
+        forceRecalculation = false;
+      }
+
+      if (cache.has(target) && !forceRecalculation) {
         return cache.get(target);
       }
 
@@ -626,8 +649,8 @@
       return boxes;
     };
 
-    var calculateBoxSize = function calculateBoxSize(target, observedBox) {
-      var _a = calculateBoxSizes(target),
+    var calculateBoxSize = function calculateBoxSize(target, observedBox, forceRecalculation) {
+      var _a = calculateBoxSizes(target, forceRecalculation),
           borderBoxSize = _a.borderBoxSize,
           contentBoxSize = _a.contentBoxSize,
           devicePixelContentBoxSize = _a.devicePixelContentBoxSize;
@@ -764,16 +787,8 @@
     var _calculateDepthForNode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! ./calculateDepthForNode */
     "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js");
-    /* harmony import */
-
-
-    var _calculateBoxSize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ./calculateBoxSize */
-    "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
 
     var gatherActiveObservationsAtDepth = function gatherActiveObservationsAtDepth(depth) {
-      _calculateBoxSize__WEBPACK_IMPORTED_MODULE_2__["cache"].clear();
-
       _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].forEach(function processObserver(ro) {
         ro.activeTargets.splice(0, ro.activeTargets.length);
         ro.skippedTargets.splice(0, ro.skippedTargets.length);
@@ -909,7 +924,7 @@
     !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/element.js ***!
     \**************************************************************************************************************/
 
-  /*! exports provided: isSVG, isHidden, isReplacedElement */
+  /*! exports provided: isSVG, isHidden, isElement, isReplacedElement */
 
   /***/
   function node_modulesJuggleResizeObserverLibUtilsElementJs(module, __webpack_exports__, __webpack_require__) {
@@ -927,6 +942,12 @@
 
     __webpack_require__.d(__webpack_exports__, "isHidden", function () {
       return isHidden;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "isElement", function () {
+      return isElement;
     });
     /* harmony export (binding) */
 
@@ -952,6 +973,13 @@
           offsetWidth = _b.offsetWidth,
           offsetHeight = _b.offsetHeight;
       return !(offsetWidth || offsetHeight || target.getClientRects().length);
+    };
+
+    var isElement = function isElement(obj) {
+      var _a, _b;
+
+      var scope = (_b = (_a = obj) === null || _a === void 0 ? void 0 : _a.ownerDocument) === null || _b === void 0 ? void 0 : _b.defaultView;
+      return !!(scope && obj instanceof scope.Element);
     };
 
     var isReplacedElement = function isReplacedElement(target) {
@@ -1101,6 +1129,7 @@
 
     var queueMicroTask = function queueMicroTask(callback) {
       if (!trigger) {
+        var toggle_1 = 0;
         var el_1 = document.createTextNode('');
         var config = {
           characterData: true
@@ -1110,7 +1139,7 @@
         }).observe(el_1, config);
 
         trigger = function trigger() {
-          el_1.textContent = '';
+          el_1.textContent = "" + (toggle_1 ? toggle_1-- : toggle_1++);
         };
       }
 
@@ -1230,7 +1259,7 @@
       return !!watching;
     };
 
-    var CATCH_FRAMES = 60 / 5;
+    var CATCH_PERIOD = 250;
     var observerConfig = {
       attributes: true,
       characterData: true,
@@ -1238,6 +1267,15 @@
       subtree: true
     };
     var events = ['resize', 'load', 'transitionend', 'animationend', 'animationstart', 'animationiteration', 'keyup', 'keydown', 'mouseup', 'mousedown', 'mouseover', 'mouseout', 'blur', 'focus'];
+
+    var time = function time(timeout) {
+      if (timeout === void 0) {
+        timeout = 0;
+      }
+
+      return Date.now() + timeout;
+    };
+
     var scheduled = false;
 
     var Scheduler = function () {
@@ -1251,14 +1289,19 @@
         };
       }
 
-      Scheduler.prototype.run = function (frames) {
+      Scheduler.prototype.run = function (timeout) {
         var _this = this;
+
+        if (timeout === void 0) {
+          timeout = CATCH_PERIOD;
+        }
 
         if (scheduled) {
           return;
         }
 
         scheduled = true;
+        var until = time(timeout);
         Object(_queueResizeObserver__WEBPACK_IMPORTED_MODULE_2__["queueResizeObserver"])(function () {
           var elementsHaveResized = false;
 
@@ -1266,15 +1309,16 @@
             elementsHaveResized = Object(_process__WEBPACK_IMPORTED_MODULE_0__["process"])();
           } finally {
             scheduled = false;
+            timeout = until - time();
 
             if (!isWatching()) {
               return;
             }
 
             if (elementsHaveResized) {
-              _this.run(60);
-            } else if (frames) {
-              _this.run(frames - 1);
+              _this.run(1000);
+            } else if (timeout > 0) {
+              _this.run(timeout);
             } else {
               _this.start();
             }
@@ -1284,7 +1328,7 @@
 
       Scheduler.prototype.schedule = function () {
         this.stop();
-        this.run(CATCH_FRAMES);
+        this.run();
       };
 
       Scheduler.prototype.observe = function () {

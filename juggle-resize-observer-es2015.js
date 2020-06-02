@@ -22,6 +22,10 @@ var DOMRectReadOnly = (function () {
         this.right = this.left + this.width;
         return Object.freeze(this);
     }
+    DOMRectReadOnly.prototype.toJSON = function () {
+        var _a = this, x = _a.x, y = _a.y, top = _a.top, right = _a.right, bottom = _a.bottom, left = _a.left, width = _a.width, height = _a.height;
+        return { x: x, y: y, top: top, right: right, bottom: bottom, left: left, width: width, height: height };
+    };
     DOMRectReadOnly.fromRect = function (rectangle) {
         return new DOMRectReadOnly(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
     };
@@ -63,7 +67,7 @@ var ResizeObservation = (function () {
         };
     }
     ResizeObservation.prototype.isActive = function () {
-        var size = Object(_algorithms_calculateBoxSize__WEBPACK_IMPORTED_MODULE_1__["calculateBoxSize"])(this.target, this.observedBox);
+        var size = Object(_algorithms_calculateBoxSize__WEBPACK_IMPORTED_MODULE_1__["calculateBoxSize"])(this.target, this.observedBox, true);
         if (skipNotifyOnElement(this.target)) {
             this.lastReportedSize = size;
         }
@@ -91,6 +95,8 @@ var ResizeObservation = (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResizeObserver", function() { return ResizeObserver; });
 /* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResizeObserverController */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
+/* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/element */ "../../node_modules/@juggle/resize-observer/lib/utils/element.js");
+
 
 var ResizeObserver = (function () {
     function ResizeObserver(callback) {
@@ -106,7 +112,7 @@ var ResizeObserver = (function () {
         if (arguments.length === 0) {
             throw new TypeError("Failed to execute 'observe' on 'ResizeObserver': 1 argument required, but only 0 present.");
         }
-        if (target instanceof Element === false) {
+        if (!Object(_utils_element__WEBPACK_IMPORTED_MODULE_1__["isElement"])(target)) {
             throw new TypeError("Failed to execute 'observe' on 'ResizeObserver': parameter 1 is not of type 'Element");
         }
         _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["ResizeObserverController"].observe(this, target, options);
@@ -115,7 +121,7 @@ var ResizeObserver = (function () {
         if (arguments.length === 0) {
             throw new TypeError("Failed to execute 'unobserve' on 'ResizeObserver': 1 argument required, but only 0 present.");
         }
-        if (target instanceof Element === false) {
+        if (!Object(_utils_element__WEBPACK_IMPORTED_MODULE_1__["isElement"])(target)) {
             throw new TypeError("Failed to execute 'unobserve' on 'ResizeObserver': parameter 1 is not of type 'Element");
         }
         _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__["ResizeObserverController"].unobserve(this, target);
@@ -172,7 +178,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var observerMap = new Map();
+var observerMap = new WeakMap();
 var getObservationIndex = function (observationTargets, target) {
     for (var i = 0; i < observationTargets.length; i += 1) {
         if (observationTargets[i].target === target) {
@@ -186,36 +192,33 @@ var ResizeObserverController = (function () {
     }
     ResizeObserverController.connect = function (resizeObserver, callback) {
         var detail = new _ResizeObserverDetail__WEBPACK_IMPORTED_MODULE_2__["ResizeObserverDetail"](resizeObserver, callback);
-        _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].push(detail);
         observerMap.set(resizeObserver, detail);
     };
     ResizeObserverController.observe = function (resizeObserver, target, options) {
-        if (observerMap.has(resizeObserver)) {
-            var detail = observerMap.get(resizeObserver);
-            if (getObservationIndex(detail.observationTargets, target) < 0) {
-                detail.observationTargets.push(new _ResizeObservation__WEBPACK_IMPORTED_MODULE_1__["ResizeObservation"](target, options && options.box));
-                Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(1);
-                _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["scheduler"].schedule();
-            }
+        var detail = observerMap.get(resizeObserver);
+        var firstObservation = detail.observationTargets.length === 0;
+        if (getObservationIndex(detail.observationTargets, target) < 0) {
+            firstObservation && _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].push(detail);
+            detail.observationTargets.push(new _ResizeObservation__WEBPACK_IMPORTED_MODULE_1__["ResizeObservation"](target, options && options.box));
+            Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(1);
+            _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["scheduler"].schedule();
         }
     };
     ResizeObserverController.unobserve = function (resizeObserver, target) {
-        if (observerMap.has(resizeObserver)) {
-            var detail = observerMap.get(resizeObserver);
-            var index = getObservationIndex(detail.observationTargets, target);
-            if (index >= 0) {
-                detail.observationTargets.splice(index, 1);
-                Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(-1);
-            }
+        var detail = observerMap.get(resizeObserver);
+        var index = getObservationIndex(detail.observationTargets, target);
+        var lastObservation = detail.observationTargets.length === 1;
+        if (index >= 0) {
+            lastObservation && _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].splice(_utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].indexOf(detail), 1);
+            detail.observationTargets.splice(index, 1);
+            Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(-1);
         }
     };
     ResizeObserverController.disconnect = function (resizeObserver) {
-        if (observerMap.has(resizeObserver)) {
-            var detail = observerMap.get(resizeObserver);
-            _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].splice(_utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__["resizeObservers"].indexOf(detail), 1);
-            observerMap.delete(resizeObserver);
-            Object(_utils_scheduler__WEBPACK_IMPORTED_MODULE_0__["updateCount"])(-detail.observationTargets.length);
-        }
+        var _this = this;
+        var detail = observerMap.get(resizeObserver);
+        detail.observationTargets.slice().forEach(function (ot) { return _this.unobserve(resizeObserver, ot.target); });
+        detail.activeTargets.splice(0, detail.activeTargets.length);
     };
     return ResizeObserverController;
 }());
@@ -332,14 +335,13 @@ var broadcastActiveObservations = function () {
 /*!****************************************************************************************************************************!*\
   !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js ***!
   \****************************************************************************************************************************/
-/*! exports provided: calculateBoxSize, calculateBoxSizes, cache */
+/*! exports provided: calculateBoxSize, calculateBoxSizes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateBoxSize", function() { return calculateBoxSize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateBoxSizes", function() { return calculateBoxSizes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cache", function() { return cache; });
 /* harmony import */ var _ResizeObserverBoxOptions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserverBoxOptions */ "../../node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js");
 /* harmony import */ var _DOMRectReadOnly__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DOMRectReadOnly */ "../../node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js");
 /* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/element */ "../../node_modules/@juggle/resize-observer/lib/utils/element.js");
@@ -348,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var cache = new Map();
+var cache = new WeakMap();
 var scrollRegexp = /auto|scroll/;
 var verticalRegexp = /^tb|vertical/;
 var IE = (/msie|trident/i).test(_utils_global__WEBPACK_IMPORTED_MODULE_3__["global"].navigator && _utils_global__WEBPACK_IMPORTED_MODULE_3__["global"].navigator.userAgent);
@@ -368,8 +370,9 @@ var zeroBoxes = Object.freeze({
     contentBoxSize: size(),
     contentRect: new _DOMRectReadOnly__WEBPACK_IMPORTED_MODULE_1__["DOMRectReadOnly"](0, 0, 0, 0)
 });
-var calculateBoxSizes = function (target) {
-    if (cache.has(target)) {
+var calculateBoxSizes = function (target, forceRecalculation) {
+    if (forceRecalculation === void 0) { forceRecalculation = false; }
+    if (cache.has(target) && !forceRecalculation) {
         return cache.get(target);
     }
     if (Object(_utils_element__WEBPACK_IMPORTED_MODULE_2__["isHidden"])(target)) {
@@ -411,8 +414,8 @@ var calculateBoxSizes = function (target) {
     cache.set(target, boxes);
     return boxes;
 };
-var calculateBoxSize = function (target, observedBox) {
-    var _a = calculateBoxSizes(target), borderBoxSize = _a.borderBoxSize, contentBoxSize = _a.contentBoxSize, devicePixelContentBoxSize = _a.devicePixelContentBoxSize;
+var calculateBoxSize = function (target, observedBox, forceRecalculation) {
+    var _a = calculateBoxSizes(target, forceRecalculation), borderBoxSize = _a.borderBoxSize, contentBoxSize = _a.contentBoxSize, devicePixelContentBoxSize = _a.devicePixelContentBoxSize;
     switch (observedBox) {
         case _ResizeObserverBoxOptions__WEBPACK_IMPORTED_MODULE_0__["ResizeObserverBoxOptions"].DEVICE_PIXEL_CONTENT_BOX:
             return devicePixelContentBoxSize;
@@ -498,12 +501,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gatherActiveObservationsAtDepth", function() { return gatherActiveObservationsAtDepth; });
 /* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "../../node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 /* harmony import */ var _calculateDepthForNode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calculateDepthForNode */ "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js");
-/* harmony import */ var _calculateBoxSize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./calculateBoxSize */ "../../node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
-
 
 
 var gatherActiveObservationsAtDepth = function (depth) {
-    _calculateBoxSize__WEBPACK_IMPORTED_MODULE_2__["cache"].clear();
     _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__["resizeObservers"].forEach(function processObserver(ro) {
         ro.activeTargets.splice(0, ro.activeTargets.length);
         ro.skippedTargets.splice(0, ro.skippedTargets.length);
@@ -589,13 +589,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************************************************************************!*\
   !*** /home/travis/build/udede/ydd-progress-button/node_modules/@juggle/resize-observer/lib/utils/element.js ***!
   \**************************************************************************************************************/
-/*! exports provided: isSVG, isHidden, isReplacedElement */
+/*! exports provided: isSVG, isHidden, isElement, isReplacedElement */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSVG", function() { return isSVG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isHidden", function() { return isHidden; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isElement", function() { return isElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isReplacedElement", function() { return isReplacedElement; });
 var isSVG = function (target) { return target instanceof SVGElement && 'getBBox' in target; };
 var isHidden = function (target) {
@@ -605,6 +606,11 @@ var isHidden = function (target) {
     }
     var _b = target, offsetWidth = _b.offsetWidth, offsetHeight = _b.offsetHeight;
     return !(offsetWidth || offsetHeight || target.getClientRects().length);
+};
+var isElement = function (obj) {
+    var _a, _b;
+    var scope = (_b = (_a = obj) === null || _a === void 0 ? void 0 : _a.ownerDocument) === null || _b === void 0 ? void 0 : _b.defaultView;
+    return !!(scope && obj instanceof scope.Element);
 };
 var isReplacedElement = function (target) {
     switch (target.tagName) {
@@ -695,10 +701,11 @@ var callbacks = [];
 var notify = function () { return callbacks.splice(0).forEach(function (cb) { return cb(); }); };
 var queueMicroTask = function (callback) {
     if (!trigger) {
+        var toggle_1 = 0;
         var el_1 = document.createTextNode('');
         var config = { characterData: true };
         new MutationObserver(function () { return notify(); }).observe(el_1, config);
-        trigger = function () { el_1.textContent = ''; };
+        trigger = function () { el_1.textContent = "" + (toggle_1 ? toggle_1-- : toggle_1++); };
     }
     callbacks.push(callback);
     trigger();
@@ -765,7 +772,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var watching = 0;
 var isWatching = function () { return !!watching; };
-var CATCH_FRAMES = 60 / 5;
+var CATCH_PERIOD = 250;
 var observerConfig = { attributes: true, characterData: true, childList: true, subtree: true };
 var events = [
     'resize',
@@ -783,6 +790,10 @@ var events = [
     'blur',
     'focus'
 ];
+var time = function (timeout) {
+    if (timeout === void 0) { timeout = 0; }
+    return Date.now() + timeout;
+};
 var scheduled = false;
 var Scheduler = (function () {
     function Scheduler() {
@@ -790,12 +801,14 @@ var Scheduler = (function () {
         this.stopped = true;
         this.listener = function () { return _this.schedule(); };
     }
-    Scheduler.prototype.run = function (frames) {
+    Scheduler.prototype.run = function (timeout) {
         var _this = this;
+        if (timeout === void 0) { timeout = CATCH_PERIOD; }
         if (scheduled) {
             return;
         }
         scheduled = true;
+        var until = time(timeout);
         Object(_queueResizeObserver__WEBPACK_IMPORTED_MODULE_2__["queueResizeObserver"])(function () {
             var elementsHaveResized = false;
             try {
@@ -803,14 +816,15 @@ var Scheduler = (function () {
             }
             finally {
                 scheduled = false;
+                timeout = until - time();
                 if (!isWatching()) {
                     return;
                 }
                 if (elementsHaveResized) {
-                    _this.run(60);
+                    _this.run(1000);
                 }
-                else if (frames) {
-                    _this.run(frames - 1);
+                else if (timeout > 0) {
+                    _this.run(timeout);
                 }
                 else {
                     _this.start();
@@ -820,7 +834,7 @@ var Scheduler = (function () {
     };
     Scheduler.prototype.schedule = function () {
         this.stop();
-        this.run(CATCH_FRAMES);
+        this.run();
     };
     Scheduler.prototype.observe = function () {
         var _this = this;
