@@ -27,7 +27,7 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
-    "@ng-select/ng-select": "^4.0.0",
+    "@ng-select/ng-select": "^4.0.4",
     "angular-cli-ghpages": "^0.6.2",
     "ngx-markdown": "^9.1.1",
     "ngx-scrollbar": "^7.2.3",
