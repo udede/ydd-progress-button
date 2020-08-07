@@ -31,7 +31,7 @@
     "angular-cli-ghpages": "^0.6.2",
     "ngx-markdown": "^9.1.1",
     "ngx-scrollbar": "^7.2.3",
-    "prismjs": "^1.20.0",
+    "prismjs": "^1.21.0",
     "rxjs": "~6.5.5",
     "zone.js": "^0.10.3"
   },
