@@ -23,7 +23,7 @@ export {ProgressButtonConfig};
 
 export class ProgressButtonModule {
 
-  static forRoot(config: ProgressButtonModuleConfig): ModuleWithProviders {
+  static forRoot(config: ProgressButtonModuleConfig): ModuleWithProviders<ProgressButtonModule> {
     return {
       ngModule: ProgressButtonModule,
       providers: [
