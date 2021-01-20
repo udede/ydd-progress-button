@@ -326,6 +326,11 @@ h1#angular-progress-button + p a {
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   position: relative;
+  width: 200px;
+  box-sizing: border-box;
+  text-align: center;
+  height: 32px;
+  font-size: 12px;
 }
 
 .ydd-page-preview .settings-header code:hover {
