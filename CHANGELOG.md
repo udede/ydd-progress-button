@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.19](https://github.com/udede/ydd-progress-button/compare/v1.1.17...v1.1.19) (2021-02-04)
+
 ### [1.1.17](https://github.com/udede/ydd-progress-button/compare/v1.1.15...v1.1.17) (2020-06-02)
 
 
