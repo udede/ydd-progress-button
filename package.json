@@ -9,7 +9,7 @@
     "copy:changelog": "copyfiles ./CHANGELOG.md ./projects/progress-button",
     "build:lib": "npm run copy:readme && npm run copy:changelog && ng build progress-button",
     "build:showcase": "ng build progress-button-showcase --base-href='.'",
-    "publish:showcase": "npx angular-cli-ghpages --dir=./dist/progress-button-showcase",
+    "publish:showcase": "npx ngh --dir=dist/progress-button-showcase",
     "test": "ng test",
     "test-headless": "ng test --code-coverage --watch=false --browsers=ChromeHeadless",
     "version": "standard-version",
