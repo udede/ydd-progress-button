@@ -5,6 +5,7 @@
     "target": "es2015",
     "declaration": true,
     "inlineSources": true,
+    "declarationMap": false,
     "types": [],
     "lib": [
       "dom",
@@ -17,7 +18,9 @@
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "enableResourceInlining": true
+    "enableResourceInlining": true,
+    "enableIvy": false,"compilationMode": "partial"
+
   },
   "exclude": [
     "src/test.ts",
