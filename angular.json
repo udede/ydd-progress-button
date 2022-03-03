@@ -23,18 +23,6 @@
             "tsConfig": "projects/progress-button/tsconfig.spec.json",
             "karmaConfig": "projects/progress-button/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/progress-button/tsconfig.lib.json",
-              "projects/progress-button/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -89,7 +77,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -142,19 +129,6 @@
               "projects/progress-button-showcase/src/styles.scss"
             ],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/progress-button-showcase/tsconfig.app.json",
-              "projects/progress-button-showcase/tsconfig.spec.json",
-              "projects/progress-button-showcase/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         },
         "e2e": {
