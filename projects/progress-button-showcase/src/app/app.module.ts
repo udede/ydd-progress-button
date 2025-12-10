@@ -5,8 +5,8 @@ import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProgressButtonModule} from '../../../progress-button/src/lib/progress-button.module';
 import {NgSelectModule} from '@ng-select/ng-select';
-import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {MarkdownModule, MARKED_OPTIONS} from 'ngx-markdown';
+import {provideHttpClient} from '@angular/common/http';
 import {markedOptionsFactory} from './app.component.models';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 
@@ -20,17 +20,16 @@ import {NgScrollbarModule} from 'ngx-scrollbar';
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     NgScrollbarModule,
-    MarkdownModule.forRoot({
-      loader: HttpClient,
-      markedOptions: {
-        provide: MarkedOptions,
-        useFactory: markedOptionsFactory,
-      }
-    })
+    MarkdownModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(),
+    {
+      provide: MARKED_OPTIONS,
+      useFactory: markedOptionsFactory
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
