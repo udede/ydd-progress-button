@@ -2,22 +2,25 @@ import {MarkedOptions, MarkedRenderer} from 'ngx-markdown';
 
 export function markedOptionsFactory(): MarkedOptions {
   const renderer = new MarkedRenderer();
-  let headers = [];
+  let headers: string[] = [];
   let cellIndex = 0;
 
-  renderer.table = (header: string, body: string) => {
+  renderer.table = (token: any) => {
     headers = [];
-    return '<div class="table"><div class="header">' + header + '</div><div class="table-body">' + body + '</div></div>';
+    const header = token.header;
+    const body = token.rows;
+    return '<div class="table"><div class="header">' + this.parser.parse(header) + '</div><div class="table-body">' + this.parser.parse(body) + '</div></div>';
   };
 
-  renderer.tablerow = (content: string) => {
+  renderer.tablerow = (token: any) => {
     cellIndex = 0;
-    return '<div class="row">' + content + '</div>';
+    return '<div class="row">' + this.parser.parse(token.tokens) + '</div>';
   };
 
-  renderer.tablecell = (content: string, flags) => {
+  renderer.tablecell = (token: any) => {
     let title = null;
-    if (flags.header) {
+    const content = this.parser.parseInline(token.tokens);
+    if (token.header) {
       headers.push(content);
     } else {
       title = headers[cellIndex];

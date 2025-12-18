@@ -1,18 +1,18 @@
-import {TestBed, async} from '@angular/core/testing';
+import {TestBed, waitForAsync} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {ProgressButtonModule} from '../../../progress-button/src/lib/progress-button.module';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
+import {provideHttpClient} from '@angular/common/http';
+import {MarkdownModule, MARKED_OPTIONS} from 'ngx-markdown';
 import {markedOptionsFactory} from './app.component.models';
 import {ProgressButtonComponent} from '../../../progress-button/src/lib/progress-button.component';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
     TestBed.configureTestingModule({
       declarations: [
@@ -24,17 +24,16 @@ describe('AppComponent', () => {
         NgSelectModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule,
         NgScrollbarModule,
-        MarkdownModule.forRoot({
-          loader: HttpClient,
-          markedOptions: {
-            provide: MarkedOptions,
-            useFactory: markedOptionsFactory,
-          }
-        })
+        MarkdownModule.forRoot()
       ],
-      providers: [],
+      providers: [
+        provideHttpClient(),
+        {
+          provide: MARKED_OPTIONS,
+          useFactory: markedOptionsFactory
+        }
+      ],
     }).compileComponents();
   }));
 

@@ -30,7 +30,7 @@ describe('ProgressButtonService', () => {
 
 
   it('should be created', () => {
-    const service: ProgressButtonService = TestBed.get(ProgressButtonService);
+    const service: ProgressButtonService = TestBed.inject(ProgressButtonService);
     expect(service).toBeTruthy();
   });
 

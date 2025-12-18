@@ -16,7 +16,8 @@ import {ProgressButtonService} from './progress-button.service';
     './progress-button.component.vars.scss',
     './progress-button.component.scss',
     './progress-button.component.styles.scss'],
-  providers: [ProgressButtonService]
+  providers: [ProgressButtonService],
+  standalone: false
 })
 export class ProgressButtonComponent {
 

@@ -1,4 +1,4 @@
-import {async, inject, ComponentFixture, TestBed} from '@angular/core/testing';
+import {waitForAsync, inject, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ProgressButtonComponent} from './progress-button.component';
 import {ProgressButtonService} from './progress-button.service';
 import {FOR_ROOT_CONFIG_TOKEN, ProgressButtonConfig, progressButtonConfigFactory} from './progress-button.types';
@@ -7,7 +7,7 @@ describe('ProgressButtonComponent', () => {
   let comp: ProgressButtonComponent;
   let fixture: ComponentFixture<ProgressButtonComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ProgressButtonComponent],
       providers: [ProgressButtonService]
@@ -15,7 +15,7 @@ describe('ProgressButtonComponent', () => {
       .compileComponents();
   }));
 
-  beforeEach(async(inject([ProgressButtonService], (service: ProgressButtonService) => {
+  beforeEach(waitForAsync(inject([ProgressButtonService], (service: ProgressButtonService) => {
     fixture = TestBed.createComponent(ProgressButtonComponent);
     comp = fixture.componentInstance;
     fixture.detectChanges();

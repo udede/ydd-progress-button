@@ -1,8 +1,8 @@
-import {async, TestBed} from '@angular/core/testing';
+import {waitForAsync, TestBed} from '@angular/core/testing';
 import {ProgressButtonModule} from './progress-button.module';
 
 describe('ProgressButtonModule', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [ProgressButtonModule.forRoot({design: {background: '#f20'}})]
     }).compileComponents();

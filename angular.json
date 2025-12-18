@@ -10,9 +10,8 @@
       "prefix": "ydd",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/progress-button/tsconfig.lib.json",
             "project": "projects/progress-button/ng-package.json"
           }
         },
@@ -22,18 +21,6 @@
             "main": "projects/progress-button/src/test.ts",
             "tsConfig": "projects/progress-button/tsconfig.spec.json",
             "karmaConfig": "projects/progress-button/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/progress-button/tsconfig.lib.json",
-              "projects/progress-button/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
@@ -143,33 +130,7 @@
             ],
             "scripts": []
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/progress-button-showcase/tsconfig.app.json",
-              "projects/progress-button-showcase/tsconfig.spec.json",
-              "projects/progress-button-showcase/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/progress-button-showcase/e2e/protractor.conf.js",
-            "devServerTarget": "progress-button-showcase:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "progress-button-showcase:serve:production"
-            }
-          }
         }
       }
-    }},
-  "defaultProject": "progress-button"
+    }}
 }
